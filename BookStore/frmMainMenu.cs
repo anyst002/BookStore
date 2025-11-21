@@ -1,17 +1,20 @@
-using System.Configuration;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
+using System.Reflection;
 
 namespace BookStore
 {
     public partial class frmMainMenu : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
+        
         SqlConnection connection;
         SqlCommand command;
 
         public frmMainMenu()
         {
             InitializeComponent();
+
             connection = new(connectionString);
             command = new("", connection);
         }
