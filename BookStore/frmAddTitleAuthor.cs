@@ -1,8 +1,5 @@
 using System;
-using System.Data;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
 using InputValidator;
 using static InputValidator.InputAssertions;
 
@@ -10,93 +7,29 @@ namespace BookStore
 {
     public partial class frmAddTitleAuthor : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
-
-        SqlConnection connection;
-        SqlCommand command;
+        private readonly Validator _validator = new Validator();
 
         public frmAddTitleAuthor()
         {
             InitializeComponent();
-
-            connection = new(connectionString);
-            command = new("", connection);
-
-            LoadAuthors();
-            LoadTitles();
-        }
-
-        private void LoadAuthors()
-        {
-            try
-            {
-                connection.Open();
-                command.CommandText = "SELECT au_id, au_lname + ', ' + au_fname AS fullname FROM authors ORDER BY au_lname";
-
-                DataTable dt = new DataTable();
-                dt.Load(command.ExecuteReader());
-                connection.Close();
-
-                cboAuthor.DataSource = dt;
-                cboAuthor.DisplayMember = "fullname";
-                cboAuthor.ValueMember = "au_id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-            }
-        }
-
-        private void LoadTitles()
-        {
-            try
-            {
-                connection.Open();
-                command.CommandText = "SELECT title_id, title FROM titles ORDER BY title";
-
-                DataTable dt = new DataTable();
-                dt.Load(command.ExecuteReader());
-                connection.Close();
-
-                cboTitle.DataSource = dt;
-                cboTitle.DisplayMember = "title";
-                cboTitle.ValueMember = "title_id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Validator validator = new Validator();
-
-            validator.Validate(() =>
+            _validator.Validate(() =>
             {
-                string authorId = AssertComboSelection(cboAuthor, "Author is required.");
-                string titleId = AssertComboSelection(cboTitle, "Title is required.");
+                AssertComboSelection(cboAuthor, "Please select an Author.");
+                AssertComboSelection(cboTitle, "Please select a Title.");
 
-                int order = AssertNonNegative(AssertInt32(txtOrder.Text, "Invalid order."));
-                int royalty = AssertNonNegative(AssertInt32(txtRoyalty.Text, "Invalid royalty."));
+                int order = AssertInt32(txtOrder.Text, "Order must be a whole number.");
+                AssertPositive(order, "Order must be positive.");
 
-                connection.Open();
-                command.CommandText = @"
-                    INSERT INTO titleauthor (au_id, title_id, au_ord, royaltyper)
-                    VALUES (@au, @title, @ord, @roy);";
+                int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.");
+                if (royalty < 0 || royalty > 100)
+                    throw new ArgumentOutOfRangeException("", "Royalty must be between 0 and 100.");
 
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("@au", authorId);
-                command.Parameters.AddWithValue("@title", titleId);
-                command.Parameters.AddWithValue("@ord", order);
-                command.Parameters.AddWithValue("@roy", royalty);
-
-                command.ExecuteNonQuery();
-                connection.Close();
-
-                MessageBox.Show("Author added to title successfully!");
+                MessageBox.Show("Title-Author relationship validated successfully!",
+                    "Validated", MessageBoxButtons.OK, MessageBoxIcon.Information);
             });
         }
 
@@ -106,11 +39,12 @@ namespace BookStore
             cboTitle.SelectedIndex = -1;
             txtOrder.Clear();
             txtRoyalty.Clear();
+            cboAuthor.Focus();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
