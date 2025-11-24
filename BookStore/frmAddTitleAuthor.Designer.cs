@@ -86,7 +86,6 @@ namespace BookStore
             cboAuthor.Name = "cboAuthor";
             cboAuthor.Size = new Size(250, 28);
             cboAuthor.TabIndex = 4;
-            cboAuthor.SelectedIndexChanged += cboAuthor_SelectedIndexChanged;
             // 
             // cboTitle
             // 
@@ -155,6 +154,7 @@ namespace BookStore
             Controls.Add(btnExit);
             Name = "frmAddTitleAuthor";
             Text = "Add Title Author";
+            Load += frmAddTitleAuthor_Load;
             ResumeLayout(false);
             PerformLayout();
         }
