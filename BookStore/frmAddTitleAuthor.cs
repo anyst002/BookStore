@@ -63,7 +63,7 @@ namespace BookStore
         {
             MaintenanceRepository repo = new MaintenanceRepository();
             List<IdInfo> list = repo.GetAuthorIds();
-            MaintenanceRepository.SelectId(list, txtAuthor);
+            txtAuthor.Text = MaintenanceRepository.SelectId(list);
         }
     }
 }

@@ -12,9 +12,12 @@ namespace BookStore
 {
     public partial class frmOrder : Form
     {
-        public frmOrder()
+        private string storeId;
+
+        public frmOrder(string storeId)
         {
             InitializeComponent();
+            this.storeId = storeId;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -35,7 +38,7 @@ namespace BookStore
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

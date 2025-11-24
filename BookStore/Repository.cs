@@ -110,13 +110,14 @@ namespace BookStore
             return list;
         }
 
-        public static void SelectId(List<IdInfo> list, TextBox textbox) //TODO this should be moved out to decouple
+        public static string SelectId(List<IdInfo> list) //TODO this should be moved out to decouple
         {
             frmSelectId selectForm = new frmSelectId(list);
             selectForm.ShowDialog();
             IdInfo? item = selectForm.selected;
 
-            if (item is not null) textbox.Text = item.Id;
+            if (item is not null) return item.Id;
+            else return "";
         }
     }
     public class OrderRepository : Repository

@@ -68,7 +68,7 @@
             // 
             // btnStores
             // 
-            btnStores.Location = new Point(31, 192);
+            btnStores.Location = new Point(179, 27);
             btnStores.Name = "btnStores";
             btnStores.Size = new Size(120, 35);
             btnStores.TabIndex = 3;
@@ -78,7 +78,7 @@
             // 
             // btnEmployees
             // 
-            btnEmployees.Location = new Point(31, 247);
+            btnEmployees.Location = new Point(179, 82);
             btnEmployees.Name = "btnEmployees";
             btnEmployees.Size = new Size(120, 35);
             btnEmployees.TabIndex = 4;
@@ -88,10 +88,10 @@
             // 
             // btnMaintClose
             // 
-            btnMaintClose.Location = new Point(31, 312);
+            btnMaintClose.Location = new Point(179, 137);
             btnMaintClose.Name = "btnMaintClose";
             btnMaintClose.Size = new Size(120, 35);
-            btnMaintClose.TabIndex = 0;
+            btnMaintClose.TabIndex = 5;
             btnMaintClose.Text = "Close";
             btnMaintClose.UseVisualStyleBackColor = true;
             btnMaintClose.Click += btnMaintClose_Click;
@@ -100,7 +100,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(183, 372);
+            ClientSize = new Size(330, 200);
             Controls.Add(btnEmployees);
             Controls.Add(btnStores);
             Controls.Add(btnPublishers);

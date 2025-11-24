@@ -71,14 +71,14 @@
         {
             MaintenanceRepository repo = new MaintenanceRepository();
             List<IdInfo> list = repo.GetJobIds();
-            MaintenanceRepository.SelectId(list, txtJobId);
+            txtJobId.Text = MaintenanceRepository.SelectId(list);
         }
 
         private void btnSelectPubId_Click(object sender, EventArgs e)
         {
             MaintenanceRepository repo = new MaintenanceRepository();
             List<IdInfo> list = repo.GetPublisherIds();
-            MaintenanceRepository.SelectId(list, txtPubId);
+            txtPubId.Text = MaintenanceRepository.SelectId(list);
         }
     }
 }
