@@ -185,8 +185,10 @@
             Controls.Add(lblSubtotal);
             Controls.Add(lblOrderNumber);
             Controls.Add(lblOrderLabel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmOrderSummary";
-            Text = "frmOrderSummary";
+            Text = "Order Summary";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

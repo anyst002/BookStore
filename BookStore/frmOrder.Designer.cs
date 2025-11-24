@@ -51,6 +51,7 @@
             txtTax = new TextBox();
             txtTotal = new TextBox();
             btnConfirmOrder = new Button();
+            btnExit = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -112,6 +113,7 @@
             btnSearch.Size = new Size(39, 23);
             btnSearch.TabIndex = 3;
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // lblQty
             // 
@@ -212,18 +214,29 @@
             // 
             // btnConfirmOrder
             // 
-            btnConfirmOrder.Location = new Point(565, 671);
+            btnConfirmOrder.Location = new Point(162, 671);
             btnConfirmOrder.Name = "btnConfirmOrder";
             btnConfirmOrder.Size = new Size(111, 23);
             btnConfirmOrder.TabIndex = 14;
             btnConfirmOrder.Text = "Confirm Order";
             btnConfirmOrder.UseVisualStyleBackColor = true;
             // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(601, 671);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(75, 23);
+            btnExit.TabIndex = 15;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
+            // 
             // frmOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(992, 735);
+            Controls.Add(btnExit);
             Controls.Add(btnConfirmOrder);
             Controls.Add(txtTotal);
             Controls.Add(txtTax);
@@ -239,8 +252,11 @@
             Controls.Add(dataGridView1);
             Controls.Add(lblSearch);
             Controls.Add(txtSearch);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmOrder";
-            Text = "frmOrder";
+            Text = "Create Order";
+            Load += frmOrder_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
@@ -271,5 +287,6 @@
         private TextBox txtTax;
         private TextBox txtTotal;
         private Button btnConfirmOrder;
+        private Button btnExit;
     }
 }

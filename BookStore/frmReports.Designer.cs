@@ -146,6 +146,7 @@
             btnExit.TabIndex = 6;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // frmReports
             // 
@@ -159,8 +160,10 @@
             Controls.Add(lblStartDate);
             Controls.Add(dtpEndDate);
             Controls.Add(dtpStartDate);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmReports";
-            Text = "frmReports";
+            Text = "Reports";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
