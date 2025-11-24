@@ -100,5 +100,11 @@
         }
 
         #endregion
+
+        private Button btnTitles;
+        private Button btnAuthors;
+        private Button btnPublishers;
+        private Button btnStores;
+        private Button btnEmployees;
     }
 }

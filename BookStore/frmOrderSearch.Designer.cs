@@ -120,12 +120,10 @@
 
         private Label lblOrderNum;
         private Label lblStoreID;
-        private Label lbl;
         private TextBox textBox1;
         private TextBox textBox2;
-        private MaskedTextBox maskedTextBox1;
-        private Button button1;
-        private Button button2;
         private Button btnClose;
+        private Button btnSearch;
+        private Button btnClear;
     }
 }

@@ -35,7 +35,7 @@
             this.SuspendLayout();
 
             this.btnAddBook.Location = new System.Drawing.Point(40, 40);
-            this.btnAddBook.Name = "btnAddBook"
+            this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(120, 35);
             this.btnAddBook.TabIndex = 0;
             this.btnAddBook.Text = "Add Book";
@@ -77,5 +77,9 @@
         }
 
         #endregion
+
+        private Button btnAddBook;
+        private Button btnSearchBooks;
+        private Button btnViewReports;
     }
 }
