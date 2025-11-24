@@ -7,20 +7,34 @@ namespace BookStore
 {
     public partial class frmAddTitleAuthor : Form
     {
-        private readonly Validator _validator = new Validator();
-
-        public frmAddTitleAuthor()
+        public frmAddTitleAuthor(string title)
         {
             InitializeComponent();
+            txtTitle.Text = title;
+        }
+
+        private void Insert()
+        {
+            //TitleAuthor entry = new TitleAuthor( construct here )
+            //InsertTitleAuthor(entry);
+
+            Clear();
+        }
+
+        private void Clear()
+        {
+            txtAuthor.Clear();
+            txtOrder.Clear();
+            txtRoyalty.Clear();
+            txtOrder.Focus();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _validator.Validate(() =>
+            Validator validator = new Validator();
+            validator.Validate(() =>
             {
-                AssertComboSelection(cboAuthor, "Please select an Author.");
-                AssertComboSelection(cboTitle, "Please select a Title.");
-
+                AssertNotNullOrWhiteSpace(txtAuthor.Text, "Please select an author.");
                 int order = AssertInt32(txtOrder.Text, "Order must be a whole number.");
                 AssertPositive(order, "Order must be positive.");
 
@@ -30,21 +44,26 @@ namespace BookStore
 
                 MessageBox.Show("Title-Author relationship validated successfully!",
                     "Validated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Insert();
             });
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            cboAuthor.SelectedIndex = -1;
-            cboTitle.SelectedIndex = -1;
-            txtOrder.Clear();
-            txtRoyalty.Clear();
-            cboAuthor.Focus();
+            Clear();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetAuthorIds();
+            MaintenanceRepository.SelectId(list, txtAuthor);
         }
     }
 }

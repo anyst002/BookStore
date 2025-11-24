@@ -1,34 +1,65 @@
-using System;
-using System.Windows.Forms;
 using InputValidator;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using static InputValidator.InputAssertions;
 
 namespace BookStore
 {
     public partial class frmAddTitle : Form
     {
-        private readonly Validator _validator = new Validator();
-
         public frmAddTitle()
         {
             InitializeComponent();
         }
 
+        private void Insert()
+        {
+            //Title title = new Title( construct here )
+            //InsertTitle(title);
+
+            DialogResult res = MessageBox.Show("Would you like to add authors to this title?", "Added",
+                                               MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (res == DialogResult.Yes)
+            {
+                frmAddTitleAuthor titleAuthorForm = new frmAddTitleAuthor("temp");
+                //frmAddTitleAuthor titleAuthorForm = new frmAddTitleAuthor(title.TitleId);
+                titleAuthorForm.ShowDialog();
+            }
+
+            Clear();
+        }
+
+        private void Clear()
+        {
+            txtTitleID.Clear();
+            txtTitle.Clear();
+            cboType.SelectedIndex = -1;
+            txtPublisher.Clear();
+            txtPrice.Clear();
+            txtAdvance.Clear();
+            txtRoyalty.Clear();
+            txtYTDSales.Clear();
+            txtNotes.Clear();
+            dtpPubDate.ResetText();
+            txtTitleID.Focus();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _validator.Validate(() =>
+            Validator validator = new Validator();
+            validator.Validate(() =>
             {
-                if (string.IsNullOrWhiteSpace(txtTitleID.Text))
-                    throw new NullReferenceException("Title ID is required.");
+                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
 
-                if (txtTitleID.Text.Trim().Length != 6)
-                    throw new ArgumentOutOfRangeException("", "Title ID must be exactly 6 characters.");
+                AssertNoWhitespace(AssertStringLengthEquals(txtTitleID.Text, 6
+                    , "Title ID must be exactly 6 characters.")
+                    , "Title ID cannot include spaces.");
 
-                if (string.IsNullOrWhiteSpace(txtTitle.Text))
-                    throw new NullReferenceException("Title is required.");
+                AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 
                 AssertComboSelection(cboType, "Please select a Type.");
-                AssertComboSelection(cboPublisher, "Please select a Publisher.");
+                AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher.");
 
                 AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal."));
                 AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal."));
@@ -39,27 +70,26 @@ namespace BookStore
 
                 MessageBox.Show("Title validated successfully!", "Validated",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Insert();
             });
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtTitleID.Clear();
-            txtTitle.Clear();
-            cboType.SelectedIndex = -1;
-            cboPublisher.SelectedIndex = -1;
-            txtPrice.Clear();
-            txtAdvance.Clear();
-            txtRoyalty.Clear();
-            txtYTDSales.Clear();
-            txtNotes.Clear();
-            dtpPubDate.Value = DateTime.Today;
-            txtTitleID.Focus();
+            Clear();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetPublisherIds();
+            MaintenanceRepository.SelectId(list, txtPublisher);
         }
     }
 }

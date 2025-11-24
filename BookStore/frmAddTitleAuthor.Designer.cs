@@ -9,9 +9,6 @@ namespace BookStore
         private System.Windows.Forms.Label lblOrder;
         private System.Windows.Forms.Label lblRoyalty;
 
-        private System.Windows.Forms.ComboBox cboAuthor;
-        private System.Windows.Forms.ComboBox cboTitle;
-
         private System.Windows.Forms.TextBox txtOrder;
         private System.Windows.Forms.TextBox txtRoyalty;
 
@@ -34,13 +31,14 @@ namespace BookStore
             lblTitle = new Label();
             lblOrder = new Label();
             lblRoyalty = new Label();
-            cboAuthor = new ComboBox();
-            cboTitle = new ComboBox();
             txtOrder = new TextBox();
             txtRoyalty = new TextBox();
             btnSave = new Button();
             btnClear = new Button();
             btnExit = new Button();
+            btnSelect = new Button();
+            txtAuthor = new TextBox();
+            txtTitle = new TextBox();
             SuspendLayout();
             // 
             // lblAuthor
@@ -79,28 +77,12 @@ namespace BookStore
             lblRoyalty.TabIndex = 3;
             lblRoyalty.Text = "Royalty %:";
             // 
-            // cboAuthor
-            // 
-            cboAuthor.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboAuthor.Location = new Point(160, 38);
-            cboAuthor.Name = "cboAuthor";
-            cboAuthor.Size = new Size(250, 23);
-            cboAuthor.TabIndex = 4;
-            // 
-            // cboTitle
-            // 
-            cboTitle.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboTitle.Location = new Point(160, 88);
-            cboTitle.Name = "cboTitle";
-            cboTitle.Size = new Size(250, 23);
-            cboTitle.TabIndex = 5;
-            // 
             // txtOrder
             // 
             txtOrder.Location = new Point(160, 138);
             txtOrder.MaxLength = 3;
             txtOrder.Name = "txtOrder";
-            txtOrder.Size = new Size(60, 23);
+            txtOrder.Size = new Size(120, 23);
             txtOrder.TabIndex = 6;
             // 
             // txtRoyalty
@@ -108,12 +90,12 @@ namespace BookStore
             txtRoyalty.Location = new Point(160, 188);
             txtRoyalty.MaxLength = 3;
             txtRoyalty.Name = "txtRoyalty";
-            txtRoyalty.Size = new Size(60, 23);
+            txtRoyalty.Size = new Size(120, 23);
             txtRoyalty.TabIndex = 7;
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(60, 250);
+            btnSave.Location = new Point(40, 248);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(90, 35);
             btnSave.TabIndex = 8;
@@ -123,7 +105,7 @@ namespace BookStore
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(190, 250);
+            btnClear.Location = new Point(170, 248);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(90, 35);
             btnClear.TabIndex = 9;
@@ -133,7 +115,7 @@ namespace BookStore
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(320, 250);
+            btnExit.Location = new Point(300, 248);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(90, 35);
             btnExit.TabIndex = 10;
@@ -141,15 +123,44 @@ namespace BookStore
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
+            // btnSelect
+            // 
+            btnSelect.Location = new Point(300, 37);
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new Size(90, 23);
+            btnSelect.TabIndex = 11;
+            btnSelect.Text = "Select";
+            btnSelect.UseVisualStyleBackColor = true;
+            btnSelect.Click += btnSelect_Click;
+            // 
+            // txtAuthor
+            // 
+            txtAuthor.Enabled = false;
+            txtAuthor.Location = new Point(160, 37);
+            txtAuthor.Name = "txtAuthor";
+            txtAuthor.Size = new Size(120, 23);
+            txtAuthor.TabIndex = 12;
+            txtAuthor.TabStop = false;
+            // 
+            // txtTitle
+            // 
+            txtTitle.Enabled = false;
+            txtTitle.Location = new Point(160, 87);
+            txtTitle.Name = "txtTitle";
+            txtTitle.Size = new Size(120, 23);
+            txtTitle.TabIndex = 13;
+            txtTitle.TabStop = false;
+            // 
             // frmAddTitleAuthor
             // 
             ClientSize = new Size(500, 330);
+            Controls.Add(txtTitle);
+            Controls.Add(txtAuthor);
+            Controls.Add(btnSelect);
             Controls.Add(lblAuthor);
             Controls.Add(lblTitle);
             Controls.Add(lblOrder);
             Controls.Add(lblRoyalty);
-            Controls.Add(cboAuthor);
-            Controls.Add(cboTitle);
             Controls.Add(txtOrder);
             Controls.Add(txtRoyalty);
             Controls.Add(btnSave);
@@ -163,5 +174,8 @@ namespace BookStore
             ResumeLayout(false);
             PerformLayout();
         }
+        private Button btnSelect;
+        private TextBox txtAuthor;
+        private TextBox txtTitle;
     }
 }

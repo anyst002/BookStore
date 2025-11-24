@@ -72,7 +72,12 @@ namespace BookStore
 
         public List<IdInfo> GetAuthorIds()
         {
-            return new List<IdInfo>();
+            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
+            IdInfo info1 = new IdInfo("007", "author test");
+            IdInfo info2 = new IdInfo("008", "author test 2");
+            list.Add(info1);
+            list.Add(info2);
+            return list;
         }
 
         public List<IdInfo> GetJobIds()
@@ -97,7 +102,12 @@ namespace BookStore
 
         public List<IdInfo> GetStoreIds()
         {
-            return new List<IdInfo>();
+            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
+            IdInfo info1 = new IdInfo("005", "store test");
+            IdInfo info2 = new IdInfo("006", "store test 2");
+            list.Add(info1);
+            list.Add(info2);
+            return list;
         }
 
         public static void SelectId(List<IdInfo> list, TextBox textbox) //TODO this should be moved out to decouple

@@ -18,7 +18,6 @@ namespace BookStore
         private System.Windows.Forms.TextBox txtTitleID;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.ComboBox cboType;
-        private System.Windows.Forms.ComboBox cboPublisher;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtAdvance;
         private System.Windows.Forms.TextBox txtRoyalty;
@@ -52,7 +51,6 @@ namespace BookStore
             txtTitleID = new TextBox();
             txtTitle = new TextBox();
             cboType = new ComboBox();
-            cboPublisher = new ComboBox();
             txtPrice = new TextBox();
             txtAdvance = new TextBox();
             txtRoyalty = new TextBox();
@@ -62,6 +60,8 @@ namespace BookStore
             btnSave = new Button();
             btnClear = new Button();
             btnExit = new Button();
+            btnSelect = new Button();
+            txtPublisher = new TextBox();
             SuspendLayout();
             // 
             // lblTitleID
@@ -173,18 +173,11 @@ namespace BookStore
             // cboType
             // 
             cboType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboType.Items.AddRange(new object[] { "temporary" });
             cboType.Location = new Point(160, 118);
             cboType.Name = "cboType";
             cboType.Size = new Size(250, 23);
             cboType.TabIndex = 12;
-            // 
-            // cboPublisher
-            // 
-            cboPublisher.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboPublisher.Location = new Point(160, 158);
-            cboPublisher.Name = "cboPublisher";
-            cboPublisher.Size = new Size(250, 23);
-            cboPublisher.TabIndex = 13;
             // 
             // txtPrice
             // 
@@ -224,7 +217,7 @@ namespace BookStore
             txtNotes.MaxLength = 200;
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(300, 60);
+            txtNotes.Size = new Size(250, 60);
             txtNotes.TabIndex = 18;
             // 
             // dtpPubDate
@@ -262,9 +255,30 @@ namespace BookStore
             btnExit.Text = "Exit";
             btnExit.Click += btnExit_Click;
             // 
+            // btnSelect
+            // 
+            btnSelect.Location = new Point(284, 157);
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new Size(75, 23);
+            btnSelect.TabIndex = 24;
+            btnSelect.Text = "Select";
+            btnSelect.UseVisualStyleBackColor = true;
+            btnSelect.Click += btnSelect_Click;
+            // 
+            // txtPublisher
+            // 
+            txtPublisher.Enabled = false;
+            txtPublisher.Location = new Point(160, 157);
+            txtPublisher.Name = "txtPublisher";
+            txtPublisher.Size = new Size(100, 23);
+            txtPublisher.TabIndex = 25;
+            txtPublisher.TabStop = false;
+            // 
             // frmAddTitle
             // 
-            ClientSize = new Size(550, 550);
+            ClientSize = new Size(462, 550);
+            Controls.Add(txtPublisher);
+            Controls.Add(btnSelect);
             Controls.Add(lblTitleID);
             Controls.Add(lblTitle);
             Controls.Add(lblType);
@@ -278,7 +292,6 @@ namespace BookStore
             Controls.Add(txtTitleID);
             Controls.Add(txtTitle);
             Controls.Add(cboType);
-            Controls.Add(cboPublisher);
             Controls.Add(txtPrice);
             Controls.Add(txtAdvance);
             Controls.Add(txtRoyalty);
@@ -296,5 +309,7 @@ namespace BookStore
             ResumeLayout(false);
             PerformLayout();
         }
+        private Button btnSelect;
+        private TextBox txtPublisher;
     }
 }
