@@ -49,38 +49,56 @@ namespace BookStore
 
             //validator.Validate(() =>
             //{
-                /* assertions verify that input meets desired property,
-                 * automatically throws exception if not, displays a message box,
-                 * and ends the program flow, allowing exception handling to be reused
-                 */
+            /* assertions verify that input meets desired property,
+             * automatically throws exception if not, displays a message box,
+             * and ends the program flow, allowing exception handling to be reused
+             */
 
-                //int intQuantity = AssertNonNegative(AssertInt32(txtQuantity.Text));
-                //decimal decPrice = AssertNonNegative(AssertDecimal(txtPrice.Text));
-
-
-                /* a custom string can optionally be supplied on any assertion to
-                 * override the default message when an exception occurs
-                 */
-
-                //string strRadioSelection = AssertRadioSelection(gboGroupBox, "Please select a sandwich.");
-                //string strComboSelection = AssertComboSelection(cboComboBox, "Please select a side.");
+            //int intQuantity = AssertNonNegative(AssertInt32(txtQuantity.Text));
+            //decimal decPrice = AssertNonNegative(AssertDecimal(txtPrice.Text));
 
 
-                /* any code beyond the assertions will only run if the inputs
-                 * have been properly validated, if any assertion fails the rest of the
-                 * code within Validate() will be skipped, allowing code after
-                 * Validate() to act as a finally{} clause
-                 */
+            /* a custom string can optionally be supplied on any assertion to
+             * override the default message when an exception occurs
+             */
 
-                //lblSummary.Text = $"{strRadioSelection} - {strComboSelection}";
+            //string strRadioSelection = AssertRadioSelection(gboGroupBox, "Please select a sandwich.");
+            //string strComboSelection = AssertComboSelection(cboComboBox, "Please select a side.");
 
-                //CalculateTotals();
+
+            /* any code beyond the assertions will only run if the inputs
+             * have been properly validated, if any assertion fails the rest of the
+             * code within Validate() will be skipped, allowing code after
+             * Validate() to act as a finally{} clause
+             */
+
+            //lblSummary.Text = $"{strRadioSelection} - {strComboSelection}";
+
+            //CalculateTotals();
             //});
 
 
             /* code that runs whether or not Validate threw an error */
 
             //Reset();
+        }
+
+        private void btnAddBook_Click(object sender, EventArgs e)
+        {
+            frmMaintenance maintenance = new frmMaintenance();
+            maintenance.ShowDialog();
+        }
+
+        private void btnSearchBooks_Click(object sender, EventArgs e)
+        {
+            frmOrder order = new frmOrder();
+            order.ShowDialog();
+        }
+
+        private void btnViewReports_Click(object sender, EventArgs e)
+        {
+            frmReports reports = new frmReports();
+            reports.ShowDialog();
         }
     }
 }
