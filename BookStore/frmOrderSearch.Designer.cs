@@ -30,10 +30,10 @@
         {
             lblOrderNum = new Label();
             lblStoreID = new Label();
-            textBox1 = new TextBox();
+            txtOrderNum = new TextBox();
             textBox2 = new TextBox();
-            this.btnSearch = new Button();
-            this.btnClear = new Button();
+            btnSearch = new Button();
+            btnClear = new Button();
             btnClose = new Button();
             SuspendLayout();
             // 
@@ -42,9 +42,9 @@
             lblOrderNum.AutoSize = true;
             lblOrderNum.Location = new Point(32, 41);
             lblOrderNum.Name = "lblOrderNum";
-            lblOrderNum.Size = new Size(85, 25);
+            lblOrderNum.Size = new Size(132, 25);
             lblOrderNum.TabIndex = 0;
-            lblOrderNum.Text = "Order ID:";
+            lblOrderNum.Text = "Order Number:";
             // 
             // lblStoreID
             // 
@@ -55,59 +55,61 @@
             lblStoreID.TabIndex = 1;
             lblStoreID.Text = "Store ID:";
             // 
-            // textBox1
+            // txtOrderNum
             // 
-            textBox1.Location = new Point(126, 38);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
-            textBox1.TabIndex = 3;
+            txtOrderNum.Location = new Point(186, 38);
+            txtOrderNum.Name = "txtOrderNum";
+            txtOrderNum.Size = new Size(150, 31);
+            txtOrderNum.TabIndex = 3;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(126, 99);
+            textBox2.Location = new Point(186, 99);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(150, 31);
             textBox2.TabIndex = 4;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new Point(32, 182);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new Size(80, 34);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Location = new Point(38, 185);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(80, 34);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
             // 
             // btnClear
             // 
-            this.btnClear.Location = new Point(138, 182);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new Size(80, 34);
-            this.btnClear.TabIndex = 7;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            btnClear.Location = new Point(144, 185);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(80, 34);
+            btnClear.TabIndex = 7;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(243, 182);
+            btnClose.Location = new Point(249, 185);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(80, 34);
             btnClose.TabIndex = 8;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // frmOrderSearch
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(355, 250);
+            ClientSize = new Size(378, 250);
             Controls.Add(btnClose);
-            Controls.Add(this.btnClear);
-            Controls.Add(this.btnSearch);
+            Controls.Add(btnClear);
+            Controls.Add(btnSearch);
             Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(txtOrderNum);
             Controls.Add(lblStoreID);
             Controls.Add(lblOrderNum);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmOrderSearch";
             ShowIcon = false;
@@ -121,11 +123,11 @@
         private Label lblOrderNum;
         private Label lblStoreID;
         private Label lbl;
-        private TextBox textBox1;
+        private TextBox txtOrderNum;
         private TextBox textBox2;
         private MaskedTextBox maskedTextBox1;
-        private Button button1;
-        private Button button2;
+        private Button btnSearch;
+        private Button btnClear;
         private Button btnClose;
     }
 }
