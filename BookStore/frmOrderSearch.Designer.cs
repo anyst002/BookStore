@@ -122,19 +122,12 @@
 
         private Label lblOrderNum;
         private Label lblStoreID;
-<<<<<<< HEAD
-        private TextBox textBox1;
-        private TextBox textBox2;
-=======
         private Label lbl;
         private TextBox txtOrderNum;
         private TextBox textBox2;
         private MaskedTextBox maskedTextBox1;
         private Button btnSearch;
         private Button btnClear;
->>>>>>> 630386f2c3f9efd256f5c119b2c3eb822c157c91
         private Button btnClose;
-        private Button btnSearch;
-        private Button btnClear;
     }
 }
