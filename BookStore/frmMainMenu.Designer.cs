@@ -79,8 +79,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 550);
             this.Controls.Add(this.btnViewReports);
-            this.Controls.Add(this.btnSearchBooks);
-            this.Controls.Add(this.btnAddBook);
+            this.Controls.Add(this.btnCreateOrder);
+            this.Controls.Add(this.btnMaintenance);
+            this.Controls.Add(this.btnMMClose);
             this.Name = "frmMainMenu";
             this.Text = "Main Menu";
             Load += frmMainMenu_Load;
@@ -89,8 +90,9 @@
 
         #endregion
 
-        private Button btnAddBook;
-        private Button btnSearchBooks;
+        private Button btnMaintenance;
+        private Button btnCreateOrder;
         private Button btnViewReports;
+        private Button btnMMClose;
     }
 }
