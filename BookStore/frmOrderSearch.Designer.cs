@@ -40,58 +40,65 @@
             // lblOrderNum
             // 
             lblOrderNum.AutoSize = true;
-            lblOrderNum.Location = new Point(32, 41);
+            lblOrderNum.Location = new Point(22, 25);
+            lblOrderNum.Margin = new Padding(2, 0, 2, 0);
             lblOrderNum.Name = "lblOrderNum";
-            lblOrderNum.Size = new Size(132, 25);
+            lblOrderNum.Size = new Size(87, 15);
             lblOrderNum.TabIndex = 0;
             lblOrderNum.Text = "Order Number:";
             // 
             // lblStoreID
             // 
             lblStoreID.AutoSize = true;
-            lblStoreID.Location = new Point(32, 102);
+            lblStoreID.Location = new Point(22, 61);
+            lblStoreID.Margin = new Padding(2, 0, 2, 0);
             lblStoreID.Name = "lblStoreID";
-            lblStoreID.Size = new Size(80, 25);
+            lblStoreID.Size = new Size(51, 15);
             lblStoreID.TabIndex = 1;
             lblStoreID.Text = "Store ID:";
             // 
             // txtOrderNum
             // 
-            txtOrderNum.Location = new Point(186, 38);
+            txtOrderNum.Location = new Point(130, 23);
+            txtOrderNum.Margin = new Padding(2, 2, 2, 2);
             txtOrderNum.Name = "txtOrderNum";
-            txtOrderNum.Size = new Size(150, 31);
+            txtOrderNum.Size = new Size(106, 23);
             txtOrderNum.TabIndex = 3;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(186, 99);
+            textBox2.Location = new Point(130, 59);
+            textBox2.Margin = new Padding(2, 2, 2, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
+            textBox2.Size = new Size(106, 23);
             textBox2.TabIndex = 4;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(38, 185);
+            btnSearch.Location = new Point(27, 111);
+            btnSearch.Margin = new Padding(2, 2, 2, 2);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(80, 34);
+            btnSearch.Size = new Size(56, 20);
             btnSearch.TabIndex = 6;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(144, 185);
+            btnClear.Location = new Point(101, 111);
+            btnClear.Margin = new Padding(2, 2, 2, 2);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(80, 34);
+            btnClear.Size = new Size(56, 20);
             btnClear.TabIndex = 7;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(249, 185);
+            btnClose.Location = new Point(174, 111);
+            btnClose.Margin = new Padding(2, 2, 2, 2);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(80, 34);
+            btnClose.Size = new Size(56, 20);
             btnClose.TabIndex = 8;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -99,9 +106,9 @@
             // 
             // frmOrderSearch
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(378, 250);
+            ClientSize = new Size(265, 150);
             Controls.Add(btnClose);
             Controls.Add(btnClear);
             Controls.Add(btnSearch);
@@ -110,9 +117,11 @@
             Controls.Add(lblStoreID);
             Controls.Add(lblOrderNum);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(2, 2, 2, 2);
             MaximizeBox = false;
             Name = "frmOrderSearch";
             ShowIcon = false;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Order Search";
             ResumeLayout(false);
             PerformLayout();
@@ -122,10 +131,8 @@
 
         private Label lblOrderNum;
         private Label lblStoreID;
-        private Label lbl;
         private TextBox txtOrderNum;
         private TextBox textBox2;
-        private MaskedTextBox maskedTextBox1;
         private Button btnSearch;
         private Button btnClear;
         private Button btnClose;

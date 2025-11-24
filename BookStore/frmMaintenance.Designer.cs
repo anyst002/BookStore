@@ -28,88 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTitles = new System.Windows.Forms.Button();
-            this.btnAuthors = new System.Windows.Forms.Button();
-            this.btnPublishers = new System.Windows.Forms.Button();
-            this.btnStores = new System.Windows.Forms.Button();
-            this.btnEmployees = new System.Windows.Forms.Button();
-            this.btnMaintClose = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            btnTitles = new Button();
+            btnAuthors = new Button();
+            btnPublishers = new Button();
+            btnStores = new Button();
+            btnEmployees = new Button();
+            btnMaintClose = new Button();
+            SuspendLayout();
             // 
-            // btnTitles 
-            //
-            this.btnTitles.Location = new System.Drawing.Point(60, 40);
-            this.btnTitles.Name = "btnTitles";
-            this.btnTitles.Size = new System.Drawing.Size(120, 35);
-            this.btnTitles.TabIndex = 0;
-            this.btnTitles.Text = "Titles";
-            this.btnTitles.UseVisualStyleBackColor = true;
-            this.btnTitles.Click += new System.EventHandler(this.btnTitles_Click);
+            // btnTitles
             // 
-            // btnAuthors 
-            //
-            this.btnAuthors.Location = new System.Drawing.Point(60, 95);
-            this.btnAuthors.Name = "btnAuthors";
-            this.btnAuthors.Size = new System.Drawing.Size(120, 35);
-            this.btnAuthors.TabIndex = 1;
-            this.btnAuthors.Text = "Authors";
-            this.btnAuthors.UseVisualStyleBackColor = true;
-            this.btnAuthors.Click += new System.EventHandler(this.btnAuthors_Click);
+            btnTitles.Location = new Point(31, 27);
+            btnTitles.Name = "btnTitles";
+            btnTitles.Size = new Size(120, 35);
+            btnTitles.TabIndex = 0;
+            btnTitles.Text = "Titles";
+            btnTitles.UseVisualStyleBackColor = true;
+            btnTitles.Click += btnTitles_Click;
+            // 
+            // btnAuthors
+            // 
+            btnAuthors.Location = new Point(31, 82);
+            btnAuthors.Name = "btnAuthors";
+            btnAuthors.Size = new Size(120, 35);
+            btnAuthors.TabIndex = 1;
+            btnAuthors.Text = "Authors";
+            btnAuthors.UseVisualStyleBackColor = true;
+            btnAuthors.Click += btnAuthors_Click;
             // 
             // btnPublishers
-            //
-            this.btnPublishers.Location = new System.Drawing.Point(60, 150);
-            this.btnPublishers.Name = "btnPublishers";
-            this.btnPublishers.Size = new System.Drawing.Size(120, 35);
-            this.btnPublishers.TabIndex = 2;
-            this.btnPublishers.Text = "Publishers";
-            this.btnPublishers.UseVisualStyleBackColor = true;
-            this.btnPublishers.Click += new System.EventHandler(this.btnPublishers_Click);
-            //
-            // btnStores 
-            //
-            this.btnStores.Location = new System.Drawing.Point(60, 205);
-            this.btnStores.Name = "btnStores";
-            this.btnStores.Size = new System.Drawing.Size(120, 35);
-            this.btnStores.TabIndex = 3;
-            this.btnStores.Text = "Stores";
-            this.btnStores.UseVisualStyleBackColor = true;
-            this.btnStores.Click += new System.EventHandler(this.btnStores_Click);
             // 
-            // btnEmployees 
-            //
-            this.btnEmployees.Location = new System.Drawing.Point(60, 260);
-            this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(120, 35);
-            this.btnEmployees.TabIndex = 4;
-            this.btnEmployees.Text = "Employees";
-            this.btnEmployees.UseVisualStyleBackColor = true;
-            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
-            //
+            btnPublishers.Location = new Point(31, 137);
+            btnPublishers.Name = "btnPublishers";
+            btnPublishers.Size = new Size(120, 35);
+            btnPublishers.TabIndex = 2;
+            btnPublishers.Text = "Publishers";
+            btnPublishers.UseVisualStyleBackColor = true;
+            btnPublishers.Click += btnPublishers_Click;
+            // 
+            // btnStores
+            // 
+            btnStores.Location = new Point(31, 192);
+            btnStores.Name = "btnStores";
+            btnStores.Size = new Size(120, 35);
+            btnStores.TabIndex = 3;
+            btnStores.Text = "Stores";
+            btnStores.UseVisualStyleBackColor = true;
+            btnStores.Click += btnStores_Click;
+            // 
+            // btnEmployees
+            // 
+            btnEmployees.Location = new Point(31, 247);
+            btnEmployees.Name = "btnEmployees";
+            btnEmployees.Size = new Size(120, 35);
+            btnEmployees.TabIndex = 4;
+            btnEmployees.Text = "Employees";
+            btnEmployees.UseVisualStyleBackColor = true;
+            btnEmployees.Click += btnEmployees_Click;
+            // 
             // btnMaintClose
-            //
-            this.btnMaintClose.Location = new System.Drawing.Point(60, 325);
-            this.btnMaintClose.Name = "btnMaintClose";
-            this.btnMaintClose.Size = new System.Drawing.Size(120, 35);
-            this.btnMaintClose.TabIndex = 0;
-            this.btnMaintClose.Text = "Close";
-            this.btnMaintClose.UseVisualStyleBackColor = true;
-            this.btnMaintClose.Click += new System.EventHandler(this.btnMaintClose_Click);
-            //
+            // 
+            btnMaintClose.Location = new Point(31, 312);
+            btnMaintClose.Name = "btnMaintClose";
+            btnMaintClose.Size = new Size(120, 35);
+            btnMaintClose.TabIndex = 0;
+            btnMaintClose.Text = "Close";
+            btnMaintClose.UseVisualStyleBackColor = true;
+            btnMaintClose.Click += btnMaintClose_Click;
+            // 
             // frmMaintenance
-            //
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 550);
-            this.Controls.Add(this.btnEmployees);
-            this.Controls.Add(this.btnStores);
-            this.Controls.Add(this.btnPublishers);
-            this.Controls.Add(this.btnAuthors);
-            this.Controls.Add(this.btnTitles);
-            this.Controls.Add(this.btnMaintClose);
-            this.Name = "frmMaintenance";
-            this.Text = "Maintenance";
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(183, 372);
+            Controls.Add(btnEmployees);
+            Controls.Add(btnStores);
+            Controls.Add(btnPublishers);
+            Controls.Add(btnAuthors);
+            Controls.Add(btnTitles);
+            Controls.Add(btnMaintClose);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "frmMaintenance";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Maintenance";
+            ResumeLayout(false);
         }
 
         #endregion

@@ -194,7 +194,7 @@
             lblTotal.AutoSize = true;
             lblTotal.Location = new Point(465, 620);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(36, 15);
+            lblTotal.Size = new Size(35, 15);
             lblTotal.TabIndex = 11;
             lblTotal.Text = "Total:";
             // 
@@ -252,9 +252,10 @@
             Controls.Add(dataGridView1);
             Controls.Add(lblSearch);
             Controls.Add(txtSearch);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmOrder";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Create Order";
             Load += frmOrder_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

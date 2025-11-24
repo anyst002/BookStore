@@ -110,7 +110,7 @@
             lblTotal.AutoSize = true;
             lblTotal.Location = new Point(792, 56);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(36, 15);
+            lblTotal.Size = new Size(35, 15);
             lblTotal.TabIndex = 7;
             lblTotal.Text = "Total:";
             // 
@@ -185,9 +185,10 @@
             Controls.Add(lblSubtotal);
             Controls.Add(lblOrderNumber);
             Controls.Add(lblOrderLabel);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmOrderSummary";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Order Summary";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);

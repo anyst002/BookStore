@@ -48,7 +48,7 @@ namespace BookStore
             lblAuthor.AutoSize = true;
             lblAuthor.Location = new Point(40, 40);
             lblAuthor.Name = "lblAuthor";
-            lblAuthor.Size = new Size(57, 20);
+            lblAuthor.Size = new Size(47, 15);
             lblAuthor.TabIndex = 0;
             lblAuthor.Text = "Author:";
             // 
@@ -57,7 +57,7 @@ namespace BookStore
             lblTitle.AutoSize = true;
             lblTitle.Location = new Point(40, 90);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(41, 20);
+            lblTitle.Size = new Size(32, 15);
             lblTitle.TabIndex = 1;
             lblTitle.Text = "Title:";
             // 
@@ -66,7 +66,7 @@ namespace BookStore
             lblOrder.AutoSize = true;
             lblOrder.Location = new Point(40, 140);
             lblOrder.Name = "lblOrder";
-            lblOrder.Size = new Size(99, 20);
+            lblOrder.Size = new Size(80, 15);
             lblOrder.TabIndex = 2;
             lblOrder.Text = "Author Order:";
             // 
@@ -75,7 +75,7 @@ namespace BookStore
             lblRoyalty.AutoSize = true;
             lblRoyalty.Location = new Point(40, 190);
             lblRoyalty.Name = "lblRoyalty";
-            lblRoyalty.Size = new Size(77, 20);
+            lblRoyalty.Size = new Size(62, 15);
             lblRoyalty.TabIndex = 3;
             lblRoyalty.Text = "Royalty %:";
             // 
@@ -84,7 +84,7 @@ namespace BookStore
             cboAuthor.DropDownStyle = ComboBoxStyle.DropDownList;
             cboAuthor.Location = new Point(160, 38);
             cboAuthor.Name = "cboAuthor";
-            cboAuthor.Size = new Size(250, 28);
+            cboAuthor.Size = new Size(250, 23);
             cboAuthor.TabIndex = 4;
             // 
             // cboTitle
@@ -92,7 +92,7 @@ namespace BookStore
             cboTitle.DropDownStyle = ComboBoxStyle.DropDownList;
             cboTitle.Location = new Point(160, 88);
             cboTitle.Name = "cboTitle";
-            cboTitle.Size = new Size(250, 28);
+            cboTitle.Size = new Size(250, 23);
             cboTitle.TabIndex = 5;
             // 
             // txtOrder
@@ -100,7 +100,7 @@ namespace BookStore
             txtOrder.Location = new Point(160, 138);
             txtOrder.MaxLength = 3;
             txtOrder.Name = "txtOrder";
-            txtOrder.Size = new Size(60, 27);
+            txtOrder.Size = new Size(60, 23);
             txtOrder.TabIndex = 6;
             // 
             // txtRoyalty
@@ -108,7 +108,7 @@ namespace BookStore
             txtRoyalty.Location = new Point(160, 188);
             txtRoyalty.MaxLength = 3;
             txtRoyalty.Name = "txtRoyalty";
-            txtRoyalty.Size = new Size(60, 27);
+            txtRoyalty.Size = new Size(60, 23);
             txtRoyalty.TabIndex = 7;
             // 
             // btnSave
@@ -119,6 +119,7 @@ namespace BookStore
             btnSave.TabIndex = 8;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnClear
             // 
@@ -128,6 +129,7 @@ namespace BookStore
             btnClear.TabIndex = 9;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnExit
             // 
@@ -137,6 +139,7 @@ namespace BookStore
             btnExit.TabIndex = 10;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // frmAddTitleAuthor
             // 
@@ -152,9 +155,11 @@ namespace BookStore
             Controls.Add(btnSave);
             Controls.Add(btnClear);
             Controls.Add(btnExit);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmAddTitleAuthor";
-            Text = "Add Title Author";
-            Load += frmAddTitleAuthor_Load;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Add Author To Title";
             ResumeLayout(false);
             PerformLayout();
         }

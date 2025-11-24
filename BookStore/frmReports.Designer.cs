@@ -160,10 +160,11 @@
             Controls.Add(lblStartDate);
             Controls.Add(dtpEndDate);
             Controls.Add(dtpStartDate);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmReports";
-            Text = "Reports";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Report";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

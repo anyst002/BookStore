@@ -1,8 +1,4 @@
-﻿//using static MaintenanceRepository;
-
-using System.Collections.Generic;
-
-namespace BookStore
+﻿namespace BookStore
 {
     public partial class frmAddEmployee : Form
     {
@@ -21,24 +17,6 @@ namespace BookStore
             txtJobLevel.Clear();
             txtPubId.Clear();
             datHireDate.ResetText();
-        }
-
-        private void SelectId(System.Windows.Forms.TextBox textbox) //TODO move to MaintenanceRepository
-        {
-            //get list of ids from database
-            //SelectId(Action action, System.Windows.Forms.TextBox textbox)
-            //List<IdInfo> list = action.Invoke();
-            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
-            IdInfo info1 = new IdInfo("003", "testo");
-            IdInfo info2 = new IdInfo("004", "testo");
-            list.Add(info1);
-            list.Add(info2);
-
-            frmSelectId selectForm = new frmSelectId(list);
-            selectForm.ShowDialog();
-            IdInfo? item = selectForm.selected;
-
-            if (item is not null) textbox.Text = item.Id;
         }
 
         private void Insert()
@@ -81,7 +59,7 @@ namespace BookStore
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Close(); //TODO should be changed to hide later
+            Close();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -91,14 +69,16 @@ namespace BookStore
 
         private void btnSelectJobId_Click(object sender, EventArgs e)
         {
-            SelectId(txtJobId);
-            //SelectId(GetJobIds, txtJobId);
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetJobIds();
+            MaintenanceRepository.SelectId(list, txtJobId);
         }
 
         private void btnSelectPubId_Click(object sender, EventArgs e)
         {
-            SelectId(txtPubId);
-            //SelectId(GetPublisherIds, txtJobId);
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetPublisherIds();
+            MaintenanceRepository.SelectId(list, txtPubId);
         }
     }
 }

@@ -119,7 +119,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmSelectId";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Select ID";
             ((System.ComponentModel.ISupportInitialize)grdDataGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)idInfoBindingSource).EndInit();

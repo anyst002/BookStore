@@ -69,7 +69,7 @@ namespace BookStore
             lblTitleID.AutoSize = true;
             lblTitleID.Location = new Point(40, 40);
             lblTitleID.Name = "lblTitleID";
-            lblTitleID.Size = new Size(60, 20);
+            lblTitleID.Size = new Size(46, 15);
             lblTitleID.TabIndex = 0;
             lblTitleID.Text = "Title ID:";
             // 
@@ -78,7 +78,7 @@ namespace BookStore
             lblTitle.AutoSize = true;
             lblTitle.Location = new Point(40, 80);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(41, 20);
+            lblTitle.Size = new Size(32, 15);
             lblTitle.TabIndex = 1;
             lblTitle.Text = "Title:";
             // 
@@ -87,7 +87,7 @@ namespace BookStore
             lblType.AutoSize = true;
             lblType.Location = new Point(40, 120);
             lblType.Name = "lblType";
-            lblType.Size = new Size(43, 20);
+            lblType.Size = new Size(34, 15);
             lblType.TabIndex = 2;
             lblType.Text = "Type:";
             // 
@@ -96,7 +96,7 @@ namespace BookStore
             lblPublisher.AutoSize = true;
             lblPublisher.Location = new Point(40, 160);
             lblPublisher.Name = "lblPublisher";
-            lblPublisher.Size = new Size(72, 20);
+            lblPublisher.Size = new Size(59, 15);
             lblPublisher.TabIndex = 3;
             lblPublisher.Text = "Publisher:";
             // 
@@ -105,7 +105,7 @@ namespace BookStore
             lblPrice.AutoSize = true;
             lblPrice.Location = new Point(40, 200);
             lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(44, 20);
+            lblPrice.Size = new Size(36, 15);
             lblPrice.TabIndex = 4;
             lblPrice.Text = "Price:";
             // 
@@ -114,7 +114,7 @@ namespace BookStore
             lblAdvance.AutoSize = true;
             lblAdvance.Location = new Point(40, 240);
             lblAdvance.Name = "lblAdvance";
-            lblAdvance.Size = new Size(69, 20);
+            lblAdvance.Size = new Size(56, 15);
             lblAdvance.TabIndex = 5;
             lblAdvance.Text = "Advance:";
             // 
@@ -123,7 +123,7 @@ namespace BookStore
             lblRoyalty.AutoSize = true;
             lblRoyalty.Location = new Point(40, 280);
             lblRoyalty.Name = "lblRoyalty";
-            lblRoyalty.Size = new Size(61, 20);
+            lblRoyalty.Size = new Size(49, 15);
             lblRoyalty.TabIndex = 6;
             lblRoyalty.Text = "Royalty:";
             // 
@@ -132,7 +132,7 @@ namespace BookStore
             lblYTDSales.AutoSize = true;
             lblYTDSales.Location = new Point(40, 320);
             lblYTDSales.Name = "lblYTDSales";
-            lblYTDSales.Size = new Size(77, 20);
+            lblYTDSales.Size = new Size(60, 15);
             lblYTDSales.TabIndex = 7;
             lblYTDSales.Text = "YTD Sales:";
             // 
@@ -141,7 +141,7 @@ namespace BookStore
             lblNotes.AutoSize = true;
             lblNotes.Location = new Point(40, 360);
             lblNotes.Name = "lblNotes";
-            lblNotes.Size = new Size(51, 20);
+            lblNotes.Size = new Size(41, 15);
             lblNotes.TabIndex = 8;
             lblNotes.Text = "Notes:";
             // 
@@ -150,7 +150,7 @@ namespace BookStore
             lblPubDate.AutoSize = true;
             lblPubDate.Location = new Point(40, 430);
             lblPubDate.Name = "lblPubDate";
-            lblPubDate.Size = new Size(95, 20);
+            lblPubDate.Size = new Size(76, 15);
             lblPubDate.TabIndex = 9;
             lblPubDate.Text = "Publish Date:";
             // 
@@ -159,7 +159,7 @@ namespace BookStore
             txtTitleID.Location = new Point(160, 38);
             txtTitleID.MaxLength = 6;
             txtTitleID.Name = "txtTitleID";
-            txtTitleID.Size = new Size(100, 27);
+            txtTitleID.Size = new Size(100, 23);
             txtTitleID.TabIndex = 10;
             // 
             // txtTitle
@@ -167,7 +167,7 @@ namespace BookStore
             txtTitle.Location = new Point(160, 78);
             txtTitle.MaxLength = 80;
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(250, 27);
+            txtTitle.Size = new Size(250, 23);
             txtTitle.TabIndex = 11;
             // 
             // cboType
@@ -175,7 +175,7 @@ namespace BookStore
             cboType.DropDownStyle = ComboBoxStyle.DropDownList;
             cboType.Location = new Point(160, 118);
             cboType.Name = "cboType";
-            cboType.Size = new Size(250, 28);
+            cboType.Size = new Size(250, 23);
             cboType.TabIndex = 12;
             // 
             // cboPublisher
@@ -183,7 +183,7 @@ namespace BookStore
             cboPublisher.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPublisher.Location = new Point(160, 158);
             cboPublisher.Name = "cboPublisher";
-            cboPublisher.Size = new Size(250, 28);
+            cboPublisher.Size = new Size(250, 23);
             cboPublisher.TabIndex = 13;
             // 
             // txtPrice
@@ -191,7 +191,7 @@ namespace BookStore
             txtPrice.Location = new Point(160, 198);
             txtPrice.MaxLength = 20;
             txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(100, 27);
+            txtPrice.Size = new Size(100, 23);
             txtPrice.TabIndex = 14;
             // 
             // txtAdvance
@@ -199,7 +199,7 @@ namespace BookStore
             txtAdvance.Location = new Point(160, 238);
             txtAdvance.MaxLength = 20;
             txtAdvance.Name = "txtAdvance";
-            txtAdvance.Size = new Size(100, 27);
+            txtAdvance.Size = new Size(100, 23);
             txtAdvance.TabIndex = 15;
             // 
             // txtRoyalty
@@ -207,7 +207,7 @@ namespace BookStore
             txtRoyalty.Location = new Point(160, 278);
             txtRoyalty.MaxLength = 10;
             txtRoyalty.Name = "txtRoyalty";
-            txtRoyalty.Size = new Size(100, 27);
+            txtRoyalty.Size = new Size(100, 23);
             txtRoyalty.TabIndex = 16;
             // 
             // txtYTDSales
@@ -215,7 +215,7 @@ namespace BookStore
             txtYTDSales.Location = new Point(160, 318);
             txtYTDSales.MaxLength = 10;
             txtYTDSales.Name = "txtYTDSales";
-            txtYTDSales.Size = new Size(100, 27);
+            txtYTDSales.Size = new Size(100, 23);
             txtYTDSales.TabIndex = 17;
             // 
             // txtNotes
@@ -232,7 +232,7 @@ namespace BookStore
             dtpPubDate.Format = DateTimePickerFormat.Short;
             dtpPubDate.Location = new Point(160, 428);
             dtpPubDate.Name = "dtpPubDate";
-            dtpPubDate.Size = new Size(150, 27);
+            dtpPubDate.Size = new Size(150, 23);
             dtpPubDate.TabIndex = 19;
             // 
             // btnSave
@@ -242,6 +242,7 @@ namespace BookStore
             btnSave.Size = new Size(90, 35);
             btnSave.TabIndex = 20;
             btnSave.Text = "Save";
+            btnSave.Click += btnSave_Click;
             // 
             // btnClear
             // 
@@ -250,6 +251,7 @@ namespace BookStore
             btnClear.Size = new Size(90, 35);
             btnClear.TabIndex = 21;
             btnClear.Text = "Clear";
+            btnClear.Click += btnClear_Click;
             // 
             // btnExit
             // 
@@ -258,6 +260,7 @@ namespace BookStore
             btnExit.Size = new Size(90, 35);
             btnExit.TabIndex = 22;
             btnExit.Text = "Exit";
+            btnExit.Click += btnExit_Click;
             // 
             // frmAddTitle
             // 
@@ -285,8 +288,11 @@ namespace BookStore
             Controls.Add(btnSave);
             Controls.Add(btnClear);
             Controls.Add(btnExit);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmAddTitle";
-            Text = "Add New Book Title";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Add Title";
             ResumeLayout(false);
             PerformLayout();
         }
