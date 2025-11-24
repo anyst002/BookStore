@@ -88,5 +88,9 @@
         }
 
         #endregion
+
+        private Button btnAddBook;
+        private Button btnSearchBooks;
+        private Button btnViewReports;
     }
 }

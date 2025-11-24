@@ -106,11 +106,19 @@
             this.Controls.Add(this.btnPublishers);
             this.Controls.Add(this.btnAuthors);
             this.Controls.Add(this.btnTitles);
+            this.Controls.Add(this.btnMaintClose);
             this.Name = "frmMaintenance";
             this.Text = "Maintenance";
             this.ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnTitles;
+        private Button btnAuthors;
+        private Button btnPublishers;
+        private Button btnStores;
+        private Button btnEmployees;
+        private Button btnMaintClose;
     }
 }
