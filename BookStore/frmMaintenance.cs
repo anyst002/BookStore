@@ -45,5 +45,10 @@ namespace BookStore
             frmAddEmployee addEmployee = new frmAddEmployee();
             addEmployee.ShowDialog();
         }
+
+        private void btnMaintClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -28,29 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddBook = new System.Windows.Forms.Button();
-            this.btnSearchBooks = new System.Windows.Forms.Button();
+            this.btnMaintenance = new System.Windows.Forms.Button();
+            this.btnCreateOrder = new System.Windows.Forms.Button();
             this.btnViewReports = new System.Windows.Forms.Button();
+            this.btnMMClose = new System.Windows.Forms.Button();
 
             this.SuspendLayout();
 
-            this.btnAddBook.Location = new System.Drawing.Point(40, 40);
-            this.btnAddBook.Name = "btnAddBook"
-            this.btnAddBook.Size = new System.Drawing.Size(120, 35);
-            this.btnAddBook.TabIndex = 0;
-            this.btnAddBook.Text = "Add Book";
-            this.btnAddBook.UseVisualStyleBackColor = true;
-            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
+            this.btnMaintenance.Location = new System.Drawing.Point(40, 40);
+            this.btnMaintenance.Name = "btnMaintenance"
+            this.btnMaintenance.Size = new System.Drawing.Size(120, 35);
+            this.btnMaintenance.TabIndex = 0;
+            this.btnMaintenance.Text = "Maintenance";
+            this.btnMaintenance.UseVisualStyleBackColor = true;
+            this.btnMaintenance.Click += new System.EventHandler(this.btnMaintenance_Click);
             //
             // btnSearchBooks
             //
-            this.btnSearchBooks.Location = new System.Drawing.Point(40, 100);
-            this.btnSearchBooks.Name = "btnSearchBooks";
-            this.btnSearchBooks.Size = new System.Drawing.Size(120, 35);
-            this.btnSearchBooks.TabIndex = 1;
-            this.btnSearchBooks.Text = "Search Books";
-            this.btnSearchBooks.UseVisualStyleBackColor = true;
-            this.btnSearchBooks.Click += new System.EventHandler(this.btnSearchBooks_Click);
+            this.btnCreateOrder.Location = new System.Drawing.Point(40, 100);
+            this.btnCreateOrder.Name = "btnCreateOrder";
+            this.btnCreateOrder.Size = new System.Drawing.Size(120, 35);
+            this.btnCreateOrder.TabIndex = 1;
+            this.btnCreateOrder.Text = "Create Order";
+            this.btnCreateOrder.UseVisualStyleBackColor = true;
+            this.btnCreateOrder.Click += new System.EventHandler(this.btnCreateOrder_Click);
             // 
             // btnViewReports
             //
@@ -61,6 +62,16 @@
             this.btnViewReports.Text = "View Reports";
             this.btnViewReports.UseVisualStyleBackColor = true;
             this.btnViewReports.Click += new System.EventHandler(this.btnViewReports_Click);
+            //
+            // btnMMClose
+            //
+            this.btnMMClose.Location = new System.Drawing.Point(40, 270);
+            this.btnMMClose.Name = "btnMMClose";
+            this.btnMMClose.Size = new System.Drawing.Size(120, 35);
+            this.btnMMClose.TabIndex = 2;
+            this.btnMMClose.Text = "Close";
+            this.btnMMClose.UseVisualStyleBackColor = true;
+            this.btnMMClose.Click += new System.EventHandler(this.btnMMClose_Click);
             // 
             // frmMainMenu
             // 
