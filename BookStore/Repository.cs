@@ -110,7 +110,7 @@ namespace BookStore
             return list;
         }
 
-        public static string SelectId(List<IdInfo> list) //TODO this should be moved out to decouple
+        public static string SelectId(List<IdInfo> list)
         {
             frmSelectId selectForm = new frmSelectId(list);
             selectForm.ShowDialog();
