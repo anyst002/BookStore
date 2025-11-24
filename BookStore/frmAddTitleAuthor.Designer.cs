@@ -30,118 +30,133 @@ namespace BookStore
 
         private void InitializeComponent()
         {
-            this.lblAuthor = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblOrder = new System.Windows.Forms.Label();
-            this.lblRoyalty = new System.Windows.Forms.Label();
-
-            this.cboAuthor = new System.Windows.Forms.ComboBox();
-            this.cboTitle = new System.Windows.Forms.ComboBox();
-
-            this.txtOrder = new System.Windows.Forms.TextBox();
-            this.txtRoyalty = new System.Windows.Forms.TextBox();
-
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
+            lblAuthor = new Label();
+            lblTitle = new Label();
+            lblOrder = new Label();
+            lblRoyalty = new Label();
+            cboAuthor = new ComboBox();
+            cboTitle = new ComboBox();
+            txtOrder = new TextBox();
+            txtRoyalty = new TextBox();
+            btnSave = new Button();
+            btnClear = new Button();
+            btnExit = new Button();
+            SuspendLayout();
+            // 
             // lblAuthor
-            this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Location = new System.Drawing.Point(40, 40);
-            this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(54, 17);
-            this.lblAuthor.Text = "Author:";
-
+            // 
+            lblAuthor.AutoSize = true;
+            lblAuthor.Location = new Point(40, 40);
+            lblAuthor.Name = "lblAuthor";
+            lblAuthor.Size = new Size(57, 20);
+            lblAuthor.TabIndex = 0;
+            lblAuthor.Text = "Author:";
+            // 
             // lblTitle
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(40, 90);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(39, 17);
-            this.lblTitle.Text = "Title:";
-
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(40, 90);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(41, 20);
+            lblTitle.TabIndex = 1;
+            lblTitle.Text = "Title:";
+            // 
             // lblOrder
-            this.lblOrder.AutoSize = true;
-            this.lblOrder.Location = new System.Drawing.Point(40, 140);
-            this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(93, 17);
-            this.lblOrder.Text = "Author Order:";
-
+            // 
+            lblOrder.AutoSize = true;
+            lblOrder.Location = new Point(40, 140);
+            lblOrder.Name = "lblOrder";
+            lblOrder.Size = new Size(99, 20);
+            lblOrder.TabIndex = 2;
+            lblOrder.Text = "Author Order:";
+            // 
             // lblRoyalty
-            this.lblRoyalty.AutoSize = true;
-            this.lblRoyalty.Location = new System.Drawing.Point(40, 190);
-            this.lblRoyalty.Name = "lblRoyalty";
-            this.lblRoyalty.Size = new System.Drawing.Size(77, 17);
-            this.lblRoyalty.Text = "Royalty %:";
-
+            // 
+            lblRoyalty.AutoSize = true;
+            lblRoyalty.Location = new Point(40, 190);
+            lblRoyalty.Name = "lblRoyalty";
+            lblRoyalty.Size = new Size(77, 20);
+            lblRoyalty.TabIndex = 3;
+            lblRoyalty.Text = "Royalty %:";
+            // 
             // cboAuthor
-            this.cboAuthor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboAuthor.Location = new System.Drawing.Point(160, 38);
-            this.cboAuthor.Name = "cboAuthor";
-            this.cboAuthor.Size = new System.Drawing.Size(250, 24);
-
+            // 
+            cboAuthor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboAuthor.Location = new Point(160, 38);
+            cboAuthor.Name = "cboAuthor";
+            cboAuthor.Size = new Size(250, 28);
+            cboAuthor.TabIndex = 4;
+            cboAuthor.SelectedIndexChanged += cboAuthor_SelectedIndexChanged;
+            // 
             // cboTitle
-            this.cboTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTitle.Location = new System.Drawing.Point(160, 88);
-            this.cboTitle.Name = "cboTitle";
-            this.cboTitle.Size = new System.Drawing.Size(250, 24);
-
+            // 
+            cboTitle.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTitle.Location = new Point(160, 88);
+            cboTitle.Name = "cboTitle";
+            cboTitle.Size = new Size(250, 28);
+            cboTitle.TabIndex = 5;
+            // 
             // txtOrder
-            this.txtOrder.Location = new System.Drawing.Point(160, 138);
-            this.txtOrder.Name = "txtOrder";
-            this.txtOrder.Size = new System.Drawing.Size(60, 22);
-            this.txtOrder.MaxLength = 3;
-
+            // 
+            txtOrder.Location = new Point(160, 138);
+            txtOrder.MaxLength = 3;
+            txtOrder.Name = "txtOrder";
+            txtOrder.Size = new Size(60, 27);
+            txtOrder.TabIndex = 6;
+            // 
             // txtRoyalty
-            this.txtRoyalty.Location = new System.Drawing.Point(160, 188);
-            this.txtRoyalty.Name = "txtRoyalty";
-            this.txtRoyalty.Size = new System.Drawing.Size(60, 22);
-            this.txtRoyalty.MaxLength = 3;
-
+            // 
+            txtRoyalty.Location = new Point(160, 188);
+            txtRoyalty.MaxLength = 3;
+            txtRoyalty.Name = "txtRoyalty";
+            txtRoyalty.Size = new Size(60, 27);
+            txtRoyalty.TabIndex = 7;
+            // 
             // btnSave
-            this.btnSave.Location = new System.Drawing.Point(60, 250);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 35);
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-
+            // 
+            btnSave.Location = new Point(60, 250);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(90, 35);
+            btnSave.TabIndex = 8;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
             // btnClear
-            this.btnClear.Location = new System.Drawing.Point(190, 250);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(90, 35);
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-
+            // 
+            btnClear.Location = new Point(190, 250);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(90, 35);
+            btnClear.TabIndex = 9;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            // 
             // btnExit
-            this.btnExit.Location = new System.Drawing.Point(320, 250);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(90, 35);
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-
+            // 
+            btnExit.Location = new Point(320, 250);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(90, 35);
+            btnExit.TabIndex = 10;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            // 
             // frmAddTitleAuthor
-            this.ClientSize = new System.Drawing.Size(500, 330);
-            this.Controls.Add(this.lblAuthor);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblOrder);
-            this.Controls.Add(this.lblRoyalty);
-
-            this.Controls.Add(this.cboAuthor);
-            this.Controls.Add(this.cboTitle);
-
-            this.Controls.Add(this.txtOrder);
-            this.Controls.Add(this.txtRoyalty);
-
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnExit);
-
-            this.Name = "frmAddTitleAuthor";
-            this.Text = "Add Title Author";
-
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            // 
+            ClientSize = new Size(500, 330);
+            Controls.Add(lblAuthor);
+            Controls.Add(lblTitle);
+            Controls.Add(lblOrder);
+            Controls.Add(lblRoyalty);
+            Controls.Add(cboAuthor);
+            Controls.Add(cboTitle);
+            Controls.Add(txtOrder);
+            Controls.Add(txtRoyalty);
+            Controls.Add(btnSave);
+            Controls.Add(btnClear);
+            Controls.Add(btnExit);
+            Name = "frmAddTitleAuthor";
+            Text = "Add Title Author";
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
