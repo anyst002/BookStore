@@ -109,6 +109,8 @@
             this.Controls.Add(this.btnMaintClose);
             this.Name = "frmMaintenance";
             this.Text = "Maintenance";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.ResumeLayout(false);
         }
 

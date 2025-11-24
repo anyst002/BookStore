@@ -85,6 +85,8 @@
             this.Name = "frmMainMenu";
             this.Text = "Main Menu";
             Load += frmMainMenu_Load;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.ResumeLayout(false);
         }
 
