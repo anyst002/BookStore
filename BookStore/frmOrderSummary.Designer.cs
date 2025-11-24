@@ -162,7 +162,7 @@
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(417, 453);
+            btnOK.Location = new Point(393, 438);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 23);
             btnOK.TabIndex = 10;
@@ -173,7 +173,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1028, 624);
+            ClientSize = new Size(995, 624);
             Controls.Add(btnOK);
             Controls.Add(dataGridView1);
             Controls.Add(txtTotal);

@@ -212,7 +212,7 @@
             // 
             // btnConfirmOrder
             // 
-            btnConfirmOrder.Location = new Point(598, 692);
+            btnConfirmOrder.Location = new Point(565, 671);
             btnConfirmOrder.Name = "btnConfirmOrder";
             btnConfirmOrder.Size = new Size(111, 23);
             btnConfirmOrder.TabIndex = 14;
@@ -223,7 +223,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(992, 759);
+            ClientSize = new Size(992, 735);
             Controls.Add(btnConfirmOrder);
             Controls.Add(txtTotal);
             Controls.Add(txtTax);

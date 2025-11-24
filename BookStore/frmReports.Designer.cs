@@ -140,7 +140,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(801, 453);
+            btnExit.Location = new Point(777, 456);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 6;
@@ -151,7 +151,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1058, 636);
+            ClientSize = new Size(1013, 636);
             Controls.Add(btnExit);
             Controls.Add(dataGridView1);
             Controls.Add(btnViewReport);
