@@ -39,163 +39,256 @@ namespace BookStore
 
         private void InitializeComponent()
         {
-            this.lblTitleID = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblType = new System.Windows.Forms.Label();
-            this.lblPublisher = new System.Windows.Forms.Label();
-            this.lblPrice = new System.Windows.Forms.Label();
-            this.lblAdvance = new System.Windows.Forms.Label();
-            this.lblRoyalty = new System.Windows.Forms.Label();
-            this.lblYTDSales = new System.Windows.Forms.Label();
-            this.lblNotes = new System.Windows.Forms.Label();
-            this.lblPubDate = new System.Windows.Forms.Label();
-
-            this.txtTitleID = new System.Windows.Forms.TextBox();
-            this.txtTitle = new System.Windows.Forms.TextBox();
-            this.cboType = new System.Windows.Forms.ComboBox();
-            this.cboPublisher = new System.Windows.Forms.ComboBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.txtAdvance = new System.Windows.Forms.TextBox();
-            this.txtRoyalty = new System.Windows.Forms.TextBox();
-            this.txtYTDSales = new System.Windows.Forms.TextBox();
-            this.txtNotes = new System.Windows.Forms.TextBox();
-            this.dtpPubDate = new System.Windows.Forms.DateTimePicker();
-
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-
-            // Labels
-            this.lblTitleID.AutoSize = true;
-            this.lblTitleID.Location = new System.Drawing.Point(40, 40);
-            this.lblTitleID.Text = "Title ID:";
-
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(40, 80);
-            this.lblTitle.Text = "Title:";
-
-            this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(40, 120);
-            this.lblType.Text = "Type:";
-
-            this.lblPublisher.AutoSize = true;
-            this.lblPublisher.Location = new System.Drawing.Point(40, 160);
-            this.lblPublisher.Text = "Publisher:";
-
-            this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(40, 200);
-            this.lblPrice.Text = "Price:";
-
-            this.lblAdvance.AutoSize = true;
-            this.lblAdvance.Location = new System.Drawing.Point(40, 240);
-            this.lblAdvance.Text = "Advance:";
-
-            this.lblRoyalty.AutoSize = true;
-            this.lblRoyalty.Location = new System.Drawing.Point(40, 280);
-            this.lblRoyalty.Text = "Royalty:";
-
-            this.lblYTDSales.AutoSize = true;
-            this.lblYTDSales.Location = new System.Drawing.Point(40, 320);
-            this.lblYTDSales.Text = "YTD Sales:";
-
-            this.lblNotes.AutoSize = true;
-            this.lblNotes.Location = new System.Drawing.Point(40, 360);
-            this.lblNotes.Text = "Notes:";
-
-            this.lblPubDate.AutoSize = true;
-            this.lblPubDate.Location = new System.Drawing.Point(40, 430);
-            this.lblPubDate.Text = "Publish Date:";
-
-            // Input Controls
-            this.txtTitleID.Location = new System.Drawing.Point(160, 38);
-            this.txtTitleID.MaxLength = 6;
-
-            this.txtTitle.Location = new System.Drawing.Point(160, 78);
-            this.txtTitle.MaxLength = 80;
-            this.txtTitle.Width = 250;
-
-            this.cboType.Location = new System.Drawing.Point(160, 118);
-            this.cboType.Width = 250;
-            this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-
-            this.cboPublisher.Location = new System.Drawing.Point(160, 158);
-            this.cboPublisher.Width = 250;
-            this.cboPublisher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-
-            this.txtPrice.Location = new System.Drawing.Point(160, 198);
-            this.txtPrice.Width = 100;
-            this.txtPrice.MaxLength = 20;
-
-            this.txtAdvance.Location = new System.Drawing.Point(160, 238);
-            this.txtAdvance.Width = 100;
-            this.txtAdvance.MaxLength = 20;
-
-            this.txtRoyalty.Location = new System.Drawing.Point(160, 278);
-            this.txtRoyalty.Width = 100;
-            this.txtRoyalty.MaxLength = 10;
-
-            this.txtYTDSales.Location = new System.Drawing.Point(160, 318);
-            this.txtYTDSales.Width = 100;
-            this.txtYTDSales.MaxLength = 10;
-
-            this.txtNotes.Location = new System.Drawing.Point(160, 358);
-            this.txtNotes.Width = 300;
-            this.txtNotes.Height = 60;
-            this.txtNotes.Multiline = true;
-            this.txtNotes.MaxLength = 200;
-
-            this.dtpPubDate.Location = new System.Drawing.Point(160, 428);
-            this.dtpPubDate.Width = 150;
-            this.dtpPubDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-
-            // Buttons
-            this.btnSave.Location = new System.Drawing.Point(80, 480);
-            this.btnSave.Size = new System.Drawing.Size(90, 35);
-            this.btnSave.Text = "Save";
-
-            this.btnClear.Location = new System.Drawing.Point(200, 480);
-            this.btnClear.Size = new System.Drawing.Size(90, 35);
-            this.btnClear.Text = "Clear";
-
-            this.btnExit.Location = new System.Drawing.Point(320, 480);
-            this.btnExit.Size = new System.Drawing.Size(90, 35);
-            this.btnExit.Text = "Exit";
-
-            // Form
-            this.ClientSize = new System.Drawing.Size(550, 550);
-            this.Controls.Add(this.lblTitleID);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblType);
-            this.Controls.Add(this.lblPublisher);
-            this.Controls.Add(this.lblPrice);
-            this.Controls.Add(this.lblAdvance);
-            this.Controls.Add(this.lblRoyalty);
-            this.Controls.Add(this.lblYTDSales);
-            this.Controls.Add(this.lblNotes);
-            this.Controls.Add(this.lblPubDate);
-
-            this.Controls.Add(this.txtTitleID);
-            this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.cboType);
-            this.Controls.Add(this.cboPublisher);
-            this.Controls.Add(this.txtPrice);
-            this.Controls.Add(this.txtAdvance);
-            this.Controls.Add(this.txtRoyalty);
-            this.Controls.Add(this.txtYTDSales);
-            this.Controls.Add(this.txtNotes);
-            this.Controls.Add(this.dtpPubDate);
-
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnExit);
-
-            this.Name = "frmAddTitle";
-            this.Text = "Add New Book Title";
-
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            lblTitleID = new Label();
+            lblTitle = new Label();
+            lblType = new Label();
+            lblPublisher = new Label();
+            lblPrice = new Label();
+            lblAdvance = new Label();
+            lblRoyalty = new Label();
+            lblYTDSales = new Label();
+            lblNotes = new Label();
+            lblPubDate = new Label();
+            txtTitleID = new TextBox();
+            txtTitle = new TextBox();
+            cboType = new ComboBox();
+            cboPublisher = new ComboBox();
+            txtPrice = new TextBox();
+            txtAdvance = new TextBox();
+            txtRoyalty = new TextBox();
+            txtYTDSales = new TextBox();
+            txtNotes = new TextBox();
+            dtpPubDate = new DateTimePicker();
+            btnSave = new Button();
+            btnClear = new Button();
+            btnExit = new Button();
+            SuspendLayout();
+            // 
+            // lblTitleID
+            // 
+            lblTitleID.AutoSize = true;
+            lblTitleID.Location = new Point(40, 40);
+            lblTitleID.Name = "lblTitleID";
+            lblTitleID.Size = new Size(60, 20);
+            lblTitleID.TabIndex = 0;
+            lblTitleID.Text = "Title ID:";
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(40, 80);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(41, 20);
+            lblTitle.TabIndex = 1;
+            lblTitle.Text = "Title:";
+            // 
+            // lblType
+            // 
+            lblType.AutoSize = true;
+            lblType.Location = new Point(40, 120);
+            lblType.Name = "lblType";
+            lblType.Size = new Size(43, 20);
+            lblType.TabIndex = 2;
+            lblType.Text = "Type:";
+            // 
+            // lblPublisher
+            // 
+            lblPublisher.AutoSize = true;
+            lblPublisher.Location = new Point(40, 160);
+            lblPublisher.Name = "lblPublisher";
+            lblPublisher.Size = new Size(72, 20);
+            lblPublisher.TabIndex = 3;
+            lblPublisher.Text = "Publisher:";
+            // 
+            // lblPrice
+            // 
+            lblPrice.AutoSize = true;
+            lblPrice.Location = new Point(40, 200);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(44, 20);
+            lblPrice.TabIndex = 4;
+            lblPrice.Text = "Price:";
+            // 
+            // lblAdvance
+            // 
+            lblAdvance.AutoSize = true;
+            lblAdvance.Location = new Point(40, 240);
+            lblAdvance.Name = "lblAdvance";
+            lblAdvance.Size = new Size(69, 20);
+            lblAdvance.TabIndex = 5;
+            lblAdvance.Text = "Advance:";
+            // 
+            // lblRoyalty
+            // 
+            lblRoyalty.AutoSize = true;
+            lblRoyalty.Location = new Point(40, 280);
+            lblRoyalty.Name = "lblRoyalty";
+            lblRoyalty.Size = new Size(61, 20);
+            lblRoyalty.TabIndex = 6;
+            lblRoyalty.Text = "Royalty:";
+            // 
+            // lblYTDSales
+            // 
+            lblYTDSales.AutoSize = true;
+            lblYTDSales.Location = new Point(40, 320);
+            lblYTDSales.Name = "lblYTDSales";
+            lblYTDSales.Size = new Size(77, 20);
+            lblYTDSales.TabIndex = 7;
+            lblYTDSales.Text = "YTD Sales:";
+            // 
+            // lblNotes
+            // 
+            lblNotes.AutoSize = true;
+            lblNotes.Location = new Point(40, 360);
+            lblNotes.Name = "lblNotes";
+            lblNotes.Size = new Size(51, 20);
+            lblNotes.TabIndex = 8;
+            lblNotes.Text = "Notes:";
+            // 
+            // lblPubDate
+            // 
+            lblPubDate.AutoSize = true;
+            lblPubDate.Location = new Point(40, 430);
+            lblPubDate.Name = "lblPubDate";
+            lblPubDate.Size = new Size(95, 20);
+            lblPubDate.TabIndex = 9;
+            lblPubDate.Text = "Publish Date:";
+            // 
+            // txtTitleID
+            // 
+            txtTitleID.Location = new Point(160, 38);
+            txtTitleID.MaxLength = 6;
+            txtTitleID.Name = "txtTitleID";
+            txtTitleID.Size = new Size(100, 27);
+            txtTitleID.TabIndex = 10;
+            // 
+            // txtTitle
+            // 
+            txtTitle.Location = new Point(160, 78);
+            txtTitle.MaxLength = 80;
+            txtTitle.Name = "txtTitle";
+            txtTitle.Size = new Size(250, 27);
+            txtTitle.TabIndex = 11;
+            // 
+            // cboType
+            // 
+            cboType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboType.Location = new Point(160, 118);
+            cboType.Name = "cboType";
+            cboType.Size = new Size(250, 28);
+            cboType.TabIndex = 12;
+            // 
+            // cboPublisher
+            // 
+            cboPublisher.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboPublisher.Location = new Point(160, 158);
+            cboPublisher.Name = "cboPublisher";
+            cboPublisher.Size = new Size(250, 28);
+            cboPublisher.TabIndex = 13;
+            // 
+            // txtPrice
+            // 
+            txtPrice.Location = new Point(160, 198);
+            txtPrice.MaxLength = 20;
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(100, 27);
+            txtPrice.TabIndex = 14;
+            // 
+            // txtAdvance
+            // 
+            txtAdvance.Location = new Point(160, 238);
+            txtAdvance.MaxLength = 20;
+            txtAdvance.Name = "txtAdvance";
+            txtAdvance.Size = new Size(100, 27);
+            txtAdvance.TabIndex = 15;
+            // 
+            // txtRoyalty
+            // 
+            txtRoyalty.Location = new Point(160, 278);
+            txtRoyalty.MaxLength = 10;
+            txtRoyalty.Name = "txtRoyalty";
+            txtRoyalty.Size = new Size(100, 27);
+            txtRoyalty.TabIndex = 16;
+            // 
+            // txtYTDSales
+            // 
+            txtYTDSales.Location = new Point(160, 318);
+            txtYTDSales.MaxLength = 10;
+            txtYTDSales.Name = "txtYTDSales";
+            txtYTDSales.Size = new Size(100, 27);
+            txtYTDSales.TabIndex = 17;
+            // 
+            // txtNotes
+            // 
+            txtNotes.Location = new Point(160, 358);
+            txtNotes.MaxLength = 200;
+            txtNotes.Multiline = true;
+            txtNotes.Name = "txtNotes";
+            txtNotes.Size = new Size(300, 60);
+            txtNotes.TabIndex = 18;
+            // 
+            // dtpPubDate
+            // 
+            dtpPubDate.Format = DateTimePickerFormat.Short;
+            dtpPubDate.Location = new Point(160, 428);
+            dtpPubDate.Name = "dtpPubDate";
+            dtpPubDate.Size = new Size(150, 27);
+            dtpPubDate.TabIndex = 19;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(80, 480);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(90, 35);
+            btnSave.TabIndex = 20;
+            btnSave.Text = "Save";
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(200, 480);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(90, 35);
+            btnClear.TabIndex = 21;
+            btnClear.Text = "Clear";
+            // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(320, 480);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(90, 35);
+            btnExit.TabIndex = 22;
+            btnExit.Text = "Exit";
+            // 
+            // frmAddTitle
+            // 
+            ClientSize = new Size(550, 550);
+            Controls.Add(lblTitleID);
+            Controls.Add(lblTitle);
+            Controls.Add(lblType);
+            Controls.Add(lblPublisher);
+            Controls.Add(lblPrice);
+            Controls.Add(lblAdvance);
+            Controls.Add(lblRoyalty);
+            Controls.Add(lblYTDSales);
+            Controls.Add(lblNotes);
+            Controls.Add(lblPubDate);
+            Controls.Add(txtTitleID);
+            Controls.Add(txtTitle);
+            Controls.Add(cboType);
+            Controls.Add(cboPublisher);
+            Controls.Add(txtPrice);
+            Controls.Add(txtAdvance);
+            Controls.Add(txtRoyalty);
+            Controls.Add(txtYTDSales);
+            Controls.Add(txtNotes);
+            Controls.Add(dtpPubDate);
+            Controls.Add(btnSave);
+            Controls.Add(btnClear);
+            Controls.Add(btnExit);
+            Name = "frmAddTitle";
+            Text = "Add New Book Title";
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
