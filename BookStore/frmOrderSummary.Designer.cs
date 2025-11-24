@@ -162,7 +162,7 @@
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(393, 438);
+            btnOK.Location = new Point(387, 435);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 23);
             btnOK.TabIndex = 10;

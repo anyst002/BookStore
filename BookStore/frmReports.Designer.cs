@@ -140,7 +140,7 @@
             // 
             // btnExit
             // 
-            btnExit.Location = new Point(777, 456);
+            btnExit.Location = new Point(768, 459);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(75, 23);
             btnExit.TabIndex = 6;
