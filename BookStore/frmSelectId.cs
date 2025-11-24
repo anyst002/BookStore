@@ -12,25 +12,22 @@ namespace BookStore
 {
     public partial class frmSelectId : Form
     {
-
-        public frmSelectId() //frmSelectId(ListViewItem[] list)
+        public IdInfo? selected = null;
+        public frmSelectId(List<IdInfo> list)
         {
             InitializeComponent();
-            //lstListView.Items.AddRange(list);
 
-            ListViewItem item = new ListViewItem();
-            item.SubItems.Add("001");
-            item.SubItems.Add("test");
-            item.SubItems.RemoveAt(0); //TODO figure out why [0] is just storing empty space
-            lstListView.Items.Add(item);
+            grdDataGrid.DataSource = list;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            if(lstListView.SelectedItems.Count == 1)
+            if (grdDataGrid.SelectedRows.Count == 1)
             {
-                ListViewItem item = lstListView.SelectedItems[0];
-                //return this to parent form somehow
+                selected = new IdInfo(
+                  (string)grdDataGrid.SelectedRows[0].Cells[0].Value
+                , (string)grdDataGrid.SelectedRows[0].Cells[1].Value);
+
                 Close();
             }
             else
