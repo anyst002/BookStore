@@ -21,5 +21,21 @@ namespace BookStore
         {
 
         }
+
+        private void frmOrder_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            frmOrderSearch search = new frmOrderSearch();
+            search.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

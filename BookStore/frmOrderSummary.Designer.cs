@@ -162,7 +162,7 @@
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(393, 438);
+            btnOK.Location = new Point(387, 435);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 23);
             btnOK.TabIndex = 10;
@@ -185,8 +185,10 @@
             Controls.Add(lblSubtotal);
             Controls.Add(lblOrderNumber);
             Controls.Add(lblOrderLabel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmOrderSummary";
-            Text = "frmOrderSummary";
+            Text = "Order Summary";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             btnSelect = new Button();
             btnCancel = new Button();
-            lstListView = new ListView();
-            colId = new ColumnHeader();
-            colDescription = new ColumnHeader();
+            grdDataGrid = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            infoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idInfoBindingSource = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)grdDataGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)idInfoBindingSource).BeginInit();
             SuspendLayout();
             // 
             // btnSelect
@@ -55,33 +60,60 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
-            // lstListView
+            // grdDataGrid
             // 
-            lstListView.Columns.AddRange(new ColumnHeader[] { colId, colDescription });
-            lstListView.FullRowSelect = true;
-            lstListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lstListView.Location = new Point(0, 0);
-            lstListView.Name = "lstListView";
-            lstListView.Size = new Size(381, 398);
-            lstListView.TabIndex = 0;
-            lstListView.UseCompatibleStateImageBehavior = false;
-            lstListView.View = View.Details;
+            grdDataGrid.AllowUserToAddRows = false;
+            grdDataGrid.AllowUserToDeleteRows = false;
+            grdDataGrid.AllowUserToResizeColumns = false;
+            grdDataGrid.AllowUserToResizeRows = false;
+            grdDataGrid.AutoGenerateColumns = false;
+            grdDataGrid.BackgroundColor = SystemColors.ControlLight;
+            grdDataGrid.BorderStyle = BorderStyle.Fixed3D;
+            grdDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grdDataGrid.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, infoDataGridViewTextBoxColumn });
+            grdDataGrid.DataSource = idInfoBindingSource;
+            grdDataGrid.Dock = DockStyle.Top;
+            grdDataGrid.Location = new Point(0, 0);
+            grdDataGrid.MultiSelect = false;
+            grdDataGrid.Name = "grdDataGrid";
+            grdDataGrid.ReadOnly = true;
+            grdDataGrid.RowHeadersVisible = false;
+            grdDataGrid.RowHeadersWidth = 20;
+            grdDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            grdDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            grdDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grdDataGrid.Size = new Size(381, 397);
+            grdDataGrid.TabIndex = 3;
             // 
-            // colId
+            // idDataGridViewTextBoxColumn
             // 
-            colId.Text = "ID";
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "ID";
+            idDataGridViewTextBoxColumn.MinimumWidth = 50;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Width = 50;
             // 
-            // colDescription
+            // infoDataGridViewTextBoxColumn
             // 
-            colDescription.Text = "Description";
-            colDescription.Width = 317;
+            infoDataGridViewTextBoxColumn.DataPropertyName = "Info";
+            infoDataGridViewTextBoxColumn.HeaderText = "Info";
+            infoDataGridViewTextBoxColumn.MinimumWidth = 50;
+            infoDataGridViewTextBoxColumn.Name = "infoDataGridViewTextBoxColumn";
+            infoDataGridViewTextBoxColumn.ReadOnly = true;
+            infoDataGridViewTextBoxColumn.Width = 328;
+            // 
+            // idInfoBindingSource
+            // 
+            idInfoBindingSource.DataSource = typeof(IdInfo);
             // 
             // frmSelectId
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(381, 435);
-            Controls.Add(lstListView);
+            Controls.Add(grdDataGrid);
             Controls.Add(btnCancel);
             Controls.Add(btnSelect);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -89,6 +121,8 @@
             Name = "frmSelectId";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Select ID";
+            ((System.ComponentModel.ISupportInitialize)grdDataGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)idInfoBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -96,8 +130,9 @@
 
         private Button btnSelect;
         private Button btnCancel;
-        private ListView lstListView;
-        private ColumnHeader colId;
-        private ColumnHeader colDescription;
+        private DataGridView grdDataGrid;
+        private BindingSource idInfoBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn infoDataGridViewTextBoxColumn;
     }
 }
