@@ -154,7 +154,6 @@ namespace BookStore
             Controls.Add(btnExit);
             Name = "frmAddTitleAuthor";
             Text = "Add Title Author";
-            Load += frmAddTitleAuthor_Load;
             ResumeLayout(false);
             PerformLayout();
         }
