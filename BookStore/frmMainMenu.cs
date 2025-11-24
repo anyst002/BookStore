@@ -83,13 +83,13 @@ namespace BookStore
             //Reset();
         }
 
-        private void btnAddBook_Click(object sender, EventArgs e)
+        private void btnMaintenance_Click(object sender, EventArgs e)
         {
             frmMaintenance maintenance = new frmMaintenance();
             maintenance.ShowDialog();
         }
 
-        private void btnSearchBooks_Click(object sender, EventArgs e)
+        private void btnCreateOrder_Click(object sender, EventArgs e)
         {
             frmOrder order = new frmOrder();
             order.ShowDialog();
@@ -99,6 +99,11 @@ namespace BookStore
         {
             frmReports reports = new frmReports();
             reports.ShowDialog();
+        }
+
+        private void btnMMClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

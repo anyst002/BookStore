@@ -33,6 +33,7 @@
             this.btnPublishers = new System.Windows.Forms.Button();
             this.btnStores = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
+            this.btnMaintClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTitles 
@@ -84,8 +85,19 @@
             this.btnEmployees.Text = "Employees";
             this.btnEmployees.UseVisualStyleBackColor = true;
             this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
-
-
+            //
+            // btnMaintClose
+            //
+            this.btnMaintClose.Location = new System.Drawing.Point(60, 325);
+            this.btnMaintClose.Name = "btnMaintClose";
+            this.btnMaintClose.Size = new System.Drawing.Size(120, 35);
+            this.btnMaintClose.TabIndex = 0;
+            this.btnMaintClose.Text = "Close";
+            this.btnMaintClose.UseVisualStyleBackColor = true;
+            this.btnMaintClose.Click += new System.EventHandler(this.btnMaintClose_Click);
+            //
+            // frmMaintenance
+            //
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 550);
@@ -94,6 +106,7 @@
             this.Controls.Add(this.btnPublishers);
             this.Controls.Add(this.btnAuthors);
             this.Controls.Add(this.btnTitles);
+            this.Controls.Add(this.btnMaintClose);
             this.Name = "frmMaintenance";
             this.Text = "Maintenance";
             this.ResumeLayout(false);
@@ -106,5 +119,6 @@
         private Button btnPublishers;
         private Button btnStores;
         private Button btnEmployees;
+        private Button btnMaintClose;
     }
 }

@@ -226,6 +226,7 @@
             btnClose.TabIndex = 21;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // frmAddAuthor
             // 
@@ -253,6 +254,7 @@
             Controls.Add(lblLastName);
             Controls.Add(lblFirstName);
             Controls.Add(lblAuthorID);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmAddAuthor";
             ShowIcon = false;
