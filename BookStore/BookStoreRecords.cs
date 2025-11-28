@@ -1,6 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace BookStore
 {
     // =============================
@@ -116,4 +113,12 @@ namespace BookStore
         , string Title
         , short Qty
         , decimal? TotalValue);
+
+    public record OrderItem(string TitleId
+        , string Title
+        , decimal? Price
+        , short Qty
+        , string AuName
+        , string? PubName
+        , DateTime PubDate);
 }

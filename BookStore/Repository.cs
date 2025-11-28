@@ -133,7 +133,7 @@ namespace BookStore
     {
         public void InsertSale(Sales sale)
         {
-            SqlCommand command = new($"EXEC insertSales @stor_id @ord_num @ord_date @qty @payterms @title_id GO");
+            SqlCommand command = new($"EXEC insertSales @stor_id @ord_num @ord_date @qty @payterms @title_id");
             ExecuteNonQuery(command, () => 
             {
                 command.Parameters.AddWithValue("@stor_id", sale.StorId);
@@ -147,18 +147,17 @@ namespace BookStore
 
         public long GetOrderNum(string storeId)
         {
-            using (SqlConnection connection = new(connectionString))
+            using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
             {
-                SqlCommand command = new($"EXEC getNextOrderNum @store_id GO");
+                SqlCommand command = new($"EXEC getNextOrderNum @store_id, @next_num OUTPUT");
                 command.Parameters.AddWithValue("@store_id", storeId);
+                command.Parameters.AddWithValue("@next_num", 0);
                 command.Connection = connection;
 
                 connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    reader.Read();
-                    return Convert.ToInt64(reader[0]);
-                }
+                long ordNum = Convert.ToInt64(command.ExecuteScalar());
+                MessageBox.Show($"ordNum={ordNum}");
+                return ordNum;
             }
         }
 
@@ -166,7 +165,7 @@ namespace BookStore
         {
             using (SqlConnection connection = new(connectionString))
             {
-                SqlCommand command = new($"EXEC getTitlesByPartialTitle @partial_title GO");
+                SqlCommand command = new($"EXEC getTitlesByPartialTitle @partial_title");
                 command.Parameters.AddWithValue("@partial_title", partialTitle);
                 command.Connection = connection;
 
@@ -178,7 +177,7 @@ namespace BookStore
                     while (reader.Read())
                     {
                         decimal? price = (reader[2] is null) ? null : Convert.ToDecimal(reader[2]);
-                        string? pubName = (reader[4] is null) ? null : Convert.ToString(reader[2]);
+                        string? pubName = (reader[4] is null) ? null : Convert.ToString(reader[4]);
 
                         TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
                             , Convert.ToString(reader[1])!

@@ -1,11 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Quic;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore
 {
@@ -16,7 +9,7 @@ namespace BookStore
         private readonly long ordNum;
         private readonly string storeId;
         private readonly OrderRepository repo;
-        public List<(TitleSearchResult, short)> cart {  get; init; }
+        public List<OrderItem> cart {  get; init; }
         public string payTerms { get; set; }
 
         public Order(string storeId)
@@ -24,42 +17,49 @@ namespace BookStore
             repo = new OrderRepository();
             ordNum = repo.GetOrderNum(storeId);
             this.storeId = storeId;
-            cart = new List<(TitleSearchResult, short)>();
+            cart = new List<OrderItem>();
             payTerms = "";
         }
 
-        public void AddItem(TitleSearchResult title, short qty)
+        public void AddItem(OrderItem item)
         {
-            int index = FindEntry(title);
+            int index = FindEntry(item);
 
             if (index == -1)
             {
-                cart.Add((title, qty));
+                cart.Add(item);
             }
             else
             {
-                qty += cart[index].Item2;
-                UpdateItem(title, qty);
+
+                OrderItem newItem = new OrderItem(item.TitleId
+                    , item.Title
+                    , item.Price
+                    , (short)(item.Qty + cart[index].Qty) //should check for integer overflow TODO
+                    , item.AuName
+                    , item.PubName
+                    , item.PubDate);
+                UpdateItem(newItem);
             }
         }
 
-        public void UpdateItem(TitleSearchResult title, short qty)
+        public void UpdateItem(OrderItem item)
         {
-            int index = FindEntry(title);
-            cart[index] = (title, qty);
+            int index = FindEntry(item);
+            cart[index] = item;
         }
 
-        public void RemoveItem(TitleSearchResult title)
+        public void RemoveItem(OrderItem item)
         {
-            int index = FindEntry(title);
+            int index = FindEntry(item);
             cart.RemoveAt(index);
         }
 
-        private int FindEntry(TitleSearchResult title)
+        private int FindEntry(OrderItem key)
         {
-            foreach ((TitleSearchResult, short) entry in cart)
+            foreach (OrderItem item in cart)
             {
-                if (entry.Item1.TitleId == title.TitleId) return cart.IndexOf(entry);
+                if (item.TitleId == key.TitleId) return cart.IndexOf(item);
             }
             return -1;
         }
@@ -67,9 +67,9 @@ namespace BookStore
         public decimal GetSubtotal()
         {
             decimal subtotal = 0.00m;
-            foreach ((TitleSearchResult, short) entry in cart)
+            foreach (OrderItem item in cart)
             {
-                subtotal += Convert.ToDecimal(entry.Item1.Price) * entry.Item2;
+                subtotal += Convert.ToDecimal(item.Price) * item.Qty;
             }
             return subtotal;
         }
@@ -78,21 +78,21 @@ namespace BookStore
         {
             if (cart.IsNullOrEmpty() || String.IsNullOrWhiteSpace(payTerms)) return;
 
-            foreach ((TitleSearchResult, short) entry in cart)
+            foreach (OrderItem item in cart)
             {
-                Sales sale = ToSale(entry);
+                Sales sale = ToSale(item);
                 repo.InsertSale(sale);
             }
         }
 
-        private Sales ToSale((TitleSearchResult, short) entry)
+        private Sales ToSale(OrderItem item)
         {
             Sales sale = new Sales(storeId
                 , ordNum
                 , DateTime.Today
-                , entry.Item2
+                , item.Qty
                 , payTerms
-                , entry.Item1.TitleId);
+                , item.TitleId);
 
             return sale;
         }

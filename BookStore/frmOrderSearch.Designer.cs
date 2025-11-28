@@ -28,113 +28,208 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblOrderNum = new Label();
-            lblStoreID = new Label();
-            txtOrderNum = new TextBox();
-            textBox2 = new TextBox();
+            components = new System.ComponentModel.Container();
+            lblTitle = new Label();
             btnSearch = new Button();
-            btnClear = new Button();
-            btnClose = new Button();
+            btnCancel = new Button();
+            lblQuantity = new Label();
+            grdResults = new DataGridView();
+            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            titleSearchResultBindingSource = new BindingSource(components);
+            btnAdd = new Button();
+            numQuantity = new NumericUpDown();
+            txtSearch = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)grdResults).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)titleSearchResultBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
             SuspendLayout();
             // 
-            // lblOrderNum
+            // lblTitle
             // 
-            lblOrderNum.AutoSize = true;
-            lblOrderNum.Location = new Point(22, 25);
-            lblOrderNum.Margin = new Padding(2, 0, 2, 0);
-            lblOrderNum.Name = "lblOrderNum";
-            lblOrderNum.Size = new Size(87, 15);
-            lblOrderNum.TabIndex = 0;
-            lblOrderNum.Text = "Order Number:";
-            // 
-            // lblStoreID
-            // 
-            lblStoreID.AutoSize = true;
-            lblStoreID.Location = new Point(22, 61);
-            lblStoreID.Margin = new Padding(2, 0, 2, 0);
-            lblStoreID.Name = "lblStoreID";
-            lblStoreID.Size = new Size(51, 15);
-            lblStoreID.TabIndex = 1;
-            lblStoreID.Text = "Store ID:";
-            // 
-            // txtOrderNum
-            // 
-            txtOrderNum.Location = new Point(130, 23);
-            txtOrderNum.Margin = new Padding(2, 2, 2, 2);
-            txtOrderNum.Name = "txtOrderNum";
-            txtOrderNum.Size = new Size(106, 23);
-            txtOrderNum.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(130, 59);
-            textBox2.Margin = new Padding(2, 2, 2, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(106, 23);
-            textBox2.TabIndex = 4;
+            lblTitle.AutoSize = true;
+            lblTitle.Location = new Point(13, 14);
+            lblTitle.Margin = new Padding(2, 0, 2, 0);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(62, 15);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Enter Title:";
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(27, 111);
-            btnSearch.Margin = new Padding(2, 2, 2, 2);
+            btnSearch.Location = new Point(326, 11);
+            btnSearch.Margin = new Padding(2);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(56, 20);
-            btnSearch.TabIndex = 6;
+            btnSearch.Size = new Size(65, 23);
+            btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
-            // btnClear
+            // btnCancel
             // 
-            btnClear.Location = new Point(101, 111);
-            btnClear.Margin = new Padding(2, 2, 2, 2);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(56, 20);
-            btnClear.TabIndex = 7;
-            btnClear.Text = "Clear";
-            btnClear.UseVisualStyleBackColor = true;
+            btnCancel.Location = new Point(777, 339);
+            btnCancel.Margin = new Padding(2);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(106, 23);
+            btnCancel.TabIndex = 6;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnClose_Click;
             // 
-            // btnClose
+            // lblQuantity
             // 
-            btnClose.Location = new Point(174, 111);
-            btnClose.Margin = new Padding(2, 2, 2, 2);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new Size(56, 20);
-            btnClose.TabIndex = 8;
-            btnClose.Text = "Close";
-            btnClose.UseVisualStyleBackColor = true;
-            btnClose.Click += btnClose_Click;
+            lblQuantity.AutoSize = true;
+            lblQuantity.Location = new Point(787, 215);
+            lblQuantity.Name = "lblQuantity";
+            lblQuantity.Size = new Size(86, 15);
+            lblQuantity.TabIndex = 9;
+            lblQuantity.Text = "Enter Quantity:";
+            // 
+            // grdResults
+            // 
+            grdResults.AllowUserToAddRows = false;
+            grdResults.AllowUserToDeleteRows = false;
+            grdResults.AllowUserToResizeColumns = false;
+            grdResults.AllowUserToResizeRows = false;
+            grdResults.AutoGenerateColumns = false;
+            grdResults.BackgroundColor = SystemColors.ControlLight;
+            grdResults.BorderStyle = BorderStyle.Fixed3D;
+            grdResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grdResults.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, auNameDataGridViewTextBoxColumn, pubNameDataGridViewTextBoxColumn, pubDateDataGridViewTextBoxColumn });
+            grdResults.DataSource = titleSearchResultBindingSource;
+            grdResults.Location = new Point(12, 46);
+            grdResults.MultiSelect = false;
+            grdResults.Name = "grdResults";
+            grdResults.ReadOnly = true;
+            grdResults.RowHeadersVisible = false;
+            grdResults.RowHeadersWidth = 20;
+            grdResults.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            grdResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grdResults.ShowEditingIcon = false;
+            grdResults.Size = new Size(753, 315);
+            grdResults.TabIndex = 3;
+            grdResults.SelectionChanged += grdResults_SelectionChanged;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            titleDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            priceDataGridViewTextBoxColumn.ReadOnly = true;
+            priceDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // auNameDataGridViewTextBoxColumn
+            // 
+            auNameDataGridViewTextBoxColumn.DataPropertyName = "AuName";
+            auNameDataGridViewTextBoxColumn.HeaderText = "Author";
+            auNameDataGridViewTextBoxColumn.Name = "auNameDataGridViewTextBoxColumn";
+            auNameDataGridViewTextBoxColumn.ReadOnly = true;
+            auNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubNameDataGridViewTextBoxColumn
+            // 
+            pubNameDataGridViewTextBoxColumn.DataPropertyName = "PubName";
+            pubNameDataGridViewTextBoxColumn.HeaderText = "Publisher";
+            pubNameDataGridViewTextBoxColumn.Name = "pubNameDataGridViewTextBoxColumn";
+            pubNameDataGridViewTextBoxColumn.ReadOnly = true;
+            pubNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubDateDataGridViewTextBoxColumn
+            // 
+            pubDateDataGridViewTextBoxColumn.DataPropertyName = "PubDate";
+            pubDateDataGridViewTextBoxColumn.HeaderText = "Pub. Date";
+            pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
+            pubDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // titleSearchResultBindingSource
+            // 
+            titleSearchResultBindingSource.DataSource = typeof(TitleSearchResult);
+            // 
+            // btnAdd
+            // 
+            btnAdd.Enabled = false;
+            btnAdd.Location = new Point(777, 271);
+            btnAdd.Margin = new Padding(2);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(106, 23);
+            btnAdd.TabIndex = 5;
+            btnAdd.Text = "Add To Cart";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // numQuantity
+            // 
+            numQuantity.Location = new Point(777, 236);
+            numQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new Size(106, 23);
+            numQuantity.TabIndex = 4;
+            numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(80, 11);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(234, 23);
+            txtSearch.TabIndex = 1;
             // 
             // frmOrderSearch
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(265, 150);
-            Controls.Add(btnClose);
-            Controls.Add(btnClear);
+            ClientSize = new Size(893, 372);
+            Controls.Add(txtSearch);
+            Controls.Add(numQuantity);
+            Controls.Add(btnAdd);
+            Controls.Add(grdResults);
+            Controls.Add(lblQuantity);
+            Controls.Add(btnCancel);
             Controls.Add(btnSearch);
-            Controls.Add(textBox2);
-            Controls.Add(txtOrderNum);
-            Controls.Add(lblStoreID);
-            Controls.Add(lblOrderNum);
+            Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             MaximizeBox = false;
             Name = "frmOrderSearch";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Order Search";
+            Text = "Search";
+            ((System.ComponentModel.ISupportInitialize)grdResults).EndInit();
+            ((System.ComponentModel.ISupportInitialize)titleSearchResultBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label lblOrderNum;
+        private Label lblTitle;
         private Label lblStoreID;
         private TextBox txtOrderNum;
-        private TextBox textBox2;
         private Button btnSearch;
         private Button btnClear;
-        private Button btnClose;
+        private Button btnCancel;
+        private Label lblQuantity;
+        private DataGridView grdResults;
+        private BindingSource titleSearchResultBindingSource;
+        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn auNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pubNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pubDateDataGridViewTextBoxColumn;
+        private Button btnAdd;
+        private NumericUpDown numQuantity;
+        private TextBox txtSearch;
     }
 }
