@@ -1,48 +1,51 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualBasic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BookStore
 {
     public class Repository
     {
-        protected SqlConnection connection;
-        protected SqlCommand command;
+        protected string connectionString;
 
         public Repository()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
-            connection = new(connectionString);
-            command = new("", connection);
+            connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;           
         }
 
-        private void Dispose()
+        protected void ExecuteNonQuery(SqlCommand command, Action query)
         {
-            connection.Dispose();
-            command.Dispose();
-        }
+            using (SqlConnection connection = new(connectionString)) 
+            {
+                query.Invoke();
+                command.Connection = connection;
 
-        ~Repository()
-        {
-            Dispose();
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Trace.Write(ex);
+                    MessageBox.Show(ex.Message, "Database Error");
+                }
+            }
         }
     }
     public class MaintenanceRepository : Repository
     {
-        public void InsertTitle() //TODO alter later
+        public void InsertTitle()
         {
-            connection.Open();
-            command.CommandText = $"SELECT * FROM titles";
-            using SqlDataReader reader = command.ExecuteReader();
 
-            reader.Read();
-            MessageBox.Show(reader.GetString(0));
-            reader.Close();
-            connection.Close();
         }
 
         public void InsertTitleAuthor()
@@ -78,6 +81,12 @@ namespace BookStore
             list.Add(info1);
             list.Add(info2);
             return list;
+
+            //using SqlDataReader reader = command.ExecuteReader();
+
+            //reader.Read();
+            //MessageBox.Show(reader.GetString(0));
+            //reader.Close();
         }
 
         public List<IdInfo> GetJobIds()
@@ -122,23 +131,80 @@ namespace BookStore
     }
     public class OrderRepository : Repository
     {
-        public void InsertSales()
+        public void InsertSale(Sales sale)
         {
-
+            SqlCommand command = new($"EXEC insertSales @stor_id @ord_num @ord_date @qty @payterms @title_id GO");
+            ExecuteNonQuery(command, () => 
+            {
+                command.Parameters.AddWithValue("@stor_id", sale.StorId);
+                command.Parameters.AddWithValue("@ord_num", sale.OrdNum);
+                command.Parameters.AddWithValue("@ord_date", sale.OrdDate);
+                command.Parameters.AddWithValue("@qty", sale.Qty);
+                command.Parameters.AddWithValue("@payterms", sale.PayTerms);
+                command.Parameters.AddWithValue("@title_id", sale.TitleId);
+            });
         }
 
-        public long GetOrderNum()
+        public long GetOrderNum(string storeId)
         {
-            return 1;
+            using (SqlConnection connection = new(connectionString))
+            {
+                SqlCommand command = new($"EXEC getNextOrderNum @store_id GO");
+                command.Parameters.AddWithValue("@store_id", storeId);
+                command.Connection = connection;
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    return Convert.ToInt64(reader[0]);
+                }
+            }
         }
 
-        public List<TitleSearchResult> GetTitlesByPartialTitle()
+        public List<TitleSearchResult> GetTitlesByPartialTitle(string partialTitle)
         {
-            return new List<TitleSearchResult>();
+            using (SqlConnection connection = new(connectionString))
+            {
+                SqlCommand command = new($"EXEC getTitlesByPartialTitle @partial_title GO");
+                command.Parameters.AddWithValue("@partial_title", partialTitle);
+                command.Connection = connection;
+
+                List<TitleSearchResult> list = new List<TitleSearchResult>();
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        decimal? price = (reader[2] is null) ? null : Convert.ToDecimal(reader[2]);
+                        string? pubName = (reader[4] is null) ? null : Convert.ToString(reader[2]);
+
+                        TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
+                            , Convert.ToString(reader[1])!
+                            , price
+                            , Convert.ToString(reader[3])!
+                            , pubName
+                            , Convert.ToDateTime(reader[5]));
+
+                        list.Add(result);
+                    }
+
+                    return list;
+                }
+            }
         }
     }
     public class ReportRepository : Repository
     {
+        private string storeId;
+
+        public ReportRepository(string storeId)
+        {
+            this.storeId = storeId;
+            //verify this doesn't overwrite parent constructor
+        }
+
         public List<SalesSummaryRow> GetSalesByTimeRange()
         {
             return new List<SalesSummaryRow>();
