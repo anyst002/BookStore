@@ -43,15 +43,47 @@ namespace BookStore
     }
     public class MaintenanceRepository : Repository
     {
-        public void InsertTitle()
-        {
+        public void InsertTitle(Title title)
+{
+    SqlCommand command = new SqlCommand(
+        @"INSERT INTO titles
+    (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate)
+  VALUES
+    (@id, @name, @type, @pubid, @price, @advance, @royalty, @ytd, @notes, @date)");
 
-        }
+    ExecuteNonQuery(command, () =>
+    {
+        command.Parameters.AddWithValue("@id", title.TitleId);
+        command.Parameters.AddWithValue("@name", title.TitleName);
+        command.Parameters.AddWithValue("@type", title.Type);
+        command.Parameters.AddWithValue("@pubid", (object?)title.PubId ?? DBNull.Value);
+        command.Parameters.AddWithValue("@price", (object?)title.Price ?? DBNull.Value);
+        command.Parameters.AddWithValue("@advance", (object?)title.Advance ?? DBNull.Value);
+        command.Parameters.AddWithValue("@royalty", (object?)title.Royalty ?? DBNull.Value);
+        command.Parameters.AddWithValue("@ytd", (object?)title.YtdSales ?? DBNull.Value);
+        command.Parameters.AddWithValue("@notes", (object?)title.Notes ?? DBNull.Value);
+        command.Parameters.AddWithValue("@date", title.PubDate);
+    });
+}
 
-        public void InsertTitleAuthor()
-        {
 
-        }
+
+public void InsertTitleAuthor(TitleAuthor entry)
+{
+    SqlCommand command = new SqlCommand(
+        @"INSERT INTO titleauthor
+    (au_id, title_id, au_ord, royaltyper)
+  VALUES
+    (@aid, @tid, @ord, @roy)");
+
+    ExecuteNonQuery(command, () =>
+    {
+        command.Parameters.AddWithValue("@aid", entry.AuId);
+        command.Parameters.AddWithValue("@tid", entry.TitleId);
+        command.Parameters.AddWithValue("@ord", (object?)entry.AuOrd ?? DBNull.Value);
+        command.Parameters.AddWithValue("@roy", (object?)entry.RoyaltyPer ?? DBNull.Value);
+    });
+}
 
         public void InsertAuthor()
         {
