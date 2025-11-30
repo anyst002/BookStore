@@ -15,20 +15,44 @@ namespace BookStore
 
         private void Insert()
         {
-            //Title title = new Title( construct here )
-            //InsertTitle(title);
+            MaintenanceRepository repo = new MaintenanceRepository();
 
-            DialogResult res = MessageBox.Show("Would you like to add authors to this title?", "Added",
-                                               MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            // Construct the Title record from UI inputs
+            Title title = new Title(
+                TitleId: txtTitleID.Text,
+                TitleName: txtTitle.Text,
+                Type: cboType.SelectedItem!.ToString(),   // validated in btnSave
+                PubId: txtPublisher.Text,
+                Price: decimal.Parse(txtPrice.Text),
+                Advance: decimal.Parse(txtAdvance.Text),
+                Royalty: int.Parse(txtRoyalty.Text),
+                YtdSales: int.Parse(txtYTDSales.Text),
+                Notes: txtNotes.Text,
+                PubDate: dtpPubDate.Value
+            );
+
+            // Insert into the database
+            repo.InsertTitle(title);
+
+            MessageBox.Show("Title added successfully!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Ask to add authors to this title
+            DialogResult res = MessageBox.Show(
+                "Would you like to add authors to this title?",
+                "Add Authors?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
             if (res == DialogResult.Yes)
             {
-                frmAddTitleAuthor titleAuthorForm = new frmAddTitleAuthor("temp");
-                //frmAddTitleAuthor titleAuthorForm = new frmAddTitleAuthor(title.TitleId);
-                titleAuthorForm.ShowDialog();
+                frmAddTitleAuthor f = new frmAddTitleAuthor(title.TitleId);
+                f.ShowDialog();
             }
 
             Clear();
         }
+
 
         private void Clear()
         {
