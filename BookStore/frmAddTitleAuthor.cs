@@ -15,11 +15,23 @@ namespace BookStore
 
         private void Insert()
         {
-            //TitleAuthor entry = new TitleAuthor( construct here )
-            //InsertTitleAuthor(entry);
+            MaintenanceRepository repo = new MaintenanceRepository();
+
+            TitleAuthor entry = new TitleAuthor(
+                AuId: txtAuthor.Text,
+                TitleId: txtTitle.Text,
+                AuOrd: byte.Parse(txtOrder.Text),
+                RoyaltyPer: int.Parse(txtRoyalty.Text)
+            );
+
+            repo.InsertTitleAuthor(entry);
+
+            MessageBox.Show("Author added to title successfully!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             Clear();
         }
+
 
         private void Clear()
         {
