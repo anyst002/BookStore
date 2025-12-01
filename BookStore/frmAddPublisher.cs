@@ -28,7 +28,7 @@ namespace BookStore
             string? State = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim();
             string? Country = string.IsNullOrWhiteSpace(txtCountry.Text) ? null : txtCountry.Text.Trim();
 
-            Publisher publisher = new Publisher(txtPubId.Text.Trim()
+            Publisher publisher = new Publisher(mtxtPubId.Text.Trim()
                 , PubName
                 , City
                 , State
@@ -45,23 +45,24 @@ namespace BookStore
 
         private void Clear()
         {
-            txtPubId.Clear();
+            mtxtPubId.Clear();
             txtPubName.Clear();
             txtCity.Clear();
             txtState.Clear();
             txtCountry.Clear();
-            txtPubId.Focus();
+            mtxtPubId.Focus();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             _validator.Validate(() =>
             {
-                if (string.IsNullOrWhiteSpace(txtPubId.Text)) //TODO actually use assertions
-                    throw new NullReferenceException("Publisher ID is required.");
-
-                if (txtPubId.Text.Trim().Length != 4)
-                    throw new ArgumentOutOfRangeException("", "Publisher ID must be exactly 4 characters.");
+                if (!mtxtPubId.MaskFull) //TODO make this an assertion later
+                {
+                    MessageBox.Show("Publisher ID is required.",
+                                "Input Missing");
+                    return;
+                }
 
                 if (!string.IsNullOrWhiteSpace(txtState.Text) &&
                     txtState.Text.Trim().Length != 2)
