@@ -20,6 +20,41 @@ namespace BookStore
             InitializeComponent();
         }
 
+        private void Insert()
+        {
+            string? StorName = string.IsNullOrWhiteSpace(txtStorName.Text) ? null : txtStorName.Text.Trim();
+            string? StorAddress = string.IsNullOrWhiteSpace(txtStorAddress.Text) ? null : txtStorAddress.Text.Trim();
+            string? City = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim();
+            string? State = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim();
+            string? Zip = string.IsNullOrEmpty(mtxtZip.Text) ? null : mtxtZip.Text;
+
+            Store store = new Store(txtStorId.Text.Trim()
+                , StorName
+                , StorAddress
+                , City
+                , State
+                , Zip);
+
+            MaintenanceRepository repo = new MaintenanceRepository();
+            repo.InsertStore(store);
+
+            MessageBox.Show("Store saved successfully.",
+                            "Success",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+        }
+
+        private void Clear()
+        {
+            txtStorId.Clear();
+            txtStorName.Clear();
+            txtStorAddress.Clear();
+            txtCity.Clear();
+            txtState.Clear();
+            mtxtZip.Clear();
+            txtStorId.Focus();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             _validator.Validate(() =>
@@ -38,36 +73,14 @@ namespace BookStore
                 if (!string.IsNullOrEmpty(rawZip) && rawZip.Length != 5)
                     throw new ArgumentOutOfRangeException("", "Zip must be 5 digits.");
 
-                var store = new Store
-                {
-                    StorId      = txtStorId.Text.Trim(),
-                    StorName    = string.IsNullOrWhiteSpace(txtStorName.Text) ? null : txtStorName.Text.Trim(),
-                    StorAddress = string.IsNullOrWhiteSpace(txtStorAddress.Text) ? null : txtStorAddress.Text.Trim(),
-                    City        = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim(),
-                    State       = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim(),
-                    Zip         = string.IsNullOrEmpty(rawZip) ? null : rawZip
-                };
-
-                StoreRepository.InsertStore(store);
-
-                MessageBox.Show("Store saved successfully.",
-                                "Success",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-
-                btnClear_Click(sender, e);
+                Insert();
+                Clear();
             });
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtStorId.Clear();
-            txtStorName.Clear();
-            txtStorAddress.Clear();
-            txtCity.Clear();
-            txtState.Clear();
-            mtxtZip.Clear();
-            txtStorId.Focus();
+            Clear();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -1,8 +1,5 @@
 global using static InputValidator.InputAssertions;
 global using InputValidator;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-using System.Reflection;
 
 namespace BookStore
 {
@@ -12,9 +9,6 @@ namespace BookStore
         public frmMainMenu()
         {
             InitializeComponent();
-
-            connection = new(connectionString);
-            command = new("", connection);
         }
 
         private void btnMaintenance_Click(object sender, EventArgs e)

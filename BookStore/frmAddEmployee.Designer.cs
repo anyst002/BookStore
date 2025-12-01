@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             lblEmployeeId = new Label();
-            txtEmployeeId = new TextBox();
             lblFirstName = new Label();
             txtFirstName = new TextBox();
             lblLastName = new Label();
@@ -41,239 +40,261 @@
             lblJobLevel = new Label();
             btnSave = new Button();
             btnClear = new Button();
-            btnSave = new Button();
-            btnExit = new Button();
-            lblFname = new Label();
-            lblLname = new Label();
-            lblMinit = new Label();
-            txtbxFname = new TextBox();
-            txtbxLname = new TextBox();
-            txtbxMinit = new TextBox();
-            txtEmpID = new TextBox();
-            txtbxPubID = new TextBox();
-            txtbxJLvl = new TextBox();
-            txtbxJobID = new TextBox();
-            masktxtbxHireDate = new MaskedTextBox();
+            btnClose = new Button();
+            lblPubId = new Label();
+            txtPubId = new TextBox();
             lblHireDate = new Label();
-            lblPubID = new Label();
-            lblJoblvl = new Label();
-            lblJobId = new Label();
-            lblEmpId = new Label();
+            txtJobLevel = new TextBox();
+            btnSelectJobId = new Button();
+            btnSelectPubId = new Button();
+            datHireDate = new DateTimePicker();
+            mtxtEmployeeId = new MaskedTextBox();
             SuspendLayout();
             // 
-            // btnClear
+            // lblEmployeeId
             // 
-            btnClear.Location = new Point(200, 371);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(101, 38);
-            btnClear.TabIndex = 0;
-            btnClear.Text = "Clear";
-            btnClear.UseVisualStyleBackColor = true;
-            btnClear.Click += btnClear_Click;
+            lblEmployeeId.AutoSize = true;
+            lblEmployeeId.Location = new Point(24, 25);
+            lblEmployeeId.Name = "lblEmployeeId";
+            lblEmployeeId.Size = new Size(76, 15);
+            lblEmployeeId.TabIndex = 15;
+            lblEmployeeId.Text = "Employee ID:";
             // 
-            // btnSave
+            // lblFirstName
             // 
-            btnSave.Location = new Point(349, 371);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(101, 38);
-            btnSave.TabIndex = 1;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
+            lblFirstName.AutoSize = true;
+            lblFirstName.Location = new Point(24, 65);
+            lblFirstName.Name = "lblFirstName";
+            lblFirstName.Size = new Size(67, 15);
+            lblFirstName.TabIndex = 17;
+            lblFirstName.Text = "First Name:";
             // 
-            // btnExit
+            // txtFirstName
             // 
-            btnExit.Location = new Point(492, 371);
-            btnExit.Name = "btnExit";
-            btnExit.Size = new Size(101, 38);
-            btnExit.TabIndex = 2;
-            btnExit.Text = "Exit";
-            btnExit.UseVisualStyleBackColor = true;
-            btnExit.Click += btnExit_Click;
+            txtFirstName.Location = new Point(144, 62);
+            txtFirstName.MaxLength = 20;
+            txtFirstName.Name = "txtFirstName";
+            txtFirstName.Size = new Size(100, 23);
+            txtFirstName.TabIndex = 2;
             // 
-            // lblFname
+            // lblLastName
             // 
-            lblFname.AutoSize = true;
-            lblFname.Location = new Point(64, 59);
-            lblFname.Name = "lblFname";
-            lblFname.Size = new Size(77, 20);
-            lblFname.TabIndex = 3;
-            lblFname.Text = "First name";
+            lblLastName.AutoSize = true;
+            lblLastName.Location = new Point(24, 105);
+            lblLastName.Name = "lblLastName";
+            lblLastName.Size = new Size(66, 15);
+            lblLastName.TabIndex = 19;
+            lblLastName.Text = "Last Name:";
             // 
-            // lblLname
+            // txtLastName
             // 
-            lblLname.AutoSize = true;
-            lblLname.Location = new Point(405, 59);
-            lblLname.Name = "lblLname";
-            lblLname.Size = new Size(76, 20);
-            lblLname.TabIndex = 4;
-            lblLname.Text = "Last name";
+            txtLastName.Location = new Point(144, 102);
+            txtLastName.MaxLength = 30;
+            txtLastName.Name = "txtLastName";
+            txtLastName.Size = new Size(100, 23);
+            txtLastName.TabIndex = 3;
             // 
-            // lblMinit
+            // lblMiddleInitial
             // 
-            lblMinit.AutoSize = true;
-            lblMinit.Location = new Point(301, 59);
-            lblMinit.Name = "lblMinit";
-            lblMinit.Size = new Size(32, 20);
-            lblMinit.TabIndex = 5;
-            lblMinit.Text = "M.I.";
+            lblMiddleInitial.AutoSize = true;
+            lblMiddleInitial.Location = new Point(24, 145);
+            lblMiddleInitial.Name = "lblMiddleInitial";
+            lblMiddleInitial.Size = new Size(79, 15);
+            lblMiddleInitial.TabIndex = 21;
+            lblMiddleInitial.Text = "Middle Initial:";
             // 
-            // txtbxFname
+            // txtMiddleInitial
             // 
-            txtbxFname.Location = new Point(62, 82);
-            txtbxFname.Name = "txtbxFname";
-            txtbxFname.Size = new Size(198, 27);
-            txtbxFname.TabIndex = 6;
-            // 
-            // txtbxLname
-            // 
-            txtbxLname.Location = new Point(405, 82);
-            txtbxLname.Name = "txtbxLname";
-            txtbxLname.Size = new Size(227, 27);
-            txtbxLname.TabIndex = 7;
-            // 
-            // txtbxMinit
-            // 
-            txtbxMinit.Location = new Point(301, 82);
-            txtbxMinit.Name = "txtbxMinit";
-            txtbxMinit.Size = new Size(67, 27);
-            txtbxMinit.TabIndex = 8;
-            // 
-            // txtEmpID
-            // 
-            txtEmpID.Location = new Point(64, 172);
-            txtEmpID.Name = "txtEmpID";
-            txtEmpID.Size = new Size(198, 27);
-            txtEmpID.TabIndex = 9;
-            // 
-            // txtbxPubID
-            // 
-            txtbxPubID.Location = new Point(62, 261);
-            txtbxPubID.Name = "txtbxPubID";
-            txtbxPubID.Size = new Size(124, 27);
-            txtbxPubID.TabIndex = 10;
-            // 
-            // txtbxJLvl
-            // 
-            txtbxJLvl.Location = new Point(474, 172);
-            txtbxJLvl.Name = "txtbxJLvl";
-            txtbxJLvl.Size = new Size(158, 27);
-            txtbxJLvl.TabIndex = 11;
-            // 
-            // txtbxJobID
-            // 
-            txtbxJobID.Location = new Point(301, 172);
-            txtbxJobID.Name = "txtbxJobID";
-            txtbxJobID.Size = new Size(138, 27);
-            txtbxJobID.TabIndex = 12;
-            // 
-            // masktxtbxHireDate
-            // 
-            masktxtbxHireDate.Location = new Point(230, 261);
-            masktxtbxHireDate.Mask = "00/00/0000";
-            masktxtbxHireDate.Name = "masktxtbxHireDate";
-            masktxtbxHireDate.Size = new Size(138, 27);
-            masktxtbxHireDate.TabIndex = 13;
-            masktxtbxHireDate.ValidatingType = typeof(DateTime);
-            // 
-            // lblHireDate
-            // 
-            lblHireDate.AutoSize = true;
-            lblHireDate.Location = new Point(230, 238);
-            lblHireDate.Name = "lblHireDate";
-            lblHireDate.Size = new Size(71, 20);
-            lblHireDate.TabIndex = 14;
-            lblHireDate.Text = "Hire date";
-            // 
-            // lblPubID
-            // 
-            lblPubID.AutoSize = true;
-            lblPubID.Location = new Point(64, 238);
-            lblPubID.Name = "lblPubID";
-            lblPubID.Size = new Size(88, 20);
-            lblPubID.TabIndex = 15;
-            lblPubID.Text = "Publisher ID";
-            // 
-            // lblJoblvl
-            // 
-            lblJoblvl.AutoSize = true;
-            lblJoblvl.Location = new Point(474, 149);
-            lblJoblvl.Name = "lblJoblvl";
-            lblJoblvl.Size = new Size(67, 20);
-            lblJoblvl.TabIndex = 16;
-            lblJoblvl.Text = "Job level";
+            txtMiddleInitial.Location = new Point(144, 142);
+            txtMiddleInitial.MaxLength = 1;
+            txtMiddleInitial.Name = "txtMiddleInitial";
+            txtMiddleInitial.Size = new Size(100, 23);
+            txtMiddleInitial.TabIndex = 4;
             // 
             // lblJobId
             // 
             lblJobId.AutoSize = true;
-            lblJobId.Location = new Point(301, 149);
+            lblJobId.Location = new Point(24, 185);
             lblJobId.Name = "lblJobId";
-            lblJobId.Size = new Size(51, 20);
-            lblJobId.TabIndex = 17;
-            lblJobId.Text = "Job ID";
+            lblJobId.Size = new Size(42, 15);
+            lblJobId.TabIndex = 23;
+            lblJobId.Text = "Job ID:";
             // 
-            // lblEmpId
+            // txtJobId
             // 
-            lblEmpId.AutoSize = true;
-            lblEmpId.Location = new Point(64, 149);
-            lblEmpId.Name = "lblEmpId";
-            lblEmpId.Size = new Size(94, 20);
-            lblEmpId.TabIndex = 18;
-            lblEmpId.Text = "Employee ID";
+            txtJobId.Enabled = false;
+            txtJobId.Location = new Point(144, 182);
+            txtJobId.MaxLength = 5;
+            txtJobId.Name = "txtJobId";
+            txtJobId.Size = new Size(100, 23);
+            txtJobId.TabIndex = 24;
+            txtJobId.TabStop = false;
+            // 
+            // lblJobLevel
+            // 
+            lblJobLevel.AutoSize = true;
+            lblJobLevel.Location = new Point(24, 225);
+            lblJobLevel.Name = "lblJobLevel";
+            lblJobLevel.Size = new Size(58, 15);
+            lblJobLevel.TabIndex = 25;
+            lblJobLevel.Text = "Job Level:";
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(24, 354);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 23);
+            btnSave.TabIndex = 9;
+            btnSave.Text = "Save";
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(144, 354);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(75, 23);
+            btnClear.TabIndex = 10;
+            btnClear.Text = "Clear";
+            btnClear.Click += btnClear_Click;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(264, 354);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 11;
+            btnClose.Text = "Close";
+            btnClose.Click += btnClose_Click;
+            // 
+            // lblPubId
+            // 
+            lblPubId.AutoSize = true;
+            lblPubId.Location = new Point(24, 265);
+            lblPubId.Name = "lblPubId";
+            lblPubId.Size = new Size(73, 15);
+            lblPubId.TabIndex = 30;
+            lblPubId.Text = "Publisher ID:";
+            // 
+            // txtPubId
+            // 
+            txtPubId.Enabled = false;
+            txtPubId.Location = new Point(144, 262);
+            txtPubId.MaxLength = 4;
+            txtPubId.Name = "txtPubId";
+            txtPubId.Size = new Size(100, 23);
+            txtPubId.TabIndex = 31;
+            txtPubId.TabStop = false;
+            // 
+            // lblHireDate
+            // 
+            lblHireDate.AutoSize = true;
+            lblHireDate.Location = new Point(24, 305);
+            lblHireDate.Name = "lblHireDate";
+            lblHireDate.Size = new Size(59, 15);
+            lblHireDate.TabIndex = 32;
+            lblHireDate.Text = "Hire Date:";
+            // 
+            // txtJobLevel
+            // 
+            txtJobLevel.Location = new Point(144, 222);
+            txtJobLevel.MaxLength = 3;
+            txtJobLevel.Name = "txtJobLevel";
+            txtJobLevel.Size = new Size(100, 23);
+            txtJobLevel.TabIndex = 6;
+            // 
+            // btnSelectJobId
+            // 
+            btnSelectJobId.Location = new Point(264, 182);
+            btnSelectJobId.Name = "btnSelectJobId";
+            btnSelectJobId.Size = new Size(75, 23);
+            btnSelectJobId.TabIndex = 5;
+            btnSelectJobId.Text = "Select";
+            btnSelectJobId.UseVisualStyleBackColor = true;
+            btnSelectJobId.Click += btnSelectJobId_Click;
+            // 
+            // btnSelectPubId
+            // 
+            btnSelectPubId.Location = new Point(264, 262);
+            btnSelectPubId.Name = "btnSelectPubId";
+            btnSelectPubId.Size = new Size(75, 23);
+            btnSelectPubId.TabIndex = 7;
+            btnSelectPubId.Text = "Select";
+            btnSelectPubId.UseVisualStyleBackColor = true;
+            btnSelectPubId.Click += btnSelectPubId_Click;
+            // 
+            // datHireDate
+            // 
+            datHireDate.Format = DateTimePickerFormat.Short;
+            datHireDate.Location = new Point(144, 302);
+            datHireDate.Name = "datHireDate";
+            datHireDate.Size = new Size(100, 23);
+            datHireDate.TabIndex = 8;
+            // 
+            // mtxtEmployeeId
+            // 
+            mtxtEmployeeId.Location = new Point(144, 22);
+            mtxtEmployeeId.Mask = "LLA000000";
+            mtxtEmployeeId.Name = "mtxtEmployeeId";
+            mtxtEmployeeId.Size = new Size(100, 23);
+            mtxtEmployeeId.TabIndex = 33;
             // 
             // frmAddEmployee
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(lblEmpId);
-            Controls.Add(lblJobId);
-            Controls.Add(lblJoblvl);
-            Controls.Add(lblPubID);
+            ClientSize = new Size(361, 401);
+            Controls.Add(mtxtEmployeeId);
+            Controls.Add(datHireDate);
+            Controls.Add(btnSelectPubId);
+            Controls.Add(btnSelectJobId);
+            Controls.Add(txtJobLevel);
+            Controls.Add(lblPubId);
+            Controls.Add(txtPubId);
             Controls.Add(lblHireDate);
-            Controls.Add(masktxtbxHireDate);
-            Controls.Add(txtbxJobID);
-            Controls.Add(txtbxJLvl);
-            Controls.Add(txtbxPubID);
-            Controls.Add(txtEmpID);
-            Controls.Add(txtbxMinit);
-            Controls.Add(txtbxLname);
-            Controls.Add(txtbxFname);
-            Controls.Add(lblMinit);
-            Controls.Add(lblLname);
-            Controls.Add(lblFname);
-            Controls.Add(btnExit);
+            Controls.Add(lblEmployeeId);
+            Controls.Add(lblFirstName);
+            Controls.Add(txtFirstName);
+            Controls.Add(lblLastName);
+            Controls.Add(txtLastName);
+            Controls.Add(lblMiddleInitial);
+            Controls.Add(txtMiddleInitial);
+            Controls.Add(lblJobId);
+            Controls.Add(txtJobId);
+            Controls.Add(lblJobLevel);
             Controls.Add(btnSave);
             Controls.Add(btnClear);
             Controls.Add(btnClose);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmAddEmployee";
-            Text = "frmAddEmployee";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Add Employee";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button btnClear;
-        private Button btnSave;
-        private Button btnExit;
-        private Label lblFname;
-        private Label lblLname;
-        private Label lblMinit;
-        private TextBox txtbxFname;
-        private TextBox txtbxLname;
-        private TextBox txtbxMinit;
-        private TextBox txtEmpID;
-        private TextBox txtbxPubID;
-        private TextBox txtbxJLvl;
-        private TextBox txtbxJobID;
-        private MaskedTextBox masktxtbxHireDate;
-        private Label lblHireDate;
-        private Label lblPubID;
-        private Label lblJoblvl;
+        private Label lblEmployeeId;
+        private Label lblFirstName;
+        private TextBox txtFirstName;
+        private Label lblLastName;
+        private TextBox txtLastName;
+        private Label lblMiddleInitial;
+        private TextBox txtMiddleInitial;
         private Label lblJobId;
-        private Label lblEmpId;
+        private TextBox txtJobId;
+        private Label lblJobLevel;
+        private Button btnSave;
+        private Button btnClear;
+        private Button btnClose;
+        private Label lblPubId;
+        private TextBox txtPubId;
+        private Label lblHireDate;
+        private TextBox txtJobLevel;
+        private Button btnSelectJobId;
+        private Button btnSelectPubId;
+        private DateTimePicker datHireDate;
+        private MaskedTextBox mtxtEmployeeId;
     }
 }

@@ -3,10 +3,13 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -47,8 +50,8 @@ namespace BookStore
     {
         public void InsertTitle(Title title)
         {
-            SqlCommand command = new($"EXEC insertTitle @title_id, @title, @type, @pub_id, " +
-                $"@price, @advance, @royalty, @ytd_sales, @notes, @pubdate");
+            SqlCommand command = new SqlCommand("insertTitle");
+            command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
             {
@@ -65,37 +68,86 @@ namespace BookStore
             });
         }
 
-        public void InsertTitleAuthor(TitleAuthor entry)
+        public void InsertTitleAuthor(TitleAuthor titleAuthor)
         {
-            SqlCommand command = new($"EXEC insertTitleauthor @au_id, @title_id, @au_ord, @royaltyper");
+            SqlCommand command = new SqlCommand("insertTitleauthor");
+            command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
             {
-                command.Parameters.AddWithValue("@au_id", entry.AuId);
-                command.Parameters.AddWithValue("@title_id", entry.TitleId);
-                command.Parameters.AddWithValue("@au_ord", entry.AuOrd);
-                command.Parameters.AddWithValue("@royaltyper", entry.RoyaltyPer);
+                command.Parameters.AddWithValue("@au_id", titleAuthor.AuId);
+                command.Parameters.AddWithValue("@title_id", titleAuthor.TitleId);
+                command.Parameters.AddWithValue("@au_ord", titleAuthor.AuOrd);
+                command.Parameters.AddWithValue("@royaltyper", titleAuthor.RoyaltyPer);
             });
         }
 
-        public void InsertAuthor()
+        public void InsertAuthor(Author author)
         {
+            SqlCommand command = new SqlCommand("insertAuthor");
+            command.CommandType = CommandType.StoredProcedure;
 
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@au_id", author.AuId);
+                command.Parameters.AddWithValue("@au_lname", author.AuLName);
+                command.Parameters.AddWithValue("@au_fname", author.AuFName);
+                command.Parameters.AddWithValue("@phone", author.Phone);
+                command.Parameters.AddWithValue("@address", author.Address);
+                command.Parameters.AddWithValue("@city", author.City);
+                command.Parameters.AddWithValue("@state", author.State);
+                command.Parameters.AddWithValue("@zip", author.Zip);
+                command.Parameters.AddWithValue("@contract", author.Contract);
+            });
         }
 
-        public void InsertPublisher()
+        public void InsertPublisher(Publisher publisher)
         {
-
+            SqlCommand command = new SqlCommand("insertPublisher");
+            command.CommandType = CommandType.StoredProcedure;
+            
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@pub_id", publisher.PubId);
+                command.Parameters.AddWithValue("@pub_name", publisher.PubName);
+                command.Parameters.AddWithValue("@city", publisher.City);
+                command.Parameters.AddWithValue("@state", publisher.State);
+                command.Parameters.AddWithValue("@country", publisher.Country);
+            });
         }
 
-        public void InsertStore()
+        public void InsertStore(Store store)
         {
+            SqlCommand command = new SqlCommand("insertStore");
+            command.CommandType = CommandType.StoredProcedure;
 
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@stor_id", store.StorId);
+                command.Parameters.AddWithValue("@stor_name", store.StorName);
+                command.Parameters.AddWithValue("@stor_address", store.StorAddress);
+                command.Parameters.AddWithValue("@city", store.City);
+                command.Parameters.AddWithValue("@state", store.State);
+                command.Parameters.AddWithValue("@zip", store.Zip);
+            });
         }
 
-        public void InsertEmployee()
+        public void InsertEmployee(Employee employee)
         {
+            SqlCommand command = new SqlCommand("insertEmployee");
+            command.CommandType = CommandType.StoredProcedure;
 
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@emp_id", employee.EmpId);
+                command.Parameters.AddWithValue("@fname", employee.FName);
+                command.Parameters.AddWithValue("@minit", employee.MInit);
+                command.Parameters.AddWithValue("@lname", employee.LName);
+                command.Parameters.AddWithValue("@job_id", employee.JobId);
+                command.Parameters.AddWithValue("@job_lvl", (object?)employee.JobLvl ?? DBNull.Value);
+                command.Parameters.AddWithValue("@pub_id", employee.PubId);
+                command.Parameters.AddWithValue("@hire_date", employee.HireDate);
+            });
         }
 
         public List<IdInfo> GetAuthorIds()
