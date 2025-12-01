@@ -215,7 +215,9 @@ namespace BookStore
     {
         public void InsertSale(Sales sale)
         {
-            SqlCommand command = new($"EXEC insertSales @stor_id, @ord_num, @ord_date, @qty, @payterms, @title_id");
+            SqlCommand command = new SqlCommand("insertSales");
+            command.CommandType = CommandType.StoredProcedure;
+
             ExecuteNonQuery(command, () => 
             {
                 command.Parameters.AddWithValue("@stor_id", sale.StorId);
@@ -247,7 +249,9 @@ namespace BookStore
         {
             using (SqlConnection connection = new(connectionString))
             {
-                SqlCommand command = new($"EXEC getTitlesByPartialTitle @partial_title");
+                SqlCommand command = new SqlCommand("getTitlesByPartialTitle");
+                command.CommandType = CommandType.StoredProcedure;
+
                 command.Parameters.AddWithValue("@partial_title", partialTitle);
                 command.Connection = connection;
 
@@ -283,12 +287,42 @@ namespace BookStore
         public ReportRepository(string storeId)
         {
             this.storeId = storeId;
-            //verify this doesn't overwrite parent constructor
         }
 
-        public List<SalesSummaryRow> GetSalesByTimeRange()
+        public List<SalesSummaryRow> GetSalesByTimeRange(DateTime start, DateTime end)
         {
-            return new List<SalesSummaryRow>();
+            using (SqlConnection connection = new(connectionString))
+            {
+                SqlCommand command = new SqlCommand("getSalesByTimeRange");
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@store_id", storeId);
+                command.Parameters.AddWithValue("@start", start);
+                command.Parameters.AddWithValue("@end", end);
+                command.Connection = connection;
+
+                List<SalesSummaryRow> list = new List<SalesSummaryRow>();
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        decimal? total = (reader[5] is DBNull) ? null : Decimal.Round(Convert.ToDecimal(reader[5]), 2);
+
+                        SalesSummaryRow result = new SalesSummaryRow(Convert.ToInt64(reader[0])
+                            , Convert.ToDateTime(reader[1])
+                            , Convert.ToString(reader[2])!
+                            , Convert.ToString(reader[3])!
+                            , Convert.ToInt16(reader[4])
+                            , total);
+
+                        list.Add(result);
+                    }
+
+                    return list;
+                }
+            }
         }
     }
 }

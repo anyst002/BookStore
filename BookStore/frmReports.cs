@@ -13,12 +13,28 @@ namespace BookStore
     public partial class frmReports : Form
     {
         private string storeId;
-        private ReportRepository reportRepo;
         public frmReports(string storeId)
         {
             InitializeComponent();
             this.storeId = storeId;
-            reportRepo = new ReportRepository(storeId);
+        }
+
+        private void UpdateTotal()
+        {
+            if (grdReports.RowCount == 0)
+            {
+                txtTotal.Clear();
+            }
+            else
+            {
+                decimal subtotal = 0.00m;
+                foreach (DataGridViewRow row in grdReports.Rows)
+                {
+                    SalesSummaryRow entry = (SalesSummaryRow)row.DataBoundItem;
+                    subtotal += entry.TotalValue ?? 0;
+                }
+                txtTotal.Text = subtotal.ToString("C");
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -26,23 +42,16 @@ namespace BookStore
             Close();
         }
 
-        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnViewReport_Click(object sender, EventArgs e)
         {
-            DateTime start = dtpStartDate.Value;
-            DateTime end = dtpEndDate.Value;
-            var data = reportRepo.GetSalesByTimeRange();
-            dgvReport.DataSource = data;
-            dgvReport.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DateTime start = dtpStartDate.Value.Date;
+            DateTime end = dtpEndDate.Value.Date;
+
+            ReportRepository repo = new ReportRepository(storeId);
+            List<SalesSummaryRow> data = repo.GetSalesByTimeRange(start, end);
+
+            grdReports.DataSource = data;
+            UpdateTotal();
         }
     }
 }
