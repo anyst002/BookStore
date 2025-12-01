@@ -43,7 +43,7 @@
         private void Reset()
         {
             order = new Order(storeId);
-            txtTax.Text = Order.tax.ToString("C");
+            
             grdCart.DataSource = order.cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
@@ -54,7 +54,10 @@
             decimal subtotal = order.GetSubtotal();
             txtSubtotal.Text = subtotal.ToString("C");
 
-            decimal total = (subtotal * Order.tax) + subtotal;
+            decimal tax = subtotal * Order.taxPer;
+            txtTax.Text = tax.ToString("C");
+
+            decimal total = subtotal + tax;
             txtTotal.Text = total.ToString("C");
         }
 

@@ -186,14 +186,14 @@ public void InsertTitleAuthor(TitleAuthor entry)
         {
             using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
             {
-                SqlCommand command = new($"EXEC getNextOrderNum @store_id, @next_num OUTPUT");
+                SqlCommand command = new($"DECLARE @return_value bigint, @next_num bigint " +
+                    $"EXEC @return_value = getNextOrderNum @store_id, @next_num = @next_num OUTPUT " +
+                    $"SELECT @return_value as 'Return Value'");
                 command.Parameters.AddWithValue("@store_id", storeId);
-                command.Parameters.AddWithValue("@next_num", 0);
                 command.Connection = connection;
 
                 connection.Open();
                 long ordNum = Convert.ToInt64(command.ExecuteScalar());
-                MessageBox.Show($"ordNum={ordNum}");
                 return ordNum;
             }
         }

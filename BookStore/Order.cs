@@ -6,7 +6,7 @@ namespace BookStore
 {
     internal class Order
     {
-        public static readonly decimal tax = 0.05m;
+        public static readonly decimal taxPer = 0.05m;
 
         private readonly long ordNum;
         private readonly string storeId;
