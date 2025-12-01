@@ -55,5 +55,29 @@
             txtSubtotal.Text = Convert.ToString(subtotal);
             txtTotal.Text = Convert.ToString((subtotal * Order.tax) + subtotal); //TODO format as currency
         }
+
+        private void grdCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                //remove cart item
+                if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Remove"))
+                {
+                    order.RemoveItem((OrderItem)grid.Rows[e.RowIndex].DataBoundItem);
+                }
+                //edit cart item quantity
+                else if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Edit"))
+                {
+                    OrderItem item = (OrderItem)grid.Rows[e.RowIndex].DataBoundItem;
+                    frmOrderQuantity edit = new frmOrderQuantity(item.Qty);
+                    edit.ShowDialog();
+                    order.UpdateItemQuantity(item, edit.quantity);
+                }
+
+                CalculateSubtotal();
+            }
+        }
     }
 }

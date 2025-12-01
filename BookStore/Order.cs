@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.ComponentModel;
 
 namespace BookStore
@@ -32,15 +33,8 @@ namespace BookStore
             }
             else
             {
-
-                OrderItem newItem = new OrderItem(item.TitleId
-                    , item.Title
-                    , item.Price
-                    , (short)(item.Qty + cart[index].Qty) //should check for integer overflow TODO
-                    , item.AuName
-                    , item.PubName
-                    , item.PubDate);
-                UpdateItem(newItem);
+                short newQty = (short)(item.Qty + cart[index].Qty); //should check for integer overflow TODO
+                UpdateItemQuantity(item, newQty);
             }
         }
 
@@ -48,6 +42,18 @@ namespace BookStore
         {
             int index = FindEntry(item);
             cart[index] = item;
+        }
+
+        public void UpdateItemQuantity(OrderItem item, short qty)
+        {
+            OrderItem newItem = new OrderItem(item.TitleId
+                    , item.Title
+                    , item.Price
+                    , qty
+                    , item.AuName
+                    , item.PubName
+                    , item.PubDate);
+            UpdateItem(newItem);
         }
 
         public void RemoveItem(OrderItem item)
