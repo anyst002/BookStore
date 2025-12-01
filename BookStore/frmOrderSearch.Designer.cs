@@ -34,15 +34,15 @@
             btnCancel = new Button();
             lblQuantity = new Label();
             grdResults = new DataGridView();
+            titleSearchResultBindingSource = new BindingSource(components);
+            btnAdd = new Button();
+            numQuantity = new NumericUpDown();
+            txtSearch = new TextBox();
             titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            titleSearchResultBindingSource = new BindingSource(components);
-            btnAdd = new Button();
-            numQuantity = new NumericUpDown();
-            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)grdResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)titleSearchResultBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
@@ -114,6 +114,38 @@
             grdResults.TabIndex = 3;
             grdResults.SelectionChanged += grdResults_SelectionChanged;
             // 
+            // titleSearchResultBindingSource
+            // 
+            titleSearchResultBindingSource.DataSource = typeof(TitleSearchResult);
+            // 
+            // btnAdd
+            // 
+            btnAdd.Enabled = false;
+            btnAdd.Location = new Point(777, 271);
+            btnAdd.Margin = new Padding(2);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(106, 23);
+            btnAdd.TabIndex = 5;
+            btnAdd.Text = "Add To Cart";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // numQuantity
+            // 
+            numQuantity.Location = new Point(777, 236);
+            numQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new Size(106, 23);
+            numQuantity.TabIndex = 4;
+            numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(80, 11);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(234, 23);
+            txtSearch.TabIndex = 1;
+            // 
             // titleDataGridViewTextBoxColumn
             // 
             titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
@@ -153,38 +185,6 @@
             pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
             pubDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // titleSearchResultBindingSource
-            // 
-            titleSearchResultBindingSource.DataSource = typeof(TitleSearchResult);
-            // 
-            // btnAdd
-            // 
-            btnAdd.Enabled = false;
-            btnAdd.Location = new Point(777, 271);
-            btnAdd.Margin = new Padding(2);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(106, 23);
-            btnAdd.TabIndex = 5;
-            btnAdd.Text = "Add To Cart";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // numQuantity
-            // 
-            numQuantity.Location = new Point(777, 236);
-            numQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numQuantity.Name = "numQuantity";
-            numQuantity.Size = new Size(106, 23);
-            numQuantity.TabIndex = 4;
-            numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(80, 11);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(234, 23);
-            txtSearch.TabIndex = 1;
-            // 
             // frmOrderSearch
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -220,13 +220,13 @@
         private Label lblQuantity;
         private DataGridView grdResults;
         private BindingSource titleSearchResultBindingSource;
+        private Button btnAdd;
+        private NumericUpDown numQuantity;
+        private TextBox txtSearch;
         private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn auNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn pubNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn pubDateDataGridViewTextBoxColumn;
-        private Button btnAdd;
-        private NumericUpDown numQuantity;
-        private TextBox txtSearch;
     }
 }

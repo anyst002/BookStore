@@ -58,12 +58,12 @@ namespace BookStore
                 command.Parameters.AddWithValue("@title_id", title.TitleId);
                 command.Parameters.AddWithValue("@title", title.TitleName);
                 command.Parameters.AddWithValue("@type", title.Type);
-                command.Parameters.AddWithValue("@pub_id", title.PubId);
-                command.Parameters.AddWithValue("@price", title.Price);
-                command.Parameters.AddWithValue("@advance", title.Advance);
-                command.Parameters.AddWithValue("@royalty", title.Royalty);
-                command.Parameters.AddWithValue("@ytd_sales", title.YtdSales);
-                command.Parameters.AddWithValue("@notes", title.Notes);
+                command.Parameters.AddWithValue("@pub_id", (object?)title.PubId ?? DBNull.Value);
+                command.Parameters.AddWithValue("@price", (object?)title.Price ?? DBNull.Value);
+                command.Parameters.AddWithValue("@advance", (object?)title.Advance ?? DBNull.Value);
+                command.Parameters.AddWithValue("@royalty", (object?)title.Royalty ?? DBNull.Value);
+                command.Parameters.AddWithValue("@ytd_sales", (object?)title.YtdSales ?? DBNull.Value);
+                command.Parameters.AddWithValue("@notes", (object?)title.Notes ?? DBNull.Value);
                 command.Parameters.AddWithValue("@pubdate", title.PubDate);
             });
         }
@@ -77,8 +77,8 @@ namespace BookStore
             {
                 command.Parameters.AddWithValue("@au_id", titleAuthor.AuId);
                 command.Parameters.AddWithValue("@title_id", titleAuthor.TitleId);
-                command.Parameters.AddWithValue("@au_ord", titleAuthor.AuOrd);
-                command.Parameters.AddWithValue("@royaltyper", titleAuthor.RoyaltyPer);
+                command.Parameters.AddWithValue("@au_ord", (object?)titleAuthor.AuOrd ?? DBNull.Value);
+                command.Parameters.AddWithValue("@royaltyper", (object?)titleAuthor.RoyaltyPer ?? DBNull.Value);
             });
         }
 
@@ -93,10 +93,10 @@ namespace BookStore
                 command.Parameters.AddWithValue("@au_lname", author.AuLName);
                 command.Parameters.AddWithValue("@au_fname", author.AuFName);
                 command.Parameters.AddWithValue("@phone", author.Phone);
-                command.Parameters.AddWithValue("@address", author.Address);
-                command.Parameters.AddWithValue("@city", author.City);
-                command.Parameters.AddWithValue("@state", author.State);
-                command.Parameters.AddWithValue("@zip", author.Zip);
+                command.Parameters.AddWithValue("@address", (object?)author.Address ?? DBNull.Value);
+                command.Parameters.AddWithValue("@city", (object?)author.City ?? DBNull.Value);
+                command.Parameters.AddWithValue("@state", (object?)author.State ?? DBNull.Value);
+                command.Parameters.AddWithValue("@zip", (object?)author.Zip ?? DBNull.Value);
                 command.Parameters.AddWithValue("@contract", author.Contract);
             });
         }
@@ -109,10 +109,10 @@ namespace BookStore
             ExecuteNonQuery(command, () =>
             {
                 command.Parameters.AddWithValue("@pub_id", publisher.PubId);
-                command.Parameters.AddWithValue("@pub_name", publisher.PubName);
-                command.Parameters.AddWithValue("@city", publisher.City);
-                command.Parameters.AddWithValue("@state", publisher.State);
-                command.Parameters.AddWithValue("@country", publisher.Country);
+                command.Parameters.AddWithValue("@pub_name", (object?)publisher.PubName ?? DBNull.Value);
+                command.Parameters.AddWithValue("@city", (object?)publisher.City ?? DBNull.Value);
+                command.Parameters.AddWithValue("@state", (object?)publisher.State ?? DBNull.Value);
+                command.Parameters.AddWithValue("@country", (object?)publisher.Country ?? DBNull.Value);
             });
         }
 
@@ -124,11 +124,11 @@ namespace BookStore
             ExecuteNonQuery(command, () =>
             {
                 command.Parameters.AddWithValue("@stor_id", store.StorId);
-                command.Parameters.AddWithValue("@stor_name", store.StorName);
-                command.Parameters.AddWithValue("@stor_address", store.StorAddress);
-                command.Parameters.AddWithValue("@city", store.City);
-                command.Parameters.AddWithValue("@state", store.State);
-                command.Parameters.AddWithValue("@zip", store.Zip);
+                command.Parameters.AddWithValue("@stor_name", (object?)store.StorName ?? DBNull.Value);
+                command.Parameters.AddWithValue("@stor_address", (object?)store.StorAddress ?? DBNull.Value);
+                command.Parameters.AddWithValue("@city", (object?)store.City ?? DBNull.Value);
+                command.Parameters.AddWithValue("@state", (object?)store.State ?? DBNull.Value);
+                command.Parameters.AddWithValue("@zip", (object?)store.Zip);
             });
         }
 

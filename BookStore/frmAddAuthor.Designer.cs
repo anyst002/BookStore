@@ -37,7 +37,6 @@
             lblState = new Label();
             lblZip = new Label();
             lblContract = new Label();
-            txtID = new TextBox();
             txtFirstName = new TextBox();
             txtLastName = new TextBox();
             mtxtPhone = new MaskedTextBox();
@@ -49,6 +48,7 @@
             btnSave = new Button();
             btnClear = new Button();
             btnClose = new Button();
+            mtxtID = new MaskedTextBox();
             SuspendLayout();
             // 
             // lblAuthorID
@@ -141,18 +141,10 @@
             lblContract.TabIndex = 8;
             lblContract.Text = "Contract:";
             // 
-            // txtID
-            // 
-            txtID.Location = new Point(92, 10);
-            txtID.Margin = new Padding(2, 2, 2, 2);
-            txtID.Name = "txtID";
-            txtID.Size = new Size(106, 23);
-            txtID.TabIndex = 9;
-            // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(92, 37);
-            txtFirstName.Margin = new Padding(2, 2, 2, 2);
+            txtFirstName.Location = new Point(92, 35);
+            txtFirstName.Margin = new Padding(2);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(106, 23);
             txtFirstName.TabIndex = 10;
@@ -160,7 +152,7 @@
             // txtLastName
             // 
             txtLastName.Location = new Point(92, 62);
-            txtLastName.Margin = new Padding(2, 2, 2, 2);
+            txtLastName.Margin = new Padding(2);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(106, 23);
             txtLastName.TabIndex = 11;
@@ -168,7 +160,7 @@
             // mtxtPhone
             // 
             mtxtPhone.Location = new Point(92, 88);
-            mtxtPhone.Margin = new Padding(2, 2, 2, 2);
+            mtxtPhone.Margin = new Padding(2);
             mtxtPhone.Mask = "(999) 000-0000";
             mtxtPhone.Name = "mtxtPhone";
             mtxtPhone.Size = new Size(106, 23);
@@ -177,7 +169,7 @@
             // txtAddress
             // 
             txtAddress.Location = new Point(92, 116);
-            txtAddress.Margin = new Padding(2, 2, 2, 2);
+            txtAddress.Margin = new Padding(2);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(106, 23);
             txtAddress.TabIndex = 13;
@@ -185,7 +177,7 @@
             // txtCity
             // 
             txtCity.Location = new Point(92, 144);
-            txtCity.Margin = new Padding(2, 2, 2, 2);
+            txtCity.Margin = new Padding(2);
             txtCity.Name = "txtCity";
             txtCity.Size = new Size(106, 23);
             txtCity.TabIndex = 14;
@@ -193,7 +185,7 @@
             // txtState
             // 
             txtState.Location = new Point(92, 173);
-            txtState.Margin = new Padding(2, 2, 2, 2);
+            txtState.Margin = new Padding(2);
             txtState.Name = "txtState";
             txtState.Size = new Size(106, 23);
             txtState.TabIndex = 15;
@@ -202,7 +194,7 @@
             // 
             chkContract.AutoSize = true;
             chkContract.Location = new Point(101, 235);
-            chkContract.Margin = new Padding(2, 2, 2, 2);
+            chkContract.Margin = new Padding(2);
             chkContract.Name = "chkContract";
             chkContract.Size = new Size(15, 14);
             chkContract.TabIndex = 17;
@@ -211,7 +203,7 @@
             // mtxtZip
             // 
             mtxtZip.Location = new Point(92, 202);
-            mtxtZip.Margin = new Padding(2, 2, 2, 2);
+            mtxtZip.Margin = new Padding(2);
             mtxtZip.Mask = "00000";
             mtxtZip.Name = "mtxtZip";
             mtxtZip.Size = new Size(106, 23);
@@ -221,27 +213,29 @@
             // btnSave
             // 
             btnSave.Location = new Point(22, 263);
-            btnSave.Margin = new Padding(2, 2, 2, 2);
+            btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(56, 20);
             btnSave.TabIndex = 19;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnClear
             // 
             btnClear.Location = new Point(92, 263);
-            btnClear.Margin = new Padding(2, 2, 2, 2);
+            btnClear.Margin = new Padding(2);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(56, 20);
             btnClear.TabIndex = 20;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnClose
             // 
             btnClose.Location = new Point(161, 263);
-            btnClose.Margin = new Padding(2, 2, 2, 2);
+            btnClose.Margin = new Padding(2);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(56, 20);
             btnClose.TabIndex = 21;
@@ -249,11 +243,21 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // mtxtID
+            // 
+            mtxtID.Location = new Point(92, 8);
+            mtxtID.Margin = new Padding(2);
+            mtxtID.Mask = "000-00-0000";
+            mtxtID.Name = "mtxtID";
+            mtxtID.Size = new Size(106, 23);
+            mtxtID.TabIndex = 22;
+            // 
             // frmAddAuthor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(248, 293);
+            Controls.Add(mtxtID);
             Controls.Add(btnClose);
             Controls.Add(btnClear);
             Controls.Add(btnSave);
@@ -265,7 +269,6 @@
             Controls.Add(mtxtPhone);
             Controls.Add(txtLastName);
             Controls.Add(txtFirstName);
-            Controls.Add(txtID);
             Controls.Add(lblContract);
             Controls.Add(lblZip);
             Controls.Add(lblState);
@@ -276,7 +279,7 @@
             Controls.Add(lblFirstName);
             Controls.Add(lblAuthorID);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             MaximizeBox = false;
             Name = "frmAddAuthor";
             ShowIcon = false;
@@ -297,7 +300,6 @@
         private Label lblState;
         private Label lblZip;
         private Label lblContract;
-        private TextBox txtID;
         private TextBox txtFirstName;
         private TextBox txtLastName;
         private MaskedTextBox mtxtPhone;
@@ -309,5 +311,6 @@
         private Button btnSave;
         private Button btnClear;
         private Button btnClose;
+        private MaskedTextBox mtxtID;
     }
 }

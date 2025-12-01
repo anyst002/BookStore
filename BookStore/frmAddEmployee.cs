@@ -24,7 +24,7 @@
             string? initial = (string.IsNullOrWhiteSpace(txtMiddleInitial.Text)) ? null : txtMiddleInitial.Text;
             byte? lvl = (string.IsNullOrWhiteSpace(txtJobLevel.Text)) ? null : Convert.ToByte(txtJobLevel.Text);
 
-            Employee emp = new Employee(mtxtEmployeeId.Text.ToUpper()
+            Employee emp = new Employee(mtxtEmployeeId.Text
                 , txtFirstName.Text.Trim()
                 , initial
                 , txtLastName.Text.Trim()
@@ -47,8 +47,28 @@
             {
                 if(!mtxtEmployeeId.MaskFull) //TODO make this an assertion later
                 {
-                    MessageBox.Show("Please enter an acceptable ID.",
-                                "ID Missing");
+                    MessageBox.Show("Please enter an employee ID.",
+                                "Input Missing");
+                    return;
+                }
+
+                char[] id = mtxtEmployeeId.Text.ToCharArray(); //this whole block is terrible but it'll work for now
+                if (!(id[1] >= 'A' && id[1] <= 'Z') && id[1] != '-')
+                {
+                    MessageBox.Show("Second digit of employee ID must be between A-Z inclusive or a -.",
+                                "ID Error");
+                    return;
+                }
+                if (id[3] == '0')
+                {
+                    MessageBox.Show("Fourth digit of employee ID must be between 1-9 inclusive.",
+                                "ID Error");
+                    return;
+                }
+                if (id[8] != 'F' && id[8] != 'M')
+                {
+                    MessageBox.Show("Final digit of employee ID must be either F or M.",
+                                "ID Error");
                     return;
                 }
 

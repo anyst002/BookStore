@@ -232,8 +232,9 @@
             // 
             // mtxtEmployeeId
             // 
+            mtxtEmployeeId.InsertKeyMode = InsertKeyMode.Insert;
             mtxtEmployeeId.Location = new Point(144, 22);
-            mtxtEmployeeId.Mask = "LLA000000";
+            mtxtEmployeeId.Mask = ">L&L00000L";
             mtxtEmployeeId.Name = "mtxtEmployeeId";
             mtxtEmployeeId.Size = new Size(100, 23);
             mtxtEmployeeId.TabIndex = 33;
