@@ -22,7 +22,6 @@
             else
             {
                 order.AddItem(item);
-                UpdateGrid();
                 CalculateSubtotal();
             }
         }
@@ -45,7 +44,7 @@
         {
             order = new Order(storeId);
             txtTax.Text = Convert.ToString(Order.tax);
-            UpdateGrid();
+            grdCart.DataSource = order.cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
         }
@@ -54,13 +53,7 @@
         {
             decimal subtotal = order.GetSubtotal();
             txtSubtotal.Text = Convert.ToString(subtotal);
-            txtTotal.Text = Convert.ToString((subtotal * Order.tax) + subtotal); //format as currency
-        }
-
-        private void UpdateGrid()
-        {
-            grdCart.DataSource = null; //terrible way of doing this but idk what else to do atm, probably why it crashes when you click a row
-            grdCart.DataSource = order.cart;
+            txtTotal.Text = Convert.ToString((subtotal * Order.tax) + subtotal); //TODO format as currency
         }
     }
 }

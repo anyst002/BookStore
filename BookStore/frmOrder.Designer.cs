@@ -31,14 +31,14 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrder));
             grdCart = new DataGridView();
-            Remove = new DataGridViewButtonColumn();
             titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             qtyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Edit = new DataGridViewButtonColumn();
             auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Remove = new DataGridViewButtonColumn();
+            Edit = new DataGridViewButtonColumn();
             orderItemBindingSource = new BindingSource(components);
             titleSearchResultBindingSource = new BindingSource(components);
             btnSearch = new Button();
@@ -67,7 +67,7 @@
             grdCart.BackgroundColor = SystemColors.ControlLight;
             grdCart.BorderStyle = BorderStyle.Fixed3D;
             grdCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grdCart.Columns.AddRange(new DataGridViewColumn[] { Remove, titleDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, qtyDataGridViewTextBoxColumn, Edit, auNameDataGridViewTextBoxColumn, pubNameDataGridViewTextBoxColumn, pubDateDataGridViewTextBoxColumn });
+            grdCart.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, qtyDataGridViewTextBoxColumn, auNameDataGridViewTextBoxColumn, pubNameDataGridViewTextBoxColumn, pubDateDataGridViewTextBoxColumn, Remove, Edit });
             grdCart.DataSource = orderItemBindingSource;
             grdCart.Location = new Point(12, 12);
             grdCart.MultiSelect = false;
@@ -76,19 +76,10 @@
             grdCart.RowHeadersVisible = false;
             grdCart.RowHeadersWidth = 20;
             grdCart.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            grdCart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grdCart.SelectionMode = DataGridViewSelectionMode.CellSelect;
             grdCart.ShowEditingIcon = false;
             grdCart.Size = new Size(776, 315);
-            grdCart.TabIndex = 2;
-            // 
-            // Remove
-            // 
-            Remove.HeaderText = "X";
-            Remove.Name = "Remove";
-            Remove.ReadOnly = true;
-            Remove.Text = "X";
-            Remove.UseColumnTextForButtonValue = true;
-            Remove.Width = 23;
+            grdCart.TabIndex = 4;
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -114,15 +105,6 @@
             qtyDataGridViewTextBoxColumn.ReadOnly = true;
             qtyDataGridViewTextBoxColumn.Width = 50;
             // 
-            // Edit
-            // 
-            Edit.HeaderText = "Edit";
-            Edit.Name = "Edit";
-            Edit.ReadOnly = true;
-            Edit.Text = "Edit";
-            Edit.UseColumnTextForButtonValue = true;
-            Edit.Width = 50;
-            // 
             // auNameDataGridViewTextBoxColumn
             // 
             auNameDataGridViewTextBoxColumn.DataPropertyName = "AuName";
@@ -145,6 +127,24 @@
             pubDateDataGridViewTextBoxColumn.HeaderText = "Pub. Date";
             pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
             pubDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Remove
+            // 
+            Remove.HeaderText = "X";
+            Remove.Name = "Remove";
+            Remove.ReadOnly = true;
+            Remove.Text = "X";
+            Remove.UseColumnTextForButtonValue = true;
+            Remove.Width = 23;
+            // 
+            // Edit
+            // 
+            Edit.HeaderText = "Edit";
+            Edit.Name = "Edit";
+            Edit.ReadOnly = true;
+            Edit.Text = "Edit";
+            Edit.UseColumnTextForButtonValue = true;
+            Edit.Width = 50;
             // 
             // orderItemBindingSource
             // 
@@ -235,7 +235,7 @@
             btnExit.Location = new Point(863, 304);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(100, 23);
-            btnExit.TabIndex = 4;
+            btnExit.TabIndex = 5;
             btnExit.Text = "Cancel";
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
@@ -300,13 +300,13 @@
         private TextBox txtPayTerms;
         private BindingSource titleSearchResultBindingSource;
         private BindingSource orderItemBindingSource;
-        private DataGridViewButtonColumn Remove;
         private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn qtyDataGridViewTextBoxColumn;
-        private DataGridViewButtonColumn Edit;
         private DataGridViewTextBoxColumn auNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn pubNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn pubDateDataGridViewTextBoxColumn;
+        private DataGridViewButtonColumn Remove;
+        private DataGridViewButtonColumn Edit;
     }
 }

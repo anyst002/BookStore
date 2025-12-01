@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel;
 
 namespace BookStore
 {
@@ -9,7 +10,7 @@ namespace BookStore
         private readonly long ordNum;
         private readonly string storeId;
         private readonly OrderRepository repo;
-        public List<OrderItem> cart {  get; init; }
+        public BindingList<OrderItem> cart {  get; init; }
         public string payTerms { get; set; }
 
         public Order(string storeId)
@@ -17,7 +18,7 @@ namespace BookStore
             repo = new OrderRepository();
             ordNum = repo.GetOrderNum(storeId);
             this.storeId = storeId;
-            cart = new List<OrderItem>();
+            cart = new BindingList<OrderItem>();
             payTerms = "";
         }
 

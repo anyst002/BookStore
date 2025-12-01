@@ -215,10 +215,7 @@
         #endregion
 
         private Label lblTitle;
-        private Label lblStoreID;
-        private TextBox txtOrderNum;
         private Button btnSearch;
-        private Button btnClear;
         private Button btnCancel;
         private Label lblQuantity;
         private DataGridView grdResults;
