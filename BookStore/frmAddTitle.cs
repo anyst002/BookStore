@@ -1,13 +1,3 @@
-using InputValidator;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-using InputValidator;
-using static InputValidator.InputAssertions;
-
-
 namespace BookStore
 {
     public partial class frmAddTitle : Form
