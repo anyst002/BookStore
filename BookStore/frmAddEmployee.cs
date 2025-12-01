@@ -1,21 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
     public partial class frmAddEmployee : Form
     {
         private readonly string ConnectionString;
-        public frmAddEmployee( string connectionString)
+        public frmAddEmployee(string connectionString)
         {
             InitializeComponent();
             ConnectionString = connectionString;
