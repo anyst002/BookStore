@@ -1,15 +1,17 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System;
+using System.ComponentModel;
 
 namespace BookStore
 {
-    internal class Order
+    public class Order
     {
-        public static readonly decimal tax = 0.05m;
+        public static readonly decimal taxPer = 0.05m;
 
-        private readonly long ordNum;
+        public long ordNum { get; init; }
         private readonly string storeId;
         private readonly OrderRepository repo;
-        public List<OrderItem> cart {  get; init; }
+        public BindingList<OrderItem> cart {  get; init; }
         public string payTerms { get; set; }
 
         public Order(string storeId)
@@ -17,7 +19,7 @@ namespace BookStore
             repo = new OrderRepository();
             ordNum = repo.GetOrderNum(storeId);
             this.storeId = storeId;
-            cart = new List<OrderItem>();
+            cart = new BindingList<OrderItem>();
             payTerms = "";
         }
 
@@ -31,15 +33,8 @@ namespace BookStore
             }
             else
             {
-
-                OrderItem newItem = new OrderItem(item.TitleId
-                    , item.Title
-                    , item.Price
-                    , (short)(item.Qty + cart[index].Qty) //should check for integer overflow TODO
-                    , item.AuName
-                    , item.PubName
-                    , item.PubDate);
-                UpdateItem(newItem);
+                short newQty = (short)(item.Qty + cart[index].Qty); //should check for integer overflow TODO
+                UpdateItemQuantity(item, newQty);
             }
         }
 
@@ -47,6 +42,18 @@ namespace BookStore
         {
             int index = FindEntry(item);
             cart[index] = item;
+        }
+
+        public void UpdateItemQuantity(OrderItem item, short qty)
+        {
+            OrderItem newItem = new OrderItem(item.TitleId
+                    , item.Title
+                    , item.Price
+                    , qty
+                    , item.AuName
+                    , item.PubName
+                    , item.PubDate);
+            UpdateItem(newItem);
         }
 
         public void RemoveItem(OrderItem item)

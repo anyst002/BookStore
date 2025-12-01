@@ -28,34 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblOrderLabel = new Label();
+            components = new System.ComponentModel.Container();
+            lblOrderNum = new Label();
             lblOrderNumber = new Label();
-            lblSubtotal = new Label();
-            txtSubtotal = new Label();
-            lblTax = new Label();
-            txtTax = new TextBox();
-            txtSubAmount = new TextBox();
-            lblTotal = new Label();
-            txtTotal = new TextBox();
-            dataGridView1 = new DataGridView();
-            colSumTitle = new DataGridViewTextBoxColumn();
-            colSumAuthor = new DataGridViewTextBoxColumn();
-            colSumYear = new DataGridViewTextBoxColumn();
-            colSumISBN = new DataGridViewTextBoxColumn();
-            colSumCost = new DataGridViewTextBoxColumn();
-            colSumQuantity = new DataGridViewTextBoxColumn();
             btnOK = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            txtTotal = new TextBox();
+            txtTax = new TextBox();
+            lblTotal = new Label();
+            lblTax = new Label();
+            txtSubtotal = new TextBox();
+            lblSubtotal = new Label();
+            txtOrderNum = new TextBox();
+            grdSummary = new DataGridView();
+            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            qtyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            orderItemBindingSource = new BindingSource(components);
+            lblSuccess = new Label();
+            ((System.ComponentModel.ISupportInitialize)grdSummary).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)orderItemBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // lblOrderLabel
+            // lblOrderNum
             // 
-            lblOrderLabel.AutoSize = true;
-            lblOrderLabel.Location = new Point(24, 15);
-            lblOrderLabel.Name = "lblOrderLabel";
-            lblOrderLabel.Size = new Size(50, 15);
-            lblOrderLabel.TabIndex = 0;
-            lblOrderLabel.Text = "Order# :";
+            lblOrderNum.AutoSize = true;
+            lblOrderNum.Location = new Point(732, 115);
+            lblOrderNum.Name = "lblOrderNum";
+            lblOrderNum.Size = new Size(50, 15);
+            lblOrderNum.TabIndex = 0;
+            lblOrderNum.Text = "Order #:";
             // 
             // lblOrderNumber
             // 
@@ -65,154 +69,213 @@
             lblOrderNumber.Size = new Size(0, 15);
             lblOrderNumber.TabIndex = 1;
             // 
-            // lblSubtotal
+            // btnOK
             // 
-            lblSubtotal.AutoSize = true;
-            lblSubtotal.Location = new Point(555, 18);
-            lblSubtotal.Name = "lblSubtotal";
-            lblSubtotal.Size = new Size(54, 15);
-            lblSubtotal.TabIndex = 2;
-            lblSubtotal.Text = "Subtotal:";
+            btnOK.Location = new Point(773, 304);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new Size(100, 23);
+            btnOK.TabIndex = 10;
+            btnOK.Text = "OK";
+            btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
-            // txtSubtotal
+            // txtTotal
             // 
-            txtSubtotal.AutoSize = true;
-            txtSubtotal.Location = new Point(606, 18);
-            txtSubtotal.Name = "txtSubtotal";
-            txtSubtotal.Size = new Size(0, 15);
-            txtSubtotal.TabIndex = 3;
-            // 
-            // lblTax
-            // 
-            lblTax.AutoSize = true;
-            lblTax.Location = new Point(792, 18);
-            lblTax.Name = "lblTax";
-            lblTax.Size = new Size(27, 15);
-            lblTax.TabIndex = 4;
-            lblTax.Text = "Tax:";
+            txtTotal.Enabled = false;
+            txtTotal.Location = new Point(801, 199);
+            txtTotal.Name = "txtTotal";
+            txtTotal.Size = new Size(100, 23);
+            txtTotal.TabIndex = 19;
+            txtTotal.TabStop = false;
             // 
             // txtTax
             // 
-            txtTax.Location = new Point(825, 15);
+            txtTax.Enabled = false;
+            txtTax.Location = new Point(801, 170);
             txtTax.Name = "txtTax";
             txtTax.Size = new Size(100, 23);
-            txtTax.TabIndex = 5;
-            // 
-            // txtSubAmount
-            // 
-            txtSubAmount.Location = new Point(612, 15);
-            txtSubAmount.Name = "txtSubAmount";
-            txtSubAmount.Size = new Size(100, 23);
-            txtSubAmount.TabIndex = 6;
+            txtTax.TabIndex = 18;
+            txtTax.TabStop = false;
             // 
             // lblTotal
             // 
             lblTotal.AutoSize = true;
-            lblTotal.Location = new Point(792, 56);
+            lblTotal.Location = new Point(732, 202);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(35, 15);
-            lblTotal.TabIndex = 7;
+            lblTotal.TabIndex = 17;
             lblTotal.Text = "Total:";
             // 
-            // txtTotal
+            // lblTax
             // 
-            txtTotal.Location = new Point(831, 56);
-            txtTotal.Name = "txtTotal";
-            txtTotal.Size = new Size(100, 23);
-            txtTotal.TabIndex = 8;
+            lblTax.AutoSize = true;
+            lblTax.Location = new Point(732, 173);
+            lblTax.Name = "lblTax";
+            lblTax.Size = new Size(27, 15);
+            lblTax.TabIndex = 16;
+            lblTax.Text = "Tax:";
             // 
-            // dataGridView1
+            // txtSubtotal
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colSumTitle, colSumAuthor, colSumYear, colSumISBN, colSumCost, colSumQuantity });
-            dataGridView1.Location = new Point(93, 120);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(645, 51);
-            dataGridView1.TabIndex = 9;
+            txtSubtotal.Enabled = false;
+            txtSubtotal.Location = new Point(801, 141);
+            txtSubtotal.Name = "txtSubtotal";
+            txtSubtotal.Size = new Size(100, 23);
+            txtSubtotal.TabIndex = 15;
+            txtSubtotal.TabStop = false;
             // 
-            // colSumTitle
+            // lblSubtotal
             // 
-            colSumTitle.HeaderText = "Title";
-            colSumTitle.Name = "colSumTitle";
+            lblSubtotal.AutoSize = true;
+            lblSubtotal.Location = new Point(732, 144);
+            lblSubtotal.Name = "lblSubtotal";
+            lblSubtotal.Size = new Size(54, 15);
+            lblSubtotal.TabIndex = 14;
+            lblSubtotal.Text = "Subtotal:";
             // 
-            // colSumAuthor
+            // txtOrderNum
             // 
-            colSumAuthor.HeaderText = "Author";
-            colSumAuthor.Name = "colSumAuthor";
+            txtOrderNum.Enabled = false;
+            txtOrderNum.Location = new Point(801, 112);
+            txtOrderNum.Name = "txtOrderNum";
+            txtOrderNum.Size = new Size(100, 23);
+            txtOrderNum.TabIndex = 20;
+            txtOrderNum.TabStop = false;
             // 
-            // colSumYear
+            // grdSummary
             // 
-            colSumYear.HeaderText = "Year";
-            colSumYear.Name = "colSumYear";
+            grdSummary.AllowUserToAddRows = false;
+            grdSummary.AllowUserToDeleteRows = false;
+            grdSummary.AllowUserToResizeColumns = false;
+            grdSummary.AllowUserToResizeRows = false;
+            grdSummary.AutoGenerateColumns = false;
+            grdSummary.BackgroundColor = SystemColors.ControlLight;
+            grdSummary.BorderStyle = BorderStyle.Fixed3D;
+            grdSummary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grdSummary.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, qtyDataGridViewTextBoxColumn, auNameDataGridViewTextBoxColumn, pubNameDataGridViewTextBoxColumn, pubDateDataGridViewTextBoxColumn });
+            grdSummary.DataSource = orderItemBindingSource;
+            grdSummary.Location = new Point(12, 12);
+            grdSummary.MultiSelect = false;
+            grdSummary.Name = "grdSummary";
+            grdSummary.ReadOnly = true;
+            grdSummary.RowHeadersVisible = false;
+            grdSummary.RowHeadersWidth = 20;
+            grdSummary.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            grdSummary.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grdSummary.ShowEditingIcon = false;
+            grdSummary.Size = new Size(703, 315);
+            grdSummary.TabIndex = 21;
             // 
-            // colSumISBN
+            // titleDataGridViewTextBoxColumn
             // 
-            colSumISBN.HeaderText = "ISBN";
-            colSumISBN.Name = "colSumISBN";
+            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            titleDataGridViewTextBoxColumn.Width = 200;
             // 
-            // colSumCost
+            // priceDataGridViewTextBoxColumn
             // 
-            colSumCost.HeaderText = "Cost";
-            colSumCost.Name = "colSumCost";
+            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            priceDataGridViewTextBoxColumn.ReadOnly = true;
+            priceDataGridViewTextBoxColumn.Width = 50;
             // 
-            // colSumQuantity
+            // qtyDataGridViewTextBoxColumn
             // 
-            colSumQuantity.HeaderText = "Quantity";
-            colSumQuantity.Name = "colSumQuantity";
+            qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            qtyDataGridViewTextBoxColumn.HeaderText = "Qty.";
+            qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            qtyDataGridViewTextBoxColumn.ReadOnly = true;
+            qtyDataGridViewTextBoxColumn.Width = 50;
             // 
-            // btnOK
+            // auNameDataGridViewTextBoxColumn
             // 
-            btnOK.Location = new Point(387, 435);
-            btnOK.Name = "btnOK";
-            btnOK.Size = new Size(75, 23);
-            btnOK.TabIndex = 10;
-            btnOK.Text = "OK";
-            btnOK.UseVisualStyleBackColor = true;
+            auNameDataGridViewTextBoxColumn.DataPropertyName = "AuName";
+            auNameDataGridViewTextBoxColumn.HeaderText = "Author";
+            auNameDataGridViewTextBoxColumn.Name = "auNameDataGridViewTextBoxColumn";
+            auNameDataGridViewTextBoxColumn.ReadOnly = true;
+            auNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubNameDataGridViewTextBoxColumn
+            // 
+            pubNameDataGridViewTextBoxColumn.DataPropertyName = "PubName";
+            pubNameDataGridViewTextBoxColumn.HeaderText = "Publisher";
+            pubNameDataGridViewTextBoxColumn.Name = "pubNameDataGridViewTextBoxColumn";
+            pubNameDataGridViewTextBoxColumn.ReadOnly = true;
+            pubNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubDateDataGridViewTextBoxColumn
+            // 
+            pubDateDataGridViewTextBoxColumn.DataPropertyName = "PubDate";
+            pubDateDataGridViewTextBoxColumn.HeaderText = "Pub. Date";
+            pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
+            pubDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // orderItemBindingSource
+            // 
+            orderItemBindingSource.DataSource = typeof(OrderItem);
+            // 
+            // lblSuccess
+            // 
+            lblSuccess.AutoSize = true;
+            lblSuccess.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSuccess.Location = new Point(733, 35);
+            lblSuccess.Name = "lblSuccess";
+            lblSuccess.Size = new Size(168, 50);
+            lblSuccess.TabIndex = 22;
+            lblSuccess.Text = "Order Submitted!\r\nSummary:";
+            lblSuccess.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // frmOrderSummary
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(995, 624);
-            Controls.Add(btnOK);
-            Controls.Add(dataGridView1);
+            ClientSize = new Size(917, 340);
+            Controls.Add(lblSuccess);
+            Controls.Add(grdSummary);
+            Controls.Add(txtOrderNum);
             Controls.Add(txtTotal);
-            Controls.Add(lblTotal);
-            Controls.Add(txtSubAmount);
             Controls.Add(txtTax);
+            Controls.Add(lblTotal);
             Controls.Add(lblTax);
             Controls.Add(txtSubtotal);
             Controls.Add(lblSubtotal);
+            Controls.Add(btnOK);
             Controls.Add(lblOrderNumber);
-            Controls.Add(lblOrderLabel);
+            Controls.Add(lblOrderNum);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "frmOrderSummary";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Order Summary";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)grdSummary).EndInit();
+            ((System.ComponentModel.ISupportInitialize)orderItemBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label lblOrderLabel;
+        private Label lblOrderNum;
         private Label lblOrderNumber;
-        private Label lblSubtotal;
-        private Label txtSubtotal;
-        private Label lblTax;
-        private TextBox txtTax;
-        private TextBox txtSubAmount;
-        private Label lblTotal;
-        private TextBox txtTotal;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn colSumTitle;
-        private DataGridViewTextBoxColumn colSumAuthor;
-        private DataGridViewTextBoxColumn colSumYear;
-        private DataGridViewTextBoxColumn colSumISBN;
-        private DataGridViewTextBoxColumn colSumCost;
-        private DataGridViewTextBoxColumn colSumQuantity;
         private Button btnOK;
+        private TextBox txtTotal;
+        private TextBox txtTax;
+        private Label lblTotal;
+        private Label lblTax;
+        private TextBox txtSubtotal;
+        private Label lblSubtotal;
+        private TextBox txtOrderNum;
+        private DataGridView grdSummary;
+        private BindingSource orderItemBindingSource;
+        private Label lblSuccess;
+        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn qtyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn auNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pubNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn pubDateDataGridViewTextBoxColumn;
     }
 }

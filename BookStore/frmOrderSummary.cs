@@ -12,9 +12,26 @@ namespace BookStore
 {
     public partial class frmOrderSummary : Form
     {
-        public frmOrderSummary()
+        public frmOrderSummary(Order order)
         {
             InitializeComponent();
+            grdSummary.DataSource = order.cart;
+
+            txtOrderNum.Text = order.ordNum.ToString();
+
+            decimal subtotal = order.GetSubtotal();
+            txtSubtotal.Text = subtotal.ToString("C");
+
+            decimal tax = subtotal * Order.taxPer;
+            txtTax.Text = tax.ToString("C");
+
+            decimal total = subtotal + tax;
+            txtTotal.Text = total.ToString("C");
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

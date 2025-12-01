@@ -43,7 +43,7 @@ namespace BookStore
         private void btnStoreSelect_Click(object sender, EventArgs e)
         {
             MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetJobIds();
+            List<IdInfo> list = repo.GetStoreIds();
             storeId = MaintenanceRepository.SelectId(list);
 
             if (!storeId.Equals(""))

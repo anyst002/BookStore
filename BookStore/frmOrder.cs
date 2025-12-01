@@ -32,18 +32,24 @@ namespace BookStore
             else
             {
                 order.AddItem(item);
-                UpdateGrid();
                 CalculateSubtotal();
+                ToggleConfirmButton();
             }
         }
 
         private void btnConfirmOrder_Click(object sender, EventArgs e)
         {
-            //validate payment terms have been entered and more than 0 items in cart
-            //order.PlaceOrder();
-            frmOrderSummary summary = new frmOrderSummary();
-            summary.ShowDialog();
-            Reset();
+            Validator validator = new Validator();
+            validator.Validate(() =>
+            {
+                order.payTerms = AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
+
+                order.PlaceOrder();
+
+                frmOrderSummary summary = new frmOrderSummary(order);
+                summary.ShowDialog();
+                Reset();
+            });
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -54,23 +60,53 @@ namespace BookStore
         private void Reset()
         {
             order = new Order(storeId);
-            txtTax.Text = Convert.ToString(Order.tax);
-            UpdateGrid();
+            
+            grdCart.DataSource = order.cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
+            ToggleConfirmButton();
+        }
+
+        private void ToggleConfirmButton()
+        {
+            btnConfirmOrder.Enabled = (grdCart.RowCount == 0) ? false : true;
         }
 
         private void CalculateSubtotal()
         {
             decimal subtotal = order.GetSubtotal();
-            txtSubtotal.Text = Convert.ToString(subtotal);
-            txtTotal.Text = Convert.ToString((subtotal * Order.tax) + subtotal); //format as currency
+            txtSubtotal.Text = subtotal.ToString("C");
+
+            decimal tax = subtotal * Order.taxPer;
+            txtTax.Text = tax.ToString("C");
+
+            decimal total = subtotal + tax;
+            txtTotal.Text = total.ToString("C");
         }
 
-        private void UpdateGrid()
+        private void grdCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            grdCart.DataSource = null; //terrible way of doing this but idk what else to do atm, probably why it crashes when you click a row
-            grdCart.DataSource = order.cart;
+            DataGridView grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                //remove cart item
+                if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Remove"))
+                {
+                    order.RemoveItem((OrderItem)grid.Rows[e.RowIndex].DataBoundItem);
+                    ToggleConfirmButton();
+                }
+                //edit cart item quantity
+                else if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Edit"))
+                {
+                    OrderItem item = (OrderItem)grid.Rows[e.RowIndex].DataBoundItem;
+                    frmOrderQuantity edit = new frmOrderQuantity(item.Qty);
+                    edit.ShowDialog();
+                    order.UpdateItemQuantity(item, edit.quantity);
+                }
+
+                CalculateSubtotal();
+            }
         }
     }
 }

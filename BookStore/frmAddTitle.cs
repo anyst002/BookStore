@@ -43,7 +43,7 @@ namespace BookStore
                 Royalty: int.Parse(txtRoyalty.Text),
                 YtdSales: int.Parse(txtYTDSales.Text),
                 Notes: txtNotes.Text,
-                PubDate: dtpPubDate.Value
+                PubDate: dtpPubDate.Value.Date;
             );
 
             // Insert into the database
@@ -105,13 +105,6 @@ namespace BookStore
                 AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal."));
                 AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."));
                 AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number."));
-
-                decimal price = AssertNonNegative(AssertDecimal(txtPrice.Text, "Invalid price."));
-                decimal advance = AssertNonNegative(AssertDecimal(txtAdvance.Text, "Invalid advance."));
-                int royalty = AssertNonNegative(AssertInt32(txtRoyalty.Text, "Invalid royalty."));
-                int ytd = AssertNonNegative(AssertInt32(txtYTDSales.Text, "Invalid YTD sales."));
-                string notes = txtNotes.Text;
-                DateTime pubDate = dtpPubDate.Value;
 
                 MessageBox.Show("Title validated successfully!", "Validated",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
