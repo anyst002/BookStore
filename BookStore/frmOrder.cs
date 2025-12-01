@@ -32,9 +32,9 @@
             Validator validator = new Validator();
             validator.Validate(() =>
             {
-                AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
-                
-                //insert order here
+                order.payTerms = AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
+
+                order.PlaceOrder();
 
                 frmOrderSummary summary = new frmOrderSummary(order);
                 summary.ShowDialog();

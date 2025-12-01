@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -41,49 +42,41 @@ namespace BookStore
             }
         }
     }
+
     public class MaintenanceRepository : Repository
     {
         public void InsertTitle(Title title)
-{
-    SqlCommand command = new SqlCommand(
-        @"INSERT INTO titles
-    (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate)
-  VALUES
-    (@id, @name, @type, @pubid, @price, @advance, @royalty, @ytd, @notes, @date)");
+        {
+            SqlCommand command = new($"EXEC insertTitle @title_id, @title, @type, @pub_id, " +
+                $"@price, @advance, @royalty, @ytd_sales, @notes, @pubdate");
 
-    ExecuteNonQuery(command, () =>
-    {
-        command.Parameters.AddWithValue("@id", title.TitleId);
-        command.Parameters.AddWithValue("@name", title.TitleName);
-        command.Parameters.AddWithValue("@type", title.Type);
-        command.Parameters.AddWithValue("@pubid", (object?)title.PubId ?? DBNull.Value);
-        command.Parameters.AddWithValue("@price", (object?)title.Price ?? DBNull.Value);
-        command.Parameters.AddWithValue("@advance", (object?)title.Advance ?? DBNull.Value);
-        command.Parameters.AddWithValue("@royalty", (object?)title.Royalty ?? DBNull.Value);
-        command.Parameters.AddWithValue("@ytd", (object?)title.YtdSales ?? DBNull.Value);
-        command.Parameters.AddWithValue("@notes", (object?)title.Notes ?? DBNull.Value);
-        command.Parameters.AddWithValue("@date", title.PubDate);
-    });
-}
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@title_id", title.TitleId);
+                command.Parameters.AddWithValue("@title", title.TitleName);
+                command.Parameters.AddWithValue("@type", title.Type);
+                command.Parameters.AddWithValue("@pub_id", title.PubId);
+                command.Parameters.AddWithValue("@price", title.Price);
+                command.Parameters.AddWithValue("@advance", title.Advance);
+                command.Parameters.AddWithValue("@royalty", title.Royalty);
+                command.Parameters.AddWithValue("@ytd_sales", title.YtdSales);
+                command.Parameters.AddWithValue("@notes", title.Notes);
+                command.Parameters.AddWithValue("@pubdate", title.PubDate);
+            });
+        }
 
+        public void InsertTitleAuthor(TitleAuthor entry)
+        {
+            SqlCommand command = new($"EXEC insertTitleauthor @au_id, @title_id, @au_ord, @royaltyper");
 
-
-public void InsertTitleAuthor(TitleAuthor entry)
-{
-    SqlCommand command = new SqlCommand(
-        @"INSERT INTO titleauthor
-    (au_id, title_id, au_ord, royaltyper)
-  VALUES
-    (@aid, @tid, @ord, @roy)");
-
-    ExecuteNonQuery(command, () =>
-    {
-        command.Parameters.AddWithValue("@aid", entry.AuId);
-        command.Parameters.AddWithValue("@tid", entry.TitleId);
-        command.Parameters.AddWithValue("@ord", (object?)entry.AuOrd ?? DBNull.Value);
-        command.Parameters.AddWithValue("@roy", (object?)entry.RoyaltyPer ?? DBNull.Value);
-    });
-}
+            ExecuteNonQuery(command, () =>
+            {
+                command.Parameters.AddWithValue("@au_id", entry.AuId);
+                command.Parameters.AddWithValue("@title_id", entry.TitleId);
+                command.Parameters.AddWithValue("@au_ord", entry.AuOrd);
+                command.Parameters.AddWithValue("@royaltyper", entry.RoyaltyPer);
+            });
+        }
 
         public void InsertAuthor()
         {
@@ -143,7 +136,7 @@ public void InsertTitleAuthor(TitleAuthor entry)
                 {
                     while (reader.Read())
                     {
-                        string? info = (reader[1] is null) ? null : Convert.ToString(reader[1]);
+                        string? info = (reader[1] is DBNull) ? null : Convert.ToString(reader[1]);
 
                         IdInfo result = new IdInfo(Convert.ToString(reader[0])!
                             , info);
@@ -170,7 +163,7 @@ public void InsertTitleAuthor(TitleAuthor entry)
     {
         public void InsertSale(Sales sale)
         {
-            SqlCommand command = new($"EXEC insertSales @stor_id @ord_num @ord_date @qty @payterms @title_id");
+            SqlCommand command = new($"EXEC insertSales @stor_id, @ord_num, @ord_date, @qty, @payterms, @title_id");
             ExecuteNonQuery(command, () => 
             {
                 command.Parameters.AddWithValue("@stor_id", sale.StorId);
@@ -213,8 +206,8 @@ public void InsertTitleAuthor(TitleAuthor entry)
                 {
                     while (reader.Read())
                     {
-                        decimal? price = (reader[2] is null) ? null : Decimal.Round(Convert.ToDecimal(reader[2]), 2);
-                        string? pubName = (reader[4] is null) ? null : Convert.ToString(reader[4]);
+                        decimal? price = (reader[2] is DBNull) ? null : Decimal.Round(Convert.ToDecimal(reader[2]), 2);
+                        string? pubName = (reader[4] is DBNull) ? null : Convert.ToString(reader[4]);
 
                         TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
                             , Convert.ToString(reader[1])!

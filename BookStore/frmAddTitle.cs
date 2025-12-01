@@ -90,7 +90,7 @@ namespace BookStore
                 AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."));
                 AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number."));
 
-                DateTime pubDate = dtpPubDate.Value;
+                DateTime pubDate = dtpPubDate.Value.Date;
 
                 MessageBox.Show("Title validated successfully!", "Validated",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
