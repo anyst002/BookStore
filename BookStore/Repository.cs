@@ -107,48 +107,53 @@ public void InsertTitleAuthor(TitleAuthor entry)
 
         public List<IdInfo> GetAuthorIds()
         {
-            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
-            IdInfo info1 = new IdInfo("007", "author test");
-            IdInfo info2 = new IdInfo("008", "author test 2");
-            list.Add(info1);
-            list.Add(info2);
-            return list;
-
-            //using SqlDataReader reader = command.ExecuteReader();
-
-            //reader.Read();
-            //MessageBox.Show(reader.GetString(0));
-            //reader.Close();
+            string query = "EXEC getAuthorIds";
+            return GetIdInfos(query);
         }
 
         public List<IdInfo> GetJobIds()
         {
-            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
-            IdInfo info1 = new IdInfo("001", "job test");
-            IdInfo info2 = new IdInfo("002", "job test 2");
-            list.Add(info1);
-            list.Add(info2);
-            return list;
+            string query = "EXEC getJobIds";
+            return GetIdInfos(query);
         }
 
         public List<IdInfo> GetPublisherIds()
         {
-            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
-            IdInfo info1 = new IdInfo("003", "pub test");
-            IdInfo info2 = new IdInfo("004", "pub test 2");
-            list.Add(info1);
-            list.Add(info2);
-            return list;
+            string query = "EXEC getPublisherIds";
+            return GetIdInfos(query);
         }
 
         public List<IdInfo> GetStoreIds()
         {
-            List<IdInfo> list = new List<IdInfo>(); //TODO remove later, temp list
-            IdInfo info1 = new IdInfo("005", "store test");
-            IdInfo info2 = new IdInfo("006", "store test 2");
-            list.Add(info1);
-            list.Add(info2);
-            return list;
+            string query = "EXEC getStoreIds";
+            return GetIdInfos(query);
+        }
+
+        private List<IdInfo> GetIdInfos(string query)
+        {
+            using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
+            {
+                SqlCommand command = new(query);
+                command.Connection = connection;
+
+                List<IdInfo> list = new List<IdInfo>();
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string? info = (reader[1] is null) ? null : Convert.ToString(reader[1]);
+
+                        IdInfo result = new IdInfo(Convert.ToString(reader[0])!
+                            , info);
+
+                        list.Add(result);
+                    }
+
+                    return list;
+                }
+            }
         }
 
         public static string SelectId(List<IdInfo> list)

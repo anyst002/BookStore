@@ -31,6 +31,14 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOrder));
             grdCart = new DataGridView();
+            Remove = new DataGridViewButtonColumn();
+            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            qtyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Edit = new DataGridViewButtonColumn();
+            auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             orderItemBindingSource = new BindingSource(components);
             titleSearchResultBindingSource = new BindingSource(components);
             btnSearch = new Button();
@@ -44,14 +52,6 @@
             btnExit = new Button();
             lblPayTerms = new Label();
             txtPayTerms = new TextBox();
-            Remove = new DataGridViewButtonColumn();
-            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            qtyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Edit = new DataGridViewButtonColumn();
-            auNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            pubNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            pubDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)grdCart).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderItemBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)titleSearchResultBindingSource).BeginInit();
@@ -75,11 +75,73 @@
             grdCart.RowHeadersVisible = false;
             grdCart.RowHeadersWidth = 20;
             grdCart.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            grdCart.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            grdCart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grdCart.ShowEditingIcon = false;
             grdCart.Size = new Size(776, 315);
             grdCart.TabIndex = 4;
             grdCart.CellContentClick += grdCart_CellContentClick;
+            // 
+            // Remove
+            // 
+            Remove.HeaderText = "X";
+            Remove.Name = "Remove";
+            Remove.Text = "X";
+            Remove.UseColumnTextForButtonValue = true;
+            Remove.Width = 23;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            titleDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            priceDataGridViewTextBoxColumn.ReadOnly = true;
+            priceDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // qtyDataGridViewTextBoxColumn
+            // 
+            qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            qtyDataGridViewTextBoxColumn.HeaderText = "Qty.";
+            qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            qtyDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // Edit
+            // 
+            Edit.HeaderText = "Edit";
+            Edit.Name = "Edit";
+            Edit.Text = "Edit";
+            Edit.UseColumnTextForButtonValue = true;
+            Edit.Width = 50;
+            // 
+            // auNameDataGridViewTextBoxColumn
+            // 
+            auNameDataGridViewTextBoxColumn.DataPropertyName = "AuName";
+            auNameDataGridViewTextBoxColumn.HeaderText = "Author";
+            auNameDataGridViewTextBoxColumn.Name = "auNameDataGridViewTextBoxColumn";
+            auNameDataGridViewTextBoxColumn.ReadOnly = true;
+            auNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubNameDataGridViewTextBoxColumn
+            // 
+            pubNameDataGridViewTextBoxColumn.DataPropertyName = "PubName";
+            pubNameDataGridViewTextBoxColumn.HeaderText = "Publisher";
+            pubNameDataGridViewTextBoxColumn.Name = "pubNameDataGridViewTextBoxColumn";
+            pubNameDataGridViewTextBoxColumn.ReadOnly = true;
+            pubNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // pubDateDataGridViewTextBoxColumn
+            // 
+            pubDateDataGridViewTextBoxColumn.DataPropertyName = "PubDate";
+            pubDateDataGridViewTextBoxColumn.HeaderText = "Pub. Date";
+            pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
+            pubDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // orderItemBindingSource
             // 
@@ -190,68 +252,6 @@
             txtPayTerms.Name = "txtPayTerms";
             txtPayTerms.Size = new Size(100, 23);
             txtPayTerms.TabIndex = 2;
-            // 
-            // Remove
-            // 
-            Remove.HeaderText = "X";
-            Remove.Name = "Remove";
-            Remove.Text = "X";
-            Remove.UseColumnTextForButtonValue = true;
-            Remove.Width = 23;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            titleDataGridViewTextBoxColumn.ReadOnly = true;
-            titleDataGridViewTextBoxColumn.Width = 200;
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            priceDataGridViewTextBoxColumn.ReadOnly = true;
-            priceDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // qtyDataGridViewTextBoxColumn
-            // 
-            qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
-            qtyDataGridViewTextBoxColumn.HeaderText = "Qty.";
-            qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
-            qtyDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // Edit
-            // 
-            Edit.HeaderText = "Edit";
-            Edit.Name = "Edit";
-            Edit.Text = "Edit";
-            Edit.UseColumnTextForButtonValue = true;
-            Edit.Width = 50;
-            // 
-            // auNameDataGridViewTextBoxColumn
-            // 
-            auNameDataGridViewTextBoxColumn.DataPropertyName = "AuName";
-            auNameDataGridViewTextBoxColumn.HeaderText = "Author";
-            auNameDataGridViewTextBoxColumn.Name = "auNameDataGridViewTextBoxColumn";
-            auNameDataGridViewTextBoxColumn.ReadOnly = true;
-            auNameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // pubNameDataGridViewTextBoxColumn
-            // 
-            pubNameDataGridViewTextBoxColumn.DataPropertyName = "PubName";
-            pubNameDataGridViewTextBoxColumn.HeaderText = "Publisher";
-            pubNameDataGridViewTextBoxColumn.Name = "pubNameDataGridViewTextBoxColumn";
-            pubNameDataGridViewTextBoxColumn.ReadOnly = true;
-            pubNameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // pubDateDataGridViewTextBoxColumn
-            // 
-            pubDateDataGridViewTextBoxColumn.DataPropertyName = "PubDate";
-            pubDateDataGridViewTextBoxColumn.HeaderText = "Pub. Date";
-            pubDateDataGridViewTextBoxColumn.Name = "pubDateDataGridViewTextBoxColumn";
-            pubDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // frmOrder
             // 
