@@ -4,11 +4,11 @@ using System.ComponentModel;
 
 namespace BookStore
 {
-    internal class Order
+    public class Order
     {
         public static readonly decimal taxPer = 0.05m;
 
-        private readonly long ordNum;
+        public long ordNum { get; init; }
         private readonly string storeId;
         private readonly OrderRepository repo;
         public BindingList<OrderItem> cart {  get; init; }

@@ -23,16 +23,23 @@
             {
                 order.AddItem(item);
                 CalculateSubtotal();
+                ToggleConfirmButton();
             }
         }
 
         private void btnConfirmOrder_Click(object sender, EventArgs e)
         {
-            //validate payment terms have been entered and more than 0 items in cart
-            //order.PlaceOrder();
-            frmOrderSummary summary = new frmOrderSummary();
-            summary.ShowDialog();
-            Reset();
+            Validator validator = new Validator();
+            validator.Validate(() =>
+            {
+                AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
+                
+                //insert order here
+
+                frmOrderSummary summary = new frmOrderSummary(order);
+                summary.ShowDialog();
+                Reset();
+            });
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -47,6 +54,12 @@
             grdCart.DataSource = order.cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
+            ToggleConfirmButton();
+        }
+
+        private void ToggleConfirmButton()
+        {
+            btnConfirmOrder.Enabled = (grdCart.RowCount == 0) ? false : true;
         }
 
         private void CalculateSubtotal()
@@ -71,6 +84,7 @@
                 if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Remove"))
                 {
                     order.RemoveItem((OrderItem)grid.Rows[e.RowIndex].DataBoundItem);
+                    ToggleConfirmButton();
                 }
                 //edit cart item quantity
                 else if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Edit"))
