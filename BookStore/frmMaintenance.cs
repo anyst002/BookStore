@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookStore
 {
@@ -43,7 +44,10 @@ namespace BookStore
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
-            frmAddEmployee addEmployee = new frmAddEmployee();
+            string myConnectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = BookStore; Integrated Security = True;
+            Pooling = False; Encrypt = True; TrustServerCertificate = False; Encrypt = False;
+            AttachDbFilename =| DataDirectory |\BookStore.MDF;";
+            frmAddEmployee addEmployee = new frmAddEmployee(myConnectionString);
             addEmployee.ShowDialog();
         }
     }

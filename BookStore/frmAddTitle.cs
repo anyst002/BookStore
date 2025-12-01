@@ -6,6 +6,7 @@ using System.Configuration;
 using InputValidator;
 using static InputValidator.InputAssertions;
 
+
 namespace BookStore
 {
     public partial class frmAddTitle : Form
@@ -65,8 +66,22 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                string id = AssertNotEmpty(txtTitleID.Text, "Title ID is required.");
-                string title = AssertNotEmpty(txtTitle.Text, "Title is required.");
+                string id = txtTitleID.Text.Trim();
+
+                if (string.IsNullOrEmpty(id))
+                {
+                    MessageBox.Show("Title ID is required.");
+                    return;
+                }
+
+                string title = txtTitle.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(title))
+                {
+                    MessageBox.Show("Title is required.");
+                    return;
+                }
+                
                 string type = AssertComboSelection(cboType, "Type is required.");
                 string pubId = AssertComboSelection(cboPublisher, "Publisher is required.");
 
