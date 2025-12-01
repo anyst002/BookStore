@@ -9,6 +9,9 @@ namespace BookStore
         private System.Windows.Forms.Label lblOrder;
         private System.Windows.Forms.Label lblRoyalty;
 
+        private System.Windows.Forms.ComboBox cboAuthor;
+        private System.Windows.Forms.ComboBox cboTitle;
+
         private System.Windows.Forms.TextBox txtOrder;
         private System.Windows.Forms.TextBox txtRoyalty;
 

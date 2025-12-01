@@ -26,18 +26,36 @@ namespace BookStore
             {
                 if (string.IsNullOrWhiteSpace(txtStorId.Text))
                     throw new NullReferenceException("Store ID is required.");
+                    
                 if (txtStorId.Text.Trim().Length != 4)
                     throw new ArgumentOutOfRangeException("", "Store ID must be exactly 4 characters.");
 
-                if (!string.IsNullOrWhiteSpace(txtState.Text) && txtState.Text.Trim().Length != 2)
+                if (!string.IsNullOrWhiteSpace(txtState.Text) &&
+                    txtState.Text.Trim().Length != 2)
                     throw new ArgumentOutOfRangeException("", "State must be exactly 2 characters.");
 
-                if (!string.IsNullOrWhiteSpace(mtxtZip.Text.Replace("_", "").Trim()) &&
-                    !mtxtZip.MaskFull)
+                var rawZip = mtxtZip.Text.Replace("_", "").Trim();
+                if (!string.IsNullOrEmpty(rawZip) && rawZip.Length != 5)
                     throw new ArgumentOutOfRangeException("", "Zip must be 5 digits.");
 
-                MessageBox.Show("Store validated successfully.\n(Database save added later.)",
-                                "Validated", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var store = new Store
+                {
+                    StorId      = txtStorId.Text.Trim(),
+                    StorName    = string.IsNullOrWhiteSpace(txtStorName.Text) ? null : txtStorName.Text.Trim(),
+                    StorAddress = string.IsNullOrWhiteSpace(txtStorAddress.Text) ? null : txtStorAddress.Text.Trim(),
+                    City        = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim(),
+                    State       = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim(),
+                    Zip         = string.IsNullOrEmpty(rawZip) ? null : rawZip
+                };
+
+                StoreRepository.InsertStore(store);
+
+                MessageBox.Show("Store saved successfully.",
+                                "Success",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                btnClear_Click(sender, e);
             });
         }
 

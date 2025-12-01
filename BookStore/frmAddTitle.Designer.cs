@@ -18,6 +18,7 @@ namespace BookStore
         private System.Windows.Forms.TextBox txtTitleID;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.ComboBox cboType;
+        private System.Windows.Forms.ComboBox cboPublisher;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtAdvance;
         private System.Windows.Forms.TextBox txtRoyalty;

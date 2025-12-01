@@ -2,15 +2,30 @@ using InputValidator;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using System.Configuration;
+using InputValidator;
 using static InputValidator.InputAssertions;
+
 
 namespace BookStore
 {
     public partial class frmAddTitle : Form
     {
+        string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
+
+        SqlConnection connection;
+        SqlCommand command;
+
         public frmAddTitle()
         {
             InitializeComponent();
+
+            connection = new(connectionString);
+            command = new("", connection);
+
+            LoadPublishers();
+            LoadTypes();
         }
 
         private void Insert()
@@ -28,7 +43,7 @@ namespace BookStore
                 Royalty: int.Parse(txtRoyalty.Text),
                 YtdSales: int.Parse(txtYTDSales.Text),
                 Notes: txtNotes.Text,
-                PubDate: dtpPubDate.Value
+                PubDate: dtpPubDate.Value.Date;
             );
 
             // Insert into the database
@@ -72,6 +87,7 @@ namespace BookStore
         private void btnSave_Click(object sender, EventArgs e)
         {
             Validator validator = new Validator();
+
             validator.Validate(() =>
             {
                 AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
@@ -89,8 +105,6 @@ namespace BookStore
                 AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal."));
                 AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."));
                 AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number."));
-
-                DateTime pubDate = dtpPubDate.Value.Date;
 
                 MessageBox.Show("Title validated successfully!", "Validated",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

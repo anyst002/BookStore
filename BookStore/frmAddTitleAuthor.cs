@@ -1,5 +1,8 @@
 using System;
+using System.Data;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
+using System.Configuration;
 using InputValidator;
 using static InputValidator.InputAssertions;
 
@@ -44,6 +47,7 @@ namespace BookStore
         private void btnSave_Click(object sender, EventArgs e)
         {
             Validator validator = new Validator();
+
             validator.Validate(() =>
             {
                 AssertNotNullOrWhiteSpace(txtAuthor.Text, "Please select an author.");

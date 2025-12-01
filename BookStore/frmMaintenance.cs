@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookStore
 {
@@ -16,6 +17,7 @@ namespace BookStore
         {
             InitializeComponent();
         }
+
         private void btnTitles_Click(object sender, EventArgs e)
         {
             frmAddTitle addTitle = new frmAddTitle();

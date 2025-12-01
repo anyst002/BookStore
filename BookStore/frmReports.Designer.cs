@@ -33,7 +33,7 @@
             lblStartDate = new Label();
             lblEndDate = new Label();
             btnViewReport = new Button();
-            dataGridView1 = new DataGridView();
+            dgvReport = new DataGridView();
             colOrderID = new DataGridViewTextBoxColumn();
             colTitle = new DataGridViewTextBoxColumn();
             colAuthor = new DataGridViewTextBoxColumn();
@@ -43,7 +43,7 @@
             colQty = new DataGridViewTextBoxColumn();
             colTotal = new DataGridViewTextBoxColumn();
             btnExit = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
             SuspendLayout();
             // 
             // dtpStartDate
@@ -53,6 +53,7 @@
             dtpStartDate.Name = "dtpStartDate";
             dtpStartDate.Size = new Size(200, 23);
             dtpStartDate.TabIndex = 0;
+            dtpStartDate.ValueChanged += dtpStartDate_ValueChanged;
             // 
             // dtpEndDate
             // 
@@ -61,6 +62,7 @@
             dtpEndDate.Name = "dtpEndDate";
             dtpEndDate.Size = new Size(200, 23);
             dtpEndDate.TabIndex = 1;
+            dtpEndDate.ValueChanged += dtpEndDate_ValueChanged;
             // 
             // lblStartDate
             // 
@@ -88,15 +90,16 @@
             btnViewReport.TabIndex = 4;
             btnViewReport.Text = "View Formatted Report";
             btnViewReport.UseVisualStyleBackColor = true;
+            btnViewReport.Click += btnViewReport_Click;
             // 
-            // dataGridView1
+            // dgvReport
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colOrderID, colTitle, colAuthor, colYear, colISBN, colCost, colQty, colTotal });
-            dataGridView1.Location = new Point(87, 177);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(840, 69);
-            dataGridView1.TabIndex = 5;
+            dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReport.Columns.AddRange(new DataGridViewColumn[] { colOrderID, colTitle, colAuthor, colYear, colISBN, colCost, colQty, colTotal });
+            dgvReport.Location = new Point(87, 177);
+            dgvReport.Name = "dgvReport";
+            dgvReport.Size = new Size(840, 69);
+            dgvReport.TabIndex = 5;
             // 
             // colOrderID
             // 
@@ -154,7 +157,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1013, 636);
             Controls.Add(btnExit);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvReport);
             Controls.Add(btnViewReport);
             Controls.Add(lblEndDate);
             Controls.Add(lblStartDate);
@@ -165,7 +168,7 @@
             Name = "frmReports";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Report";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReport).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,7 +180,7 @@
         private Label lblStartDate;
         private Label lblEndDate;
         private Button btnViewReport;
-        private DataGridView dataGridView1;
+        private DataGridView dgvReport;
         private DataGridViewTextBoxColumn colOrderID;
         private DataGridViewTextBoxColumn colTitle;
         private DataGridViewTextBoxColumn colAuthor;
