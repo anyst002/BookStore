@@ -44,11 +44,13 @@ namespace BookStore
 
         private void btnEmployees_Click(object sender, EventArgs e)
         {
-            string myConnectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = BookStore; Integrated Security = True;
-            Pooling = False; Encrypt = True; TrustServerCertificate = False; Encrypt = False;
-            AttachDbFilename =| DataDirectory |\BookStore.MDF;";
-            frmAddEmployee addEmployee = new frmAddEmployee(myConnectionString);
+            frmAddEmployee addEmployee = new frmAddEmployee();
             addEmployee.ShowDialog();
+        }
+
+        private void btnMaintClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

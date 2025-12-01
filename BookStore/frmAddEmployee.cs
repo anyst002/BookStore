@@ -47,16 +47,16 @@ namespace BookStore
                     MessageBox.Show("Employee ID is required.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtEmpID.Focus();
                     return;
-                }
+        }
 
                 using (var conn = new SqlConnection(ConnectionString))
-                {
+        {
                     conn.Open();
                     string insertSql = @"
                     INSERT INTO insertEmployee (emp_id, fname, minit, lname, job_id, job_lvl, pub_id, hire_date)
                     VALUES (@emp_id, @fname, @minit, @lname, @job_id, @job_lvl, @pub_id, @hire_date)";
                     using (var command = new SqlCommand(insertSql, conn))
-                    {
+            {
                         command.Parameters.AddWithValue("@emp_id", txtEmpID.Text.Trim());
                         command.Parameters.AddWithValue("@fname", (object)txtbxFname.Text.Trim() ?? DBNull.Value);
                         command.Parameters.AddWithValue("@minit", (object)txtbxMinit.Text.Trim() ?? DBNull.Value);
@@ -68,7 +68,7 @@ namespace BookStore
 
                         command.ExecuteNonQuery();
                     }
-                }
+        }
 
                 MessageBox.Show("Employee Saved.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -77,16 +77,16 @@ namespace BookStore
             catch (SqlException sqlEx)
             {
                 if (sqlEx.Number == 2627)
-                {
+        {
                     MessageBox.Show("An employee with that Employee ID already exists.", "Dupicate Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+        }
                 else
-                {
+        {
                     MessageBox.Show("Trouble with database: " + sqlEx.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
+        }
             catch (Exception ex)
-            {
+        {
                 MessageBox.Show("Unable to save employee: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

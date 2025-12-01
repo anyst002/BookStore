@@ -28,6 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            lblEmployeeId = new Label();
+            txtEmployeeId = new TextBox();
+            lblFirstName = new Label();
+            txtFirstName = new TextBox();
+            lblLastName = new Label();
+            txtLastName = new TextBox();
+            lblMiddleInitial = new Label();
+            txtMiddleInitial = new TextBox();
+            lblJobId = new Label();
+            txtJobId = new TextBox();
+            lblJobLevel = new Label();
+            btnSave = new Button();
             btnClear = new Button();
             btnSave = new Button();
             btnExit = new Button();
@@ -233,6 +245,9 @@
             Controls.Add(btnExit);
             Controls.Add(btnSave);
             Controls.Add(btnClear);
+            Controls.Add(btnClose);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmAddEmployee";
             Text = "frmAddEmployee";
             ResumeLayout(false);

@@ -28,60 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnAddBook = new Button();
-            btnSearchBooks = new Button();
+            btnMaintenance = new Button();
+            btnCreateOrder = new Button();
             btnViewReports = new Button();
+            btnMMClose = new Button();
+            grpStoreSpecific = new GroupBox();
+            btnStoreSelect = new Button();
+            grpStoreSpecific.SuspendLayout();
             SuspendLayout();
             // 
-            // btnAddBook
+            // btnMaintenance
             // 
-            btnAddBook.Location = new Point(76, 69);
-            btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(125, 45);
-            btnAddBook.TabIndex = 0;
-            btnAddBook.Text = "Add Book";
-            btnAddBook.UseVisualStyleBackColor = true;
-            btnAddBook.Click += btnAddBook_Click;
+            btnMaintenance.Location = new Point(22, 93);
+            btnMaintenance.Name = "btnMaintenance";
+            btnMaintenance.Size = new Size(120, 35);
+            btnMaintenance.TabIndex = 2;
+            btnMaintenance.Text = "Maintenance";
+            btnMaintenance.UseVisualStyleBackColor = true;
+            btnMaintenance.Click += btnMaintenance_Click;
             // 
-            // btnSearchBooks
+            // btnCreateOrder
             // 
-            btnSearchBooks.Location = new Point(76, 168);
-            btnSearchBooks.Name = "btnSearchBooks";
-            btnSearchBooks.Size = new Size(125, 45);
-            btnSearchBooks.TabIndex = 1;
-            btnSearchBooks.Text = "Search Books";
-            btnSearchBooks.UseVisualStyleBackColor = true;
-            btnSearchBooks.Click += btnSearchBooks_Click;
+            btnCreateOrder.Location = new Point(6, 22);
+            btnCreateOrder.Name = "btnCreateOrder";
+            btnCreateOrder.Size = new Size(120, 35);
+            btnCreateOrder.TabIndex = 3;
+            btnCreateOrder.Text = "Create Order";
+            btnCreateOrder.UseVisualStyleBackColor = true;
+            btnCreateOrder.Click += btnCreateOrder_Click;
             // 
             // btnViewReports
             // 
-            btnViewReports.Location = new Point(76, 277);
+            btnViewReports.Location = new Point(6, 81);
             btnViewReports.Name = "btnViewReports";
-            btnViewReports.Size = new Size(125, 45);
-            btnViewReports.TabIndex = 2;
+            btnViewReports.Size = new Size(120, 35);
+            btnViewReports.TabIndex = 4;
             btnViewReports.Text = "View Reports";
             btnViewReports.UseVisualStyleBackColor = true;
             btnViewReports.Click += btnViewReports_Click;
             // 
+            // btnMMClose
+            // 
+            btnMMClose.Location = new Point(102, 151);
+            btnMMClose.Name = "btnMMClose";
+            btnMMClose.Size = new Size(120, 35);
+            btnMMClose.TabIndex = 5;
+            btnMMClose.Text = "Close";
+            btnMMClose.UseVisualStyleBackColor = true;
+            btnMMClose.Click += btnMMClose_Click;
+            // 
+            // grpStoreSpecific
+            // 
+            grpStoreSpecific.Controls.Add(btnCreateOrder);
+            grpStoreSpecific.Controls.Add(btnViewReports);
+            grpStoreSpecific.Enabled = false;
+            grpStoreSpecific.Location = new Point(170, 12);
+            grpStoreSpecific.Name = "grpStoreSpecific";
+            grpStoreSpecific.Size = new Size(132, 123);
+            grpStoreSpecific.TabIndex = 3;
+            grpStoreSpecific.TabStop = false;
+            grpStoreSpecific.Text = "No Store Selected";
+            // 
+            // btnStoreSelect
+            // 
+            btnStoreSelect.Location = new Point(22, 34);
+            btnStoreSelect.Name = "btnStoreSelect";
+            btnStoreSelect.Size = new Size(120, 35);
+            btnStoreSelect.TabIndex = 1;
+            btnStoreSelect.Text = "Select Store";
+            btnStoreSelect.UseVisualStyleBackColor = true;
+            btnStoreSelect.Click += btnStoreSelect_Click;
+            // 
             // frmMainMenu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
-            Controls.Add(btnViewReports);
-            Controls.Add(btnSearchBooks);
-            Controls.Add(btnAddBook);
-            Margin = new Padding(3, 4, 3, 4);
+            ClientSize = new Size(325, 203);
+            Controls.Add(btnStoreSelect);
+            Controls.Add(grpStoreSpecific);
+            Controls.Add(btnMaintenance);
+            Controls.Add(btnMMClose);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmMainMenu";
-            Text = "Book Collection - Main Menu";
-            Load += frmMainMenu_Load;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Main Menu";
+            grpStoreSpecific.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btnAddBook;
-        private Button btnSearchBooks;
+        private Button btnMaintenance;
+        private Button btnCreateOrder;
         private Button btnViewReports;
+        private Button btnMMClose;
+        private GroupBox grpStoreSpecific;
+        private Button btnStoreSelect;
     }
 }

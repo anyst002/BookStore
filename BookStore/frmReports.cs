@@ -12,9 +12,17 @@ namespace BookStore
 {
     public partial class frmReports : Form
     {
-        public frmReports()
+        private string storeId;
+
+        public frmReports(string storeId)
         {
             InitializeComponent();
+            this.storeId = storeId;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

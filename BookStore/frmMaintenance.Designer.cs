@@ -33,13 +33,14 @@
             btnPublishers = new Button();
             btnStores = new Button();
             btnEmployees = new Button();
+            btnMaintClose = new Button();
             SuspendLayout();
             // 
             // btnTitles
             // 
-            btnTitles.Location = new Point(54, 43);
+            btnTitles.Location = new Point(31, 27);
             btnTitles.Name = "btnTitles";
-            btnTitles.Size = new Size(131, 47);
+            btnTitles.Size = new Size(120, 35);
             btnTitles.TabIndex = 0;
             btnTitles.Text = "Titles";
             btnTitles.UseVisualStyleBackColor = true;
@@ -47,9 +48,9 @@
             // 
             // btnAuthors
             // 
-            btnAuthors.Location = new Point(54, 96);
+            btnAuthors.Location = new Point(31, 82);
             btnAuthors.Name = "btnAuthors";
-            btnAuthors.Size = new Size(129, 47);
+            btnAuthors.Size = new Size(120, 35);
             btnAuthors.TabIndex = 1;
             btnAuthors.Text = "Authors";
             btnAuthors.UseVisualStyleBackColor = true;
@@ -57,9 +58,9 @@
             // 
             // btnPublishers
             // 
-            btnPublishers.Location = new Point(52, 149);
+            btnPublishers.Location = new Point(31, 137);
             btnPublishers.Name = "btnPublishers";
-            btnPublishers.Size = new Size(131, 47);
+            btnPublishers.Size = new Size(120, 35);
             btnPublishers.TabIndex = 2;
             btnPublishers.Text = "Publishers";
             btnPublishers.UseVisualStyleBackColor = true;
@@ -67,9 +68,9 @@
             // 
             // btnStores
             // 
-            btnStores.Location = new Point(54, 202);
+            btnStores.Location = new Point(179, 27);
             btnStores.Name = "btnStores";
-            btnStores.Size = new Size(131, 47);
+            btnStores.Size = new Size(120, 35);
             btnStores.TabIndex = 3;
             btnStores.Text = "Stores";
             btnStores.UseVisualStyleBackColor = true;
@@ -77,25 +78,39 @@
             // 
             // btnEmployees
             // 
-            btnEmployees.Location = new Point(52, 255);
+            btnEmployees.Location = new Point(179, 82);
             btnEmployees.Name = "btnEmployees";
-            btnEmployees.Size = new Size(131, 47);
+            btnEmployees.Size = new Size(120, 35);
             btnEmployees.TabIndex = 4;
             btnEmployees.Text = "Employees";
             btnEmployees.UseVisualStyleBackColor = true;
             btnEmployees.Click += btnEmployees_Click;
             // 
+            // btnMaintClose
+            // 
+            btnMaintClose.Location = new Point(179, 137);
+            btnMaintClose.Name = "btnMaintClose";
+            btnMaintClose.Size = new Size(120, 35);
+            btnMaintClose.TabIndex = 5;
+            btnMaintClose.Text = "Close";
+            btnMaintClose.UseVisualStyleBackColor = true;
+            btnMaintClose.Click += btnMaintClose_Click;
+            // 
             // frmMaintenance
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(330, 200);
             Controls.Add(btnEmployees);
             Controls.Add(btnStores);
             Controls.Add(btnPublishers);
             Controls.Add(btnAuthors);
             Controls.Add(btnTitles);
+            Controls.Add(btnMaintClose);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "frmMaintenance";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Maintenance";
             ResumeLayout(false);
         }
@@ -107,5 +122,6 @@
         private Button btnPublishers;
         private Button btnStores;
         private Button btnEmployees;
+        private Button btnMaintClose;
     }
 }

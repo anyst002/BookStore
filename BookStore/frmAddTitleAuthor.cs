@@ -10,64 +10,38 @@ namespace BookStore
 {
     public partial class frmAddTitleAuthor : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
-
-        SqlConnection connection;
-        SqlCommand command;
-
-        public frmAddTitleAuthor()
+        public frmAddTitleAuthor(string title)
         {
             InitializeComponent();
-
-            connection = new(connectionString);
-            command = new("", connection);
-
-            LoadAuthors();
-            LoadTitles();
+            txtTitle.Text = title;
         }
 
-        private void LoadAuthors()
+        private void Insert()
         {
-            try
-            {
-                connection.Open();
-                command.CommandText = "SELECT au_id, au_lname + ', ' + au_fname AS fullname FROM authors ORDER BY au_lname";
+            MaintenanceRepository repo = new MaintenanceRepository();
 
-                DataTable dt = new DataTable();
-                dt.Load(command.ExecuteReader());
-                connection.Close();
+            TitleAuthor entry = new TitleAuthor(
+                AuId: txtAuthor.Text,
+                TitleId: txtTitle.Text,
+                AuOrd: byte.Parse(txtOrder.Text),
+                RoyaltyPer: int.Parse(txtRoyalty.Text)
+            );
 
-                cboAuthor.DataSource = dt;
-                cboAuthor.DisplayMember = "fullname";
-                cboAuthor.ValueMember = "au_id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-            }
+            repo.InsertTitleAuthor(entry);
+
+            MessageBox.Show("Author added to title successfully!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Clear();
         }
 
-        private void LoadTitles()
+
+        private void Clear()
         {
-            try
-            {
-                connection.Open();
-                command.CommandText = "SELECT title_id, title FROM titles ORDER BY title";
-
-                DataTable dt = new DataTable();
-                dt.Load(command.ExecuteReader());
-                connection.Close();
-
-                cboTitle.DataSource = dt;
-                cboTitle.DisplayMember = "title";
-                cboTitle.ValueMember = "title_id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                connection.Close();
-            }
+            txtAuthor.Clear();
+            txtOrder.Clear();
+            txtRoyalty.Clear();
+            txtOrder.Focus();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -76,41 +50,36 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                string authorId = AssertComboSelection(cboAuthor, "Author is required.");
-                string titleId = AssertComboSelection(cboTitle, "Title is required.");
+                AssertNotNullOrWhiteSpace(txtAuthor.Text, "Please select an author.");
+                int order = AssertInt32(txtOrder.Text, "Order must be a whole number.");
+                AssertPositive(order, "Order must be positive.");
 
-                int order = AssertNonNegative(AssertInt32(txtOrder.Text, "Invalid order."));
-                int royalty = AssertNonNegative(AssertInt32(txtRoyalty.Text, "Invalid royalty."));
+                int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.");
+                if (royalty < 0 || royalty > 100)
+                    throw new ArgumentOutOfRangeException("", "Royalty must be between 0 and 100.");
 
-                connection.Open();
-                command.CommandText = @"
-                    INSERT INTO titleauthor (au_id, title_id, au_ord, royaltyper)
-                    VALUES (@au, @title, @ord, @roy);";
+                MessageBox.Show("Title-Author relationship validated successfully!",
+                    "Validated", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("@au", authorId);
-                command.Parameters.AddWithValue("@title", titleId);
-                command.Parameters.AddWithValue("@ord", order);
-                command.Parameters.AddWithValue("@roy", royalty);
-
-                command.ExecuteNonQuery();
-                connection.Close();
-
-                MessageBox.Show("Author added to title successfully!");
+                Insert();
             });
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            cboAuthor.SelectedIndex = -1;
-            cboTitle.SelectedIndex = -1;
-            txtOrder.Clear();
-            txtRoyalty.Clear();
+            Clear();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetAuthorIds();
+            txtAuthor.Text = MaintenanceRepository.SelectId(list);
         }
     }
 }

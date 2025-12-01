@@ -1,5 +1,6 @@
+using InputValidator;
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
@@ -27,37 +28,60 @@ namespace BookStore
             LoadTypes();
         }
 
-        private void LoadPublishers()
+        private void Insert()
         {
-            try
-            {
-                connection.Open();
-                command.CommandText = "SELECT pub_id, pub_name FROM publishers ORDER BY pub_name";
+            MaintenanceRepository repo = new MaintenanceRepository();
 
-                DataTable dt = new DataTable();
-                dt.Load(command.ExecuteReader());
-                connection.Close();
+            // Construct the Title record from UI inputs
+            Title title = new Title(
+                TitleId: txtTitleID.Text,
+                TitleName: txtTitle.Text,
+                Type: cboType.SelectedItem!.ToString(),   // validated in btnSave
+                PubId: txtPublisher.Text,
+                Price: decimal.Parse(txtPrice.Text),
+                Advance: decimal.Parse(txtAdvance.Text),
+                Royalty: int.Parse(txtRoyalty.Text),
+                YtdSales: int.Parse(txtYTDSales.Text),
+                Notes: txtNotes.Text,
+                PubDate: dtpPubDate.Value
+            );
 
-                cboPublisher.DataSource = dt;
-                cboPublisher.DisplayMember = "pub_name";
-                cboPublisher.ValueMember = "pub_id";
-            }
-            catch (Exception ex)
+            // Insert into the database
+            repo.InsertTitle(title);
+
+            MessageBox.Show("Title added successfully!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Ask to add authors to this title
+            DialogResult res = MessageBox.Show(
+                "Would you like to add authors to this title?",
+                "Add Authors?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (res == DialogResult.Yes)
             {
-                MessageBox.Show(ex.Message);
-                connection.Close();
+                frmAddTitleAuthor f = new frmAddTitleAuthor(title.TitleId);
+                f.ShowDialog();
             }
+
+            Clear();
         }
 
-        private void LoadTypes()
-        {
-            cboType.Items.Clear();
 
-            cboType.Items.Add("business");
-            cboType.Items.Add("mod_cook");
-            cboType.Items.Add("popular_comp");
-            cboType.Items.Add("trad_cook");
-            cboType.Items.Add("UNDECIDED");
+        private void Clear()
+        {
+            txtTitleID.Clear();
+            txtTitle.Clear();
+            cboType.SelectedIndex = -1;
+            txtPublisher.Clear();
+            txtPrice.Clear();
+            txtAdvance.Clear();
+            txtRoyalty.Clear();
+            txtYTDSales.Clear();
+            txtNotes.Clear();
+            dtpPubDate.ResetText();
+            txtTitleID.Focus();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -66,24 +90,21 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                string id = txtTitleID.Text.Trim();
+                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
 
-                if (string.IsNullOrEmpty(id))
-                {
-                    MessageBox.Show("Title ID is required.");
-                    return;
-                }
+                AssertNoWhitespace(AssertStringLengthEquals(txtTitleID.Text, 6
+                    , "Title ID must be exactly 6 characters.")
+                    , "Title ID cannot include spaces.");
 
-                string title = txtTitle.Text.Trim();
+                AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 
-                if (string.IsNullOrWhiteSpace(title))
-                {
-                    MessageBox.Show("Title is required.");
-                    return;
-                }
-                
-                string type = AssertComboSelection(cboType, "Type is required.");
-                string pubId = AssertComboSelection(cboPublisher, "Publisher is required.");
+                AssertComboSelection(cboType, "Please select a Type.");
+                AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher.");
+
+                AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal."));
+                AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal."));
+                AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."));
+                AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number."));
 
                 decimal price = AssertNonNegative(AssertDecimal(txtPrice.Text, "Invalid price."));
                 decimal advance = AssertNonNegative(AssertDecimal(txtAdvance.Text, "Invalid advance."));
@@ -92,47 +113,28 @@ namespace BookStore
                 string notes = txtNotes.Text;
                 DateTime pubDate = dtpPubDate.Value;
 
-                connection.Open();
-                command.CommandText = @"
-                    INSERT INTO titles (title_id, title, type, pub_id, price, advance, royalty, ytd_sales, notes, pubdate)
-                    VALUES (@id, @title, @type, @pub, @price, @adv, @roy, @ytd, @notes, @date);";
+                MessageBox.Show("Title validated successfully!", "Validated",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("@id", id);
-                command.Parameters.AddWithValue("@title", title);
-                command.Parameters.AddWithValue("@type", type);
-                command.Parameters.AddWithValue("@pub", pubId);
-                command.Parameters.AddWithValue("@price", price);
-                command.Parameters.AddWithValue("@adv", advance);
-                command.Parameters.AddWithValue("@roy", royalty);
-                command.Parameters.AddWithValue("@ytd", ytd);
-                command.Parameters.AddWithValue("@notes", notes);
-                command.Parameters.AddWithValue("@date", pubDate);
-
-                command.ExecuteNonQuery();
-                connection.Close();
-
-                MessageBox.Show("Title added successfully!");
+                Insert();
             });
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtTitleID.Clear();
-            txtTitle.Clear();
-            cboType.SelectedIndex = -1;
-            cboPublisher.SelectedIndex = -1;
-            txtPrice.Clear();
-            txtAdvance.Clear();
-            txtRoyalty.Clear();
-            txtYTDSales.Clear();
-            txtNotes.Clear();
-            dtpPubDate.Value = DateTime.Now;
+            Clear();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            MaintenanceRepository repo = new MaintenanceRepository();
+            List<IdInfo> list = repo.GetPublisherIds();
+            txtPublisher.Text = MaintenanceRepository.SelectId(list);
         }
     }
 }

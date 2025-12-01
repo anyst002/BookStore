@@ -72,11 +72,44 @@ namespace InputValidator
             return input;
         }
 
+        public static string AssertNotNullOrWhiteSpace(string? input, string customError = "Missing required input.")
+        {
+            if (string.IsNullOrWhiteSpace(input)) throw new NullReferenceException(customError);
+            return input;
+        }
+
+        public static string AssertNoWhitespace(string input, string customError = "Missing required input.")
+        {
+            foreach (var c in input)
+            {
+                if (char.IsWhiteSpace(c)) throw new ArgumentException(customError);
+            }
+            return input;
+        }
+
+        public static string AssertStringLengthEquals(string input, int length, string customError = "Input must be correct length.")
+        {
+            if (input.Length != length) throw new ArgumentOutOfRangeException("", customError);
+            return input;
+        }
+
         public static int AssertInt32(string input, string customError = "Input must be an integer only.")
         {
             try
             {
                 return Convert.ToInt32(input);
+            }
+            catch
+            {
+                throw new FormatException(customError);
+            }
+        }
+
+        public static int AssertByte(string input, string customError = "Input must be a byte only.")
+        {
+            try
+            {
+                return Convert.ToByte(input);
             }
             catch
             {
@@ -141,7 +174,7 @@ namespace InputValidator
             {
                 MessageBox.Show(ex.Message, "Invalid Format");
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Invalid Value");
             }
@@ -177,7 +210,7 @@ namespace InputValidator
                 MessageBox.Show(ex.Message, "different window title");
                 //other unique code for this exception in this validator class
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Invalid Value");
             }
