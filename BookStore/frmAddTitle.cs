@@ -12,20 +12,9 @@ namespace BookStore
 {
     public partial class frmAddTitle : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;
-
-        SqlConnection connection;
-        SqlCommand command;
-
         public frmAddTitle()
         {
             InitializeComponent();
-
-            connection = new(connectionString);
-            command = new("", connection);
-
-            LoadPublishers();
-            LoadTypes();
         }
 
         private void Insert()
@@ -43,7 +32,7 @@ namespace BookStore
                 Royalty: int.Parse(txtRoyalty.Text),
                 YtdSales: int.Parse(txtYTDSales.Text),
                 Notes: txtNotes.Text,
-                PubDate: dtpPubDate.Value.Date;
+                PubDate: dtpPubDate.Value.Date
             );
 
             // Insert into the database
@@ -98,7 +87,7 @@ namespace BookStore
 
                 AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 
-                AssertComboSelection(cboType, "Please select a Type.");
+                AssertComboSelection(cboType, "Please select a Type."); //TODO change this to textbox
                 AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher.");
 
                 AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal."));
