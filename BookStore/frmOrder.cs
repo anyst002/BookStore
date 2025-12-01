@@ -43,7 +43,7 @@
         private void Reset()
         {
             order = new Order(storeId);
-            txtTax.Text = Convert.ToString(Order.tax);
+            txtTax.Text = Order.tax.ToString("C");
             grdCart.DataSource = order.cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
@@ -52,8 +52,10 @@
         private void CalculateSubtotal()
         {
             decimal subtotal = order.GetSubtotal();
-            txtSubtotal.Text = Convert.ToString(subtotal);
-            txtTotal.Text = Convert.ToString((subtotal * Order.tax) + subtotal); //TODO format as currency
+            txtSubtotal.Text = subtotal.ToString("C");
+
+            decimal total = (subtotal * Order.tax) + subtotal;
+            txtTotal.Text = total.ToString("C");
         }
 
         private void grdCart_CellContentClick(object sender, DataGridViewCellEventArgs e)

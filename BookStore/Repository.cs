@@ -208,7 +208,7 @@ public void InsertTitleAuthor(TitleAuthor entry)
                 {
                     while (reader.Read())
                     {
-                        decimal? price = (reader[2] is null) ? null : Convert.ToDecimal(reader[2]);
+                        decimal? price = (reader[2] is null) ? null : Decimal.Round(Convert.ToDecimal(reader[2]), 2);
                         string? pubName = (reader[4] is null) ? null : Convert.ToString(reader[4]);
 
                         TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
