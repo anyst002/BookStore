@@ -175,7 +175,7 @@ namespace BookStore
             // 
             // salesSummaryRowBindingSource
             // 
-            salesSummaryRowBindingSource.DataSource = typeof(SalesSummaryRow);
+            salesSummaryRowBindingSource.DataSource = typeof(SalesSummary);
             // 
             // lblTotal
             // 

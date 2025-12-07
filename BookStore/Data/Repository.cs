@@ -1,5 +1,5 @@
-﻿using BookStore.Entities;
-using static BookStore.Data.RepositoryUtilities;
+﻿using static BookStore.Data.RepositoryUtilities;
+using BookStore.Entities;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -131,7 +131,7 @@ namespace BookStore.Data
 
         private static List<IdInfo> GetIdInfos(string procedure)
         {
-            using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
+            using (SqlConnection connection = new(connectionString))
             {
                 SqlCommand command = new (procedure);
                 command.CommandType = CommandType.StoredProcedure;
@@ -175,7 +175,7 @@ namespace BookStore.Data
 
         public static long GetOrderNum(string storeId)
         {
-            using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
+            using (SqlConnection connection = new(connectionString))
             {
                 SqlCommand command = new($"DECLARE @return_value bigint, @next_num bigint " +
                     $"EXEC @return_value = getNextOrderNum @store_id, @next_num = @next_num OUTPUT " +
@@ -224,7 +224,7 @@ namespace BookStore.Data
             }
         }
 
-        public static List<SalesSummaryRow> GetSalesByTimeRange(DateTime start, DateTime end, string storeId)
+        public static List<SalesSummary> GetSalesByTimeRange(DateTime start, DateTime end, string storeId)
         {
             using (SqlConnection connection = new(connectionString))
             {
@@ -236,7 +236,7 @@ namespace BookStore.Data
                 command.Parameters.AddWithValue("@end", end);
                 command.Connection = connection;
 
-                List<SalesSummaryRow> list = new List<SalesSummaryRow>();
+                List<SalesSummary> list = new List<SalesSummary>();
 
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -245,7 +245,7 @@ namespace BookStore.Data
                     {
                         decimal? total = reader[5] is DBNull ? null : decimal.Round(Convert.ToDecimal(reader[5]), 2);
 
-                        SalesSummaryRow result = new SalesSummaryRow(Convert.ToInt64(reader[0])
+                        SalesSummary result = new SalesSummary(Convert.ToInt64(reader[0])
                             , Convert.ToDateTime(reader[1])
                             , Convert.ToString(reader[2])!
                             , Convert.ToString(reader[3])!

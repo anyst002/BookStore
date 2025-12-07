@@ -107,7 +107,7 @@ namespace BookStore.Entities
         , DateTime PubDate);
 
     // getSalesByTimeRange(): ord_num, ord_date, title_id, title, qty, total_value
-    public record SalesSummaryRow(long OrdNum
+    public record SalesSummary(long OrdNum
         , DateTime OrdDate
         , string TitleId
         , string Title

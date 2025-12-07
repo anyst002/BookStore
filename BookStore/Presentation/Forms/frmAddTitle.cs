@@ -22,14 +22,14 @@ namespace BookStore
 
             if (res == DialogResult.Yes)
             {
-                frmAddTitleAuthor f = new frmAddTitleAuthor(txtTitleID.Text.Trim());
+                frmAddTitleAuthor f = new frmAddTitleAuthor(mtxtTitleID.Text);
                 f.ShowDialog();
             }
         }
 
         private void Insert()
         {
-            AddTitle(txtTitleID.Text.Trim()
+            AddTitle(mtxtTitleID.Text
                 , txtTitle.Text.Trim()
                 , txtType.Text.Trim()
                 , txtPublisher.Text
@@ -51,7 +51,7 @@ namespace BookStore
 
         private void Clear()
         {
-            txtTitleID.Clear();
+            mtxtTitleID.Clear();
             txtTitle.Clear();
             txtType.Clear();
             txtPublisher.Clear();
@@ -61,7 +61,7 @@ namespace BookStore
             txtYTDSales.Clear();
             txtNotes.Clear();
             dtpPubDate.ResetText();
-            txtTitleID.Focus();
+            mtxtTitleID.Focus();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -70,11 +70,7 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
-
-                AssertNoWhitespace(AssertStringLengthEquals(txtTitleID.Text, 6
-                    , "Title ID must be exactly 6 characters.")
-                    , "Title ID cannot include spaces.");
+                AssertMaskFull(mtxtTitleID, "Title ID is required.");
 
                 AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 

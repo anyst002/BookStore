@@ -29,10 +29,10 @@ namespace BookStore.Business
             else return Convert.ToDecimal(str);
         }
 
-        public static decimal CalculateSalesSummaryTotal(List<SalesSummaryRow> list)
+        public static decimal CalculateSalesSummaryTotal(List<SalesSummary> list)
         {
             decimal subtotal = 0.00m;
-            foreach (SalesSummaryRow entry in list)
+            foreach (SalesSummary entry in list)
             {
                  subtotal += entry.TotalValue ?? 0;
             }
@@ -153,7 +153,7 @@ namespace BookStore.Business
             InsertTitleAuthor(titleAuthor);
         }
 
-        public static List<SalesSummaryRow> GetReports(DateTime start, DateTime end, string storeId)
+        public static List<SalesSummary> GetReports(DateTime start, DateTime end, string storeId)
         {
             return GetSalesByTimeRange(start, end, storeId);
         }

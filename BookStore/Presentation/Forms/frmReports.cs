@@ -20,7 +20,7 @@ namespace BookStore
             }
             else
             {
-                decimal subtotal = CalculateSalesSummaryTotal((List<SalesSummaryRow>)grdReports.DataSource);
+                decimal subtotal = CalculateSalesSummaryTotal((List<SalesSummary>)grdReports.DataSource);
                 txtTotal.Text = subtotal.ToString("C");
             }
         }

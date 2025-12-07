@@ -11,7 +11,7 @@ namespace BookStore.Presentation
             return selectForm.id;
         }
 
-        public static void ValidateState(string state)//may need a validator wrap
+        public static void ValidateState(string state)
         {
             if (!string.IsNullOrWhiteSpace(state))
                 AssertStringLengthEquals(state.Trim(), 2, "State must be exactly 2 characters.");

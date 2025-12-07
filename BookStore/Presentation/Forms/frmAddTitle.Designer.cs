@@ -14,8 +14,6 @@ namespace BookStore
         private System.Windows.Forms.Label lblYTDSales;
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.Label lblPubDate;
-
-        private System.Windows.Forms.TextBox txtTitleID;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtAdvance;
@@ -47,7 +45,6 @@ namespace BookStore
             lblYTDSales = new Label();
             lblNotes = new Label();
             lblPubDate = new Label();
-            txtTitleID = new TextBox();
             txtTitle = new TextBox();
             txtPrice = new TextBox();
             txtAdvance = new TextBox();
@@ -61,6 +58,7 @@ namespace BookStore
             btnSelect = new Button();
             txtPublisher = new TextBox();
             txtType = new TextBox();
+            mtxtTitleID = new MaskedTextBox();
             SuspendLayout();
             // 
             // lblTitleID
@@ -152,14 +150,6 @@ namespace BookStore
             lblPubDate.Size = new Size(76, 15);
             lblPubDate.TabIndex = 9;
             lblPubDate.Text = "Publish Date:";
-            // 
-            // txtTitleID
-            // 
-            txtTitleID.Location = new Point(160, 38);
-            txtTitleID.MaxLength = 6;
-            txtTitleID.Name = "txtTitleID";
-            txtTitleID.Size = new Size(100, 23);
-            txtTitleID.TabIndex = 10;
             // 
             // txtTitle
             // 
@@ -272,9 +262,18 @@ namespace BookStore
             txtType.Size = new Size(100, 23);
             txtType.TabIndex = 26;
             // 
+            // mtxtTitleID
+            // 
+            mtxtTitleID.Location = new Point(160, 37);
+            mtxtTitleID.Mask = ">L>L0000";
+            mtxtTitleID.Name = "mtxtTitleID";
+            mtxtTitleID.Size = new Size(100, 23);
+            mtxtTitleID.TabIndex = 27;
+            // 
             // frmAddTitle
             // 
             ClientSize = new Size(462, 550);
+            Controls.Add(mtxtTitleID);
             Controls.Add(txtType);
             Controls.Add(txtPublisher);
             Controls.Add(btnSelect);
@@ -288,7 +287,6 @@ namespace BookStore
             Controls.Add(lblYTDSales);
             Controls.Add(lblNotes);
             Controls.Add(lblPubDate);
-            Controls.Add(txtTitleID);
             Controls.Add(txtTitle);
             Controls.Add(txtPrice);
             Controls.Add(txtAdvance);
@@ -310,5 +308,6 @@ namespace BookStore
         private Button btnSelect;
         private TextBox txtPublisher;
         private TextBox txtType;
+        private MaskedTextBox mtxtTitleID;
     }
 }

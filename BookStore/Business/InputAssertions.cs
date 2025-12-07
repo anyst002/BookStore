@@ -68,6 +68,7 @@
             if (input == 0) throw new ArgumentOutOfRangeException("", customError);
             return input;
         }
+
         public static int AssertInRange(int input, int min, int max, string customError = "Input not in range.")
         {
             if (input < min || input > max) throw new ArgumentOutOfRangeException("", customError);
