@@ -1,4 +1,5 @@
-﻿using BookStore.Data;
+﻿using BookStore.Business;
+using BookStore.Data;
 using BookStore.Entities;
 using System;
 using System.Collections.Generic;
@@ -49,10 +50,8 @@ namespace BookStore
             DateTime start = dtpStartDate.Value.Date;
             DateTime end = dtpEndDate.Value.Date;
 
-            ReportRepository repo = new ReportRepository(storeId);
-            List<SalesSummaryRow> data = repo.GetSalesByTimeRange(start, end);
+            grdReports.DataSource = BusinessManager.GetReports(start, end, storeId);
 
-            grdReports.DataSource = data;
             UpdateTotal();
         }
     }

@@ -7,6 +7,7 @@ using static BookStore.Presentation.InputAssertions;
 using BookStore.Data;
 using BookStore.Presentation;
 using BookStore.Entities;
+using BookStore.Business;
 
 namespace BookStore
 {
@@ -20,16 +21,10 @@ namespace BookStore
 
         private void Insert()
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-
-            TitleAuthor entry = new TitleAuthor(
-                AuId: txtAuthor.Text,
-                TitleId: txtTitle.Text,
-                AuOrd: byte.Parse(txtOrder.Text),
-                RoyaltyPer: int.Parse(txtRoyalty.Text)
-            );
-
-            repo.InsertTitleAuthor(entry);
+            BusinessManager.AddTitleAuthor(txtAuthor.Text
+                , txtTitle.Text
+                , txtOrder.Text.Trim()
+                , txtRoyalty.Text.Trim());
 
             MessageBox.Show("Author added to title successfully!",
                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -53,15 +48,12 @@ namespace BookStore
             validator.Validate(() =>
             {
                 AssertNotNullOrWhiteSpace(txtAuthor.Text, "Please select an author.");
-                int order = AssertInt32(txtOrder.Text, "Order must be a whole number.");
+                int order = AssertInt32(txtOrder.Text, "Order must be a whole number."); //TODO make nullable
                 AssertPositive(order, "Order must be positive.");
 
-                int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.");
+                int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."); //TODO make nullable
                 if (royalty < 0 || royalty > 100)
                     throw new ArgumentOutOfRangeException("", "Royalty must be between 0 and 100.");
-
-                MessageBox.Show("Title-Author relationship validated successfully!",
-                    "Validated", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Insert();
             });

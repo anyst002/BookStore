@@ -1,5 +1,6 @@
 ﻿using BookStore.Data;
 using BookStore.Entities;
+using BookStore.Business;
 using BookStore.Presentation;
 
 namespace BookStore
@@ -25,23 +26,18 @@ namespace BookStore
 
         private void Insert()
         {
-            string? initial = (string.IsNullOrWhiteSpace(txtMiddleInitial.Text)) ? null : txtMiddleInitial.Text;
-            byte? lvl = (string.IsNullOrWhiteSpace(txtJobLevel.Text)) ? null : Convert.ToByte(txtJobLevel.Text);
-
-            Employee emp = new Employee(mtxtEmployeeId.Text
+            BusinessManager.AddEmployee(mtxtEmployeeId.Text
                 , txtFirstName.Text.Trim()
-                , initial
+                , txtMiddleInitial.Text
                 , txtLastName.Text.Trim()
                 , Convert.ToInt16(txtJobId.Text)
-                , lvl
+                , txtJobLevel.Text
                 , txtPubId.Text
                 , datHireDate.Value);
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertEmployee(emp);
-
             MessageBox.Show("Employee added successfully!",
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Clear();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -82,7 +78,6 @@ namespace BookStore
                     AssertByte(txtJobLevel.Text, "Job level must be between 0-255 or blank.");
 
                 Insert();
-                Clear();
             });
         }
 

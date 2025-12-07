@@ -1,5 +1,6 @@
 using BookStore.Data;
 using BookStore.Entities;
+using BookStore.Business;
 using BookStore.Presentation;
 
 namespace BookStore
@@ -11,31 +12,8 @@ namespace BookStore
             InitializeComponent();
         }
 
-        private void Insert()
+        private void AddAuthorPopup()
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-
-            // Construct the Title record from UI inputs
-            Title title = new Title(
-                TitleId: txtTitleID.Text,
-                TitleName: txtTitle.Text,
-                Type: cboType.SelectedItem!.ToString(),   // validated in btnSave
-                PubId: txtPublisher.Text,
-                Price: decimal.Parse(txtPrice.Text),
-                Advance: decimal.Parse(txtAdvance.Text),
-                Royalty: int.Parse(txtRoyalty.Text),
-                YtdSales: int.Parse(txtYTDSales.Text),
-                Notes: txtNotes.Text,
-                PubDate: dtpPubDate.Value.Date
-            );
-
-            // Insert into the database
-            repo.InsertTitle(title);
-
-            MessageBox.Show("Title added successfully!",
-                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Ask to add authors to this title
             DialogResult res = MessageBox.Show(
                 "Would you like to add authors to this title?",
                 "Add Authors?",
@@ -44,9 +22,28 @@ namespace BookStore
 
             if (res == DialogResult.Yes)
             {
-                frmAddTitleAuthor f = new frmAddTitleAuthor(title.TitleId);
+                frmAddTitleAuthor f = new frmAddTitleAuthor(txtTitleID.Text.Trim());
                 f.ShowDialog();
             }
+        }
+
+        private void Insert()
+        {
+            BusinessManager.AddTitle(txtTitleID.Text.Trim()
+                , txtTitle.Text.Trim()
+                , cboType.SelectedItem!.ToString()   // validated in btnSave // switch to string
+                , txtPublisher.Text
+                , txtPrice.Text.Trim()
+                , txtAdvance.Text.Trim()
+                , txtRoyalty.Text.Trim()
+                , txtYTDSales.Text.Trim()
+                , txtNotes.Text.Trim()
+                , dtpPubDate.Value.Date);
+
+            MessageBox.Show("Title added successfully!",
+                "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            AddAuthorPopup();
 
             Clear();
         }
@@ -73,7 +70,7 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
+                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required."); //TODO check for all whitespace
 
                 AssertNoWhitespace(AssertStringLengthEquals(txtTitleID.Text, 6
                     , "Title ID must be exactly 6 characters.")
@@ -82,12 +79,12 @@ namespace BookStore
                 AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 
                 AssertComboSelection(cboType, "Please select a Type."); //TODO change this to textbox
-                AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher.");
+                AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher."); //TODO make optional
 
-                AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal."));
-                AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal."));
-                AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."));
-                AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number."));
+                AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal.")); //TODO make optional
+                AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal.")); //TODO make optional
+                AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.")); //TODO make optional
+                AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number.")); //TODO make optional
 
                 MessageBox.Show("Title validated successfully!", "Validated",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

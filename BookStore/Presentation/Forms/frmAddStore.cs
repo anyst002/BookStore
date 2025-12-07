@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BookStore.Data;
 using BookStore.Entities;
+using BookStore.Business;
 using BookStore.Presentation;
 
 namespace BookStore
@@ -24,26 +25,18 @@ namespace BookStore
 
         private void Insert()
         {
-            string? StorName = string.IsNullOrWhiteSpace(txtStorName.Text) ? null : txtStorName.Text.Trim();
-            string? StorAddress = string.IsNullOrWhiteSpace(txtStorAddress.Text) ? null : txtStorAddress.Text.Trim();
-            string? City = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim();
-            string? State = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim();
-            string? Zip = string.IsNullOrEmpty(mtxtZip.Text) ? null : mtxtZip.Text;
-
-            Store store = new Store(txtStorId.Text.Trim()
-                , StorName
-                , StorAddress
-                , City
-                , State
-                , Zip);
-
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertStore(store);
+            BusinessManager.AddStore(txtStorId.Text.Trim()
+                , txtStorName.Text.Trim()
+                , txtStorAddress.Text.Trim()
+                , txtCity.Text.Trim()
+                , txtState.Text.Trim()
+                , mtxtZip.Text);
 
             MessageBox.Show("Store saved successfully.",
                             "Success",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
+            Clear();
         }
 
         private void Clear()
@@ -71,12 +64,14 @@ namespace BookStore
                     txtState.Text.Trim().Length != 2)
                     throw new ArgumentOutOfRangeException("", "State must be exactly 2 characters.");
 
-                var rawZip = mtxtZip.Text.Replace("_", "").Trim();
-                if (!string.IsNullOrEmpty(rawZip) && rawZip.Length != 5)
-                    throw new ArgumentOutOfRangeException("", "Zip must be 5 digits.");
+                if (!string.IsNullOrWhiteSpace(mtxtZip.Text.Replace("-", "")) && !mtxtZip.MaskFull)
+                {
+                    MessageBox.Show("Zip must be 5 digits.",
+                                "Input Missing");
+                    return;
+                }
 
                 Insert();
-                Clear();
             });
         }
 

@@ -1,5 +1,6 @@
 ﻿using BookStore.Data;
 using BookStore.Entities;
+using BookStore.Business;
 using BookStore.Presentation;
 using System;
 using System.Collections.Generic;
@@ -25,24 +26,18 @@ namespace BookStore
         }
         private void Insert()
         {
-            string? PubName = string.IsNullOrWhiteSpace(txtPubName.Text) ? null : txtPubName.Text.Trim();
-            string? City = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim();
-            string? State = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text.Trim();
-            string? Country = string.IsNullOrWhiteSpace(txtCountry.Text) ? null : txtCountry.Text.Trim();
-
-            Publisher publisher = new Publisher(mtxtPubId.Text.Trim()
-                , PubName
-                , City
-                , State
-                , Country);
-
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertPublisher(publisher);
+            BusinessManager.AddPublisher(mtxtPubId.Text.Trim()
+                , txtPubName.Text.Trim()
+                , txtCity.Text.Trim()
+                , txtState.Text.Trim()
+                , txtCountry.Text.Trim());
 
             MessageBox.Show("Publisher saved successfully.",
                             "Success",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
+
+            Clear();
         }
 
         private void Clear()
@@ -71,7 +66,6 @@ namespace BookStore
                     throw new ArgumentOutOfRangeException("", "State must be exactly 2 characters.");
 
                 Insert();
-                Clear();
             });
         }
 

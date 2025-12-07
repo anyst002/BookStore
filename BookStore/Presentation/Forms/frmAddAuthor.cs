@@ -1,5 +1,6 @@
 ﻿using BookStore.Data;
 using BookStore.Entities;
+using BookStore.Business;
 using BookStore.Presentation;
 using System;
 using System.Collections.Generic;
@@ -22,26 +23,19 @@ namespace BookStore
 
         private void Insert()
         {
-            string? address = string.IsNullOrWhiteSpace(txtAddress.Text) ? null : txtAddress.Text;
-            string? city = string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text;
-            string? state = string.IsNullOrWhiteSpace(txtState.Text) ? null : txtState.Text;
-            string? zip = string.IsNullOrWhiteSpace(mtxtZip.Text.Replace("-", "")) ? null : mtxtZip.Text;
-
-            Author author = new Author(mtxtID.Text
-                , txtFirstName.Text.Trim()
+            BusinessManager.AddAuthor(mtxtID.Text
                 , txtLastName.Text.Trim()
+                , txtFirstName.Text.Trim()
                 , mtxtPhone.Text
-                , address
-                , city
-                , state
-                , zip
+                , txtAddress.Text.Trim()
+                , txtCity.Text.Trim()
+                , txtState.Text.Trim()
+                , mtxtZip.Text.Replace("-", "")
                 , chkContract.Checked);
-
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertAuthor(author);
 
             MessageBox.Show("Author added successfully!",
                                 "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Clear();
         }
 
         private void Clear()
@@ -59,7 +53,7 @@ namespace BookStore
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -95,7 +89,6 @@ namespace BookStore
                 }
 
                 Insert();
-                Clear();
             });
         }
 

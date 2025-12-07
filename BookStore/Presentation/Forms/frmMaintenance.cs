@@ -50,7 +50,7 @@ namespace BookStore
 
         private void btnMaintClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
