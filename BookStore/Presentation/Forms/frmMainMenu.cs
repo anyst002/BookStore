@@ -1,6 +1,6 @@
-global using static BookStore.Presentation.InputAssertions;
-global using BookStore.Presentation;
-using BookStore.Data;
+global using static BookStore.Business.InputAssertions;
+using static BookStore.Business.BusinessManager;
+using static BookStore.Presentation.PresentationUtilities;
 using BookStore.Entities;
 
 namespace BookStore
@@ -38,9 +38,8 @@ namespace BookStore
 
         private void btnStoreSelect_Click(object sender, EventArgs e)
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetStoreIds();
-            storeId = MaintenanceRepository.SelectId(list);
+            List<IdInfo> list = SelectStoreIds();
+            storeId = SelectId(list);
 
             if (!storeId.Equals(""))
             {

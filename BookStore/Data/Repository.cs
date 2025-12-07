@@ -1,56 +1,15 @@
 ﻿using BookStore.Entities;
+using static BookStore.Data.RepositoryUtilities;
 using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace BookStore.Data
 {
-    public class Repository
+    public static class Repository
     {
-        protected string connectionString;
-
-        public Repository()
+        public static void InsertTitle(Title title)
         {
-            connectionString = ConfigurationManager.ConnectionStrings["BookStore"].ConnectionString;           
-        }
-
-        protected void ExecuteNonQuery(SqlCommand command, Action query)
-        {
-            using (SqlConnection connection = new(connectionString)) 
-            {
-                query.Invoke();
-                command.Connection = connection;
-
-                try
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Trace.Write(ex);
-                    MessageBox.Show(ex.Message, "Database Error");
-                }
-            }
-        }
-    }
-
-    public class MaintenanceRepository : Repository
-    {
-        public void InsertTitle(Title title)
-        {
-            SqlCommand command = new SqlCommand("insertTitle");
+            SqlCommand command = new ("insertTitle");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
@@ -68,9 +27,9 @@ namespace BookStore.Data
             });
         }
 
-        public void InsertTitleAuthor(TitleAuthor titleAuthor)
+        public static void InsertTitleAuthor(TitleAuthor titleAuthor)
         {
-            SqlCommand command = new SqlCommand("insertTitleauthor");
+            SqlCommand command = new ("insertTitleauthor");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
@@ -82,9 +41,9 @@ namespace BookStore.Data
             });
         }
 
-        public void InsertAuthor(Author author)
+        public static void InsertAuthor(Author author)
         {
-            SqlCommand command = new SqlCommand("insertAuthor");
+            SqlCommand command = new ("insertAuthor");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
@@ -101,9 +60,9 @@ namespace BookStore.Data
             });
         }
 
-        public void InsertPublisher(Publisher publisher)
+        public static void InsertPublisher(Publisher publisher)
         {
-            SqlCommand command = new SqlCommand("insertPublisher");
+            SqlCommand command = new ("insertPublisher");
             command.CommandType = CommandType.StoredProcedure;
             
             ExecuteNonQuery(command, () =>
@@ -116,9 +75,9 @@ namespace BookStore.Data
             });
         }
 
-        public void InsertStore(Store store)
+        public static void InsertStore(Store store)
         {
-            SqlCommand command = new SqlCommand("insertStore");
+            SqlCommand command = new ("insertStore");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
@@ -132,9 +91,9 @@ namespace BookStore.Data
             });
         }
 
-        public void InsertEmployee(Employee employee)
+        public static void InsertEmployee(Employee employee)
         {
-            SqlCommand command = new SqlCommand("insertEmployee");
+            SqlCommand command = new ("insertEmployee");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () =>
@@ -150,35 +109,32 @@ namespace BookStore.Data
             });
         }
 
-        public List<IdInfo> GetAuthorIds()
+        public static List<IdInfo> GetAuthorIds()
         {
-            string query = "EXEC getAuthorIds";
-            return GetIdInfos(query);
+            return GetIdInfos("getAuthorIds");
         }
 
-        public List<IdInfo> GetJobIds()
+        public static List<IdInfo> GetJobIds()
         {
-            string query = "EXEC getJobIds";
-            return GetIdInfos(query);
+            return GetIdInfos("getJobIds");
         }
 
-        public List<IdInfo> GetPublisherIds()
+        public static List<IdInfo> GetPublisherIds()
         {
-            string query = "EXEC getPublisherIds";
-            return GetIdInfos(query);
+            return GetIdInfos("getPublisherIds");
         }
 
-        public List<IdInfo> GetStoreIds()
+        public static List<IdInfo> GetStoreIds()
         {
-            string query = "EXEC getStoreIds";
-            return GetIdInfos(query);
+            return GetIdInfos("getStoreIds");
         }
 
-        private List<IdInfo> GetIdInfos(string query)
+        private static List<IdInfo> GetIdInfos(string procedure)
         {
             using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
             {
-                SqlCommand command = new(query);
+                SqlCommand command = new (procedure);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Connection = connection;
 
                 List<IdInfo> list = new List<IdInfo>();
@@ -201,21 +157,9 @@ namespace BookStore.Data
             }
         }
 
-        public static string SelectId(List<IdInfo> list)
+        public static void InsertSale(Sales sale)
         {
-            frmSelectId selectForm = new frmSelectId(list);
-            selectForm.ShowDialog();
-            IdInfo? item = selectForm.selected;
-
-            if (item is not null) return item.Id;
-            else return "";
-        }
-    }
-    public class OrderRepository : Repository
-    {
-        public void InsertSale(Sales sale)
-        {
-            SqlCommand command = new SqlCommand("insertSales");
+            SqlCommand command = new ("insertSales");
             command.CommandType = CommandType.StoredProcedure;
 
             ExecuteNonQuery(command, () => 
@@ -229,7 +173,7 @@ namespace BookStore.Data
             });
         }
 
-        public long GetOrderNum(string storeId)
+        public static long GetOrderNum(string storeId)
         {
             using (SqlConnection connection = new(connectionString)) //probably should be moved up to parent class somehow
             {
@@ -245,7 +189,7 @@ namespace BookStore.Data
             }
         }
 
-        public List<TitleSummary> GetTitlesByPartialTitle(string partialTitle)
+        public static List<TitleSummary> GetTitlesByPartialTitle(string partialTitle)
         {
             using (SqlConnection connection = new(connectionString))
             {
@@ -279,17 +223,8 @@ namespace BookStore.Data
                 }
             }
         }
-    }
-    public class ReportRepository : Repository
-    {
-        private string storeId;
 
-        public ReportRepository(string storeId)
-        {
-            this.storeId = storeId;
-        }
-
-        public List<SalesSummaryRow> GetSalesByTimeRange(DateTime start, DateTime end)
+        public static List<SalesSummaryRow> GetSalesByTimeRange(DateTime start, DateTime end, string storeId)
         {
             using (SqlConnection connection = new(connectionString))
             {

@@ -1,4 +1,4 @@
-﻿using BookStore.Data;
+﻿using static BookStore.Data.Repository;
 using BookStore.Entities;
 
 namespace BookStore.Business
@@ -29,6 +29,16 @@ namespace BookStore.Business
             else return Convert.ToDecimal(str);
         }
 
+        public static decimal CalculateSalesSummaryTotal(List<SalesSummaryRow> list)
+        {
+            decimal subtotal = 0.00m;
+            foreach (SalesSummaryRow entry in list)
+            {
+                 subtotal += entry.TotalValue ?? 0;
+            }
+            return subtotal;
+        }
+
         public static void AddAuthor(string AuId
             , string AuLName
             , string AuFName
@@ -49,8 +59,7 @@ namespace BookStore.Business
                 , NullCheckString(Zip)
                 , Contract);
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertAuthor(author);
+            InsertAuthor(author);
         }
 
         public static void AddEmployee(string EmpId
@@ -71,8 +80,7 @@ namespace BookStore.Business
                 , PubId
                 , HireDate);
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertEmployee(emp);
+            InsertEmployee(emp);
         }
 
         public static void AddPublisher(string PubId
@@ -87,8 +95,7 @@ namespace BookStore.Business
                 , NullCheckString(State)
                 , NullCheckString(Country));
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertPublisher(publisher);
+            InsertPublisher(publisher);
         }
 
         public static void AddStore(string StorId
@@ -105,8 +112,7 @@ namespace BookStore.Business
                 , NullCheckString(State)
                 , NullCheckString(Zip));
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertStore(store);
+            InsertStore(store);
         }
 
         public static void AddTitle(string TitleId
@@ -131,8 +137,7 @@ namespace BookStore.Business
                 , NullCheckString(Notes)
                 , PubDate);
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertTitle(title);
+            InsertTitle(title);
         }
 
         public static void AddTitleAuthor(string AuId
@@ -145,14 +150,32 @@ namespace BookStore.Business
                 , NullCheckByte(AuOrd)
                 , NullCheckInt32(RoyaltyPer));
 
-            MaintenanceRepository repo = new MaintenanceRepository();
-            repo.InsertTitleAuthor(titleAuthor);
+            InsertTitleAuthor(titleAuthor);
         }
 
         public static List<SalesSummaryRow> GetReports(DateTime start, DateTime end, string storeId)
         {
-            ReportRepository repo = new ReportRepository(storeId);
-            return repo.GetSalesByTimeRange(start, end);
+            return GetSalesByTimeRange(start, end, storeId);
+        }
+
+        public static List<IdInfo> SelectAuthorIds() //rename
+        {
+            return GetAuthorIds();
+        }
+
+        public static List<IdInfo> SelectJobIds()
+        {
+            return GetJobIds();
+        }
+
+        public static List<IdInfo> SelectPublisherIds()
+        {
+            return GetPublisherIds();
+        }
+
+        public static List<IdInfo> SelectStoreIds()
+        {
+            return GetStoreIds();
         }
     }
 }

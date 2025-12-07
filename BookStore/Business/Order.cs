@@ -1,4 +1,4 @@
-﻿using BookStore.Data;
+﻿using static BookStore.Data.Repository;
 using BookStore.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel;
@@ -17,8 +17,7 @@ namespace BookStore.Business
 
         public Order(string storeId)
         {
-            OrderRepository repo = new OrderRepository();
-            OrdNum = repo.GetOrderNum(storeId);
+            OrdNum = GetOrderNum(storeId);
 
             _storeId = storeId;
             Cart = new BindingList<OrderItem>();
@@ -102,20 +101,17 @@ namespace BookStore.Business
 
         public static List<TitleSummary> GetSearchResults(string partialTitle)
         {
-            OrderRepository repo = new OrderRepository();
-            return repo.GetTitlesByPartialTitle(partialTitle);
+            return GetTitlesByPartialTitle(partialTitle);
         }
 
         public void PlaceOrder()
         {
             if (Cart.IsNullOrEmpty() || string.IsNullOrWhiteSpace(PayTerms)) return;
 
-            OrderRepository repo = new OrderRepository();
-
             foreach (OrderItem item in Cart)
             {
                 Sales sale = ToSale(item);
-                repo.InsertSale(sale);
+                InsertSale(sale);
             }
         }
 

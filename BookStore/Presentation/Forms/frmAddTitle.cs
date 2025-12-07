@@ -1,7 +1,7 @@
-using BookStore.Data;
 using BookStore.Entities;
 using BookStore.Business;
-using BookStore.Presentation;
+using static BookStore.Business.BusinessManager;
+using static BookStore.Presentation.PresentationUtilities;
 
 namespace BookStore
 {
@@ -29,9 +29,9 @@ namespace BookStore
 
         private void Insert()
         {
-            BusinessManager.AddTitle(txtTitleID.Text.Trim()
+            AddTitle(txtTitleID.Text.Trim()
                 , txtTitle.Text.Trim()
-                , cboType.SelectedItem!.ToString()   // validated in btnSave // switch to string
+                , cboType.SelectedItem!.ToString()!  // validated in btnSave // switch to string
                 , txtPublisher.Text
                 , txtPrice.Text.Trim()
                 , txtAdvance.Text.Trim()
@@ -105,9 +105,8 @@ namespace BookStore
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetPublisherIds();
-            txtPublisher.Text = MaintenanceRepository.SelectId(list);
+            List<IdInfo> list = SelectPublisherIds();
+            txtPublisher.Text = SelectId(list);
         }
     }
 }

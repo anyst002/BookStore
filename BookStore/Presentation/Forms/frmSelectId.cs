@@ -1,19 +1,10 @@
 ﻿using BookStore.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
     public partial class frmSelectId : Form
     {
-        public IdInfo? selected = null;
+        public string id = "";
         public frmSelectId(List<IdInfo> list)
         {
             InitializeComponent();
@@ -23,18 +14,9 @@ namespace BookStore
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            if (grdDataGrid.SelectedRows.Count == 1)
-            {
-                selected = new IdInfo(
-                  (string)grdDataGrid.SelectedRows[0].Cells[0].Value
-                , (string)grdDataGrid.SelectedRows[0].Cells[1].Value);
+            id = (string)grdDataGrid.SelectedRows[0].Cells[0].Value;
 
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Please select a single ID.", "Invalid Selection");
-            }
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using BookStore.Data;
 using BookStore.Entities;
 using BookStore.Business;
-using BookStore.Presentation;
 
 namespace BookStore
 {

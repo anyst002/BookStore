@@ -1,7 +1,7 @@
-﻿using BookStore.Data;
+﻿using static BookStore.Business.BusinessManager;
+using static BookStore.Presentation.PresentationUtilities;
 using BookStore.Entities;
 using BookStore.Business;
-using BookStore.Presentation;
 
 namespace BookStore
 {
@@ -26,7 +26,7 @@ namespace BookStore
 
         private void Insert()
         {
-            BusinessManager.AddEmployee(mtxtEmployeeId.Text
+            AddEmployee(mtxtEmployeeId.Text
                 , txtFirstName.Text.Trim()
                 , txtMiddleInitial.Text
                 , txtLastName.Text.Trim()
@@ -93,16 +93,14 @@ namespace BookStore
 
         private void btnSelectJobId_Click(object sender, EventArgs e)
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetJobIds();
-            txtJobId.Text = MaintenanceRepository.SelectId(list);
+            List<IdInfo> list = SelectJobIds();
+            txtJobId.Text = SelectId(list);
         }
 
         private void btnSelectPubId_Click(object sender, EventArgs e)
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetPublisherIds();
-            txtPubId.Text = MaintenanceRepository.SelectId(list);
+            List<IdInfo> list = SelectPublisherIds();
+            txtPubId.Text = SelectId(list);
         }
     }
 }

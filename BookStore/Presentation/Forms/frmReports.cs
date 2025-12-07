@@ -1,25 +1,15 @@
-﻿using BookStore.Business;
-using BookStore.Data;
+﻿using static BookStore.Business.BusinessManager;
 using BookStore.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
     public partial class frmReports : Form
     {
-        private string storeId;
+        private readonly string _storeId;
         public frmReports(string storeId)
         {
             InitializeComponent();
-            this.storeId = storeId;
+            _storeId = storeId;
         }
 
         private void UpdateTotal()
@@ -30,12 +20,7 @@ namespace BookStore
             }
             else
             {
-                decimal subtotal = 0.00m;
-                foreach (DataGridViewRow row in grdReports.Rows)
-                {
-                    SalesSummaryRow entry = (SalesSummaryRow)row.DataBoundItem;
-                    subtotal += entry.TotalValue ?? 0;
-                }
+                decimal subtotal = CalculateSalesSummaryTotal((List<SalesSummaryRow>)grdReports.DataSource);
                 txtTotal.Text = subtotal.ToString("C");
             }
         }
@@ -50,7 +35,7 @@ namespace BookStore
             DateTime start = dtpStartDate.Value.Date;
             DateTime end = dtpEndDate.Value.Date;
 
-            grdReports.DataSource = BusinessManager.GetReports(start, end, storeId);
+            grdReports.DataSource = GetReports(start, end, _storeId);
 
             UpdateTotal();
         }

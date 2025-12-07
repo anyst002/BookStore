@@ -1,11 +1,5 @@
-using System;
-using System.Data;
-using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-using static BookStore.Presentation.InputAssertions;
-using BookStore.Data;
-using BookStore.Presentation;
+using static BookStore.Business.BusinessManager;
+using static BookStore.Presentation.PresentationUtilities;
 using BookStore.Entities;
 using BookStore.Business;
 
@@ -21,7 +15,7 @@ namespace BookStore
 
         private void Insert()
         {
-            BusinessManager.AddTitleAuthor(txtAuthor.Text
+            AddTitleAuthor(txtAuthor.Text
                 , txtTitle.Text
                 , txtOrder.Text.Trim()
                 , txtRoyalty.Text.Trim());
@@ -71,9 +65,8 @@ namespace BookStore
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            MaintenanceRepository repo = new MaintenanceRepository();
-            List<IdInfo> list = repo.GetAuthorIds();
-            txtAuthor.Text = MaintenanceRepository.SelectId(list);
+            List<IdInfo> list = SelectAuthorIds();
+            txtAuthor.Text = SelectId(list);
         }
     }
 }

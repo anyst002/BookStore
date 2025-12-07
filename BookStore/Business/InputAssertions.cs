@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace BookStore.Presentation
+﻿namespace BookStore.Business
 {
     //===============================================================
     // A group of methods to assert inputs meet criteria, throwing
@@ -156,74 +153,4 @@ namespace BookStore.Presentation
             return item.ToString()!;
         }
     }
-
-    //===============================================================
-    // A psuedo-abstract class to handle exceptions for validation
-    // failures. Can be extended to implement custom handling.
-    //===============================================================
-
-    public class Validator
-    {
-        public virtual void Validate(Action action)
-        {
-            try
-            {
-                action.Invoke();
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show(ex.Message, "Invalid Format");
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Invalid Value");
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show(ex.Message, "Missing Value");
-            }
-            catch (Exception ex)
-            {
-                Trace.Write(ex);
-                MessageBox.Show(ex.Message, "Unexpected Error");
-            }
-        }
-    }
-
-    //===============================================================
-    // An example Validator implementation with a unique error
-    // message. Could be modified to take in additional actions and
-    // execute them conditionally on specific exception call. For
-    // instance, to reset fields on a window only for some errors.
-    //===============================================================
-
-    public class OrderValidator : Validator
-    {
-        public override void Validate(Action action)
-        {
-            try
-            {
-                action.Invoke();
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show(ex.Message, "different window title");
-                //other unique code for this exception in this validator class
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message, "Invalid Value");
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show(ex.Message, "Missing Value");
-            }
-            catch (Exception ex)
-            {
-                Trace.Write(ex);
-                MessageBox.Show(ex.Message, "Unexpected Error");
-            }
-        }
-    }
 }
-
