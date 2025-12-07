@@ -1,7 +1,7 @@
+using BookStore.Business;
+using BookStore.Entities;
 using static BookStore.Business.BusinessManager;
 using static BookStore.Presentation.PresentationUtilities;
-using BookStore.Entities;
-using BookStore.Business;
 
 namespace BookStore
 {
@@ -42,12 +42,18 @@ namespace BookStore
             validator.Validate(() =>
             {
                 AssertNotNullOrWhiteSpace(txtAuthor.Text, "Please select an author.");
-                int order = AssertInt32(txtOrder.Text, "Order must be a whole number."); //TODO make nullable
-                AssertPositive(order, "Order must be positive.");
+                
+                if (!string.IsNullOrWhiteSpace(txtOrder.Text))
+                {
+                    int order = AssertInt32(txtOrder.Text, "Author order must be a whole number.");
+                    AssertPositive(order, "Author order must be positive.");
+                }
 
-                int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number."); //TODO make nullable
-                if (royalty < 0 || royalty > 100)
-                    throw new ArgumentOutOfRangeException("", "Royalty must be between 0 and 100.");
+                if (!string.IsNullOrWhiteSpace(txtRoyalty.Text))
+                {
+                    int royalty = AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.");
+                    AssertInRange(royalty, 0, 100, "Royalty must be between 0 and 100.");
+                }
 
                 Insert();
             });

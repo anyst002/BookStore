@@ -1,15 +1,6 @@
-﻿using BookStore.Data;
-using BookStore.Entities;
+﻿using static BookStore.Business.BusinessManager;
+using static BookStore.Presentation.PresentationUtilities;
 using BookStore.Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
@@ -22,7 +13,7 @@ namespace BookStore
 
         private void Insert()
         {
-            BusinessManager.AddAuthor(mtxtID.Text
+            AddAuthor(mtxtID.Text
                 , txtLastName.Text.Trim()
                 , txtFirstName.Text.Trim()
                 , mtxtPhone.Text
@@ -60,32 +51,16 @@ namespace BookStore
             Validator validator = new Validator();
             validator.Validate(() =>
             {
-                if (!mtxtID.MaskFull) //TODO make this an assertion later
-                {
-                    MessageBox.Show("Please enter an author ID.",
-                                "Input Missing");
-                    return;
-                }
+                AssertMaskFull(mtxtID, "Please enter an author ID.");
 
                 AssertNotNullOrWhiteSpace(txtFirstName.Text, "Please enter a first name.");
                 AssertNotNullOrWhiteSpace(txtLastName.Text, "Please enter a last name.");
 
-                if (!mtxtPhone.MaskFull) //TODO make this an assertion later
-                {
-                    MessageBox.Show("Please enter a phone number.",
-                                "Input Missing");
-                    return;
-                }
+                AssertMaskFull(mtxtPhone, "Please enter a phone number.");
 
-                if (!string.IsNullOrWhiteSpace(txtState.Text))
-                    AssertStringLengthEquals(txtState.Text, 2, "State must be exactly 2 characters.");
+                ValidateState(txtState.Text);
 
-                if (!string.IsNullOrWhiteSpace(mtxtZip.Text.Replace("-", "")) && !mtxtZip.MaskFull)
-                {
-                    MessageBox.Show("Zip must be 5 digits.",
-                                "Input Missing");
-                    return;
-                }
+                ValidateZip(mtxtZip);
 
                 Insert();
             });

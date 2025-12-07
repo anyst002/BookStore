@@ -1,7 +1,7 @@
-using BookStore.Entities;
-using BookStore.Business;
 using static BookStore.Business.BusinessManager;
 using static BookStore.Presentation.PresentationUtilities;
+using BookStore.Entities;
+using BookStore.Business;
 
 namespace BookStore
 {
@@ -31,7 +31,7 @@ namespace BookStore
         {
             AddTitle(txtTitleID.Text.Trim()
                 , txtTitle.Text.Trim()
-                , cboType.SelectedItem!.ToString()!  // validated in btnSave // switch to string
+                , txtType.Text.Trim()
                 , txtPublisher.Text
                 , txtPrice.Text.Trim()
                 , txtAdvance.Text.Trim()
@@ -53,7 +53,7 @@ namespace BookStore
         {
             txtTitleID.Clear();
             txtTitle.Clear();
-            cboType.SelectedIndex = -1;
+            txtType.Clear();
             txtPublisher.Clear();
             txtPrice.Clear();
             txtAdvance.Clear();
@@ -70,7 +70,7 @@ namespace BookStore
 
             validator.Validate(() =>
             {
-                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required."); //TODO check for all whitespace
+                AssertNotNullOrWhiteSpace(txtTitleID.Text, "Title ID is required.");
 
                 AssertNoWhitespace(AssertStringLengthEquals(txtTitleID.Text, 6
                     , "Title ID must be exactly 6 characters.")
@@ -78,16 +78,32 @@ namespace BookStore
 
                 AssertNotNullOrWhiteSpace(txtTitle.Text, "Title is required.");
 
-                AssertComboSelection(cboType, "Please select a Type."); //TODO change this to textbox
-                AssertNotNullOrWhiteSpace(txtPublisher.Text, "Please select a Publisher."); //TODO make optional
+                AssertNotNullOrWhiteSpace(txtType.Text, "Type is required.");
 
-                AssertNonNegative(AssertDecimal(txtPrice.Text, "Price must be a decimal.")); //TODO make optional
-                AssertNonNegative(AssertDecimal(txtAdvance.Text, "Advance must be a decimal.")); //TODO make optional
-                AssertNonNegative(AssertInt32(txtRoyalty.Text, "Royalty must be a whole number.")); //TODO make optional
-                AssertNonNegative(AssertInt32(txtYTDSales.Text, "YTD Sales must be a whole number.")); //TODO make optional
-
-                MessageBox.Show("Title validated successfully!", "Validated",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!string.IsNullOrWhiteSpace(txtPrice.Text))
+                {
+                    AssertPositive(AssertDecimal(txtPrice.Text
+                        , "Price must be a whole number.")
+                        , "Price must be positive.");
+                }
+                if (!string.IsNullOrWhiteSpace(txtAdvance.Text))
+                {
+                    AssertPositive(AssertDecimal(txtAdvance.Text
+                        , "Advance must be a whole number.")
+                        , "Advance must be positive.");
+                }
+                if (!string.IsNullOrWhiteSpace(txtRoyalty.Text))
+                {
+                    AssertPositive(AssertInt32(txtRoyalty.Text
+                        , "Royalty must be a whole number.")
+                        , "Royalty must be positive.");
+                }
+                if (!string.IsNullOrWhiteSpace(txtYTDSales.Text))
+                {
+                    AssertPositive(AssertInt32(txtYTDSales.Text
+                        , "YTD Sales must be a whole number.")
+                        , "YTD Sales must be positive.");
+                }
 
                 Insert();
             });

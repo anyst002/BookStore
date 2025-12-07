@@ -45,12 +45,7 @@ namespace BookStore
             Validator validator = new Validator();
             validator.Validate(() =>
             {
-                if(!mtxtEmployeeId.MaskFull) //TODO make this an assertion later
-                {
-                    MessageBox.Show("Please enter an employee ID.",
-                                "Input Missing");
-                    return;
-                }
+                AssertMaskFull(mtxtEmployeeId, "Please enter an employee ID.");
 
                 char[] id = mtxtEmployeeId.Text.ToCharArray(); //this whole block is terrible but it'll work for now
                 if (!(id[1] >= 'A' && id[1] <= 'Z') && id[1] != '-')
@@ -74,6 +69,7 @@ namespace BookStore
 
                 AssertNotNullOrWhiteSpace(txtFirstName.Text, "Please enter a first name.");
                 AssertNotNullOrWhiteSpace(txtLastName.Text, "Please enter a last name.");
+
                 if (!string.IsNullOrWhiteSpace(txtJobLevel.Text))
                     AssertByte(txtJobLevel.Text, "Job level must be between 0-255 or blank.");
 

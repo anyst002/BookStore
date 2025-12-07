@@ -68,6 +68,11 @@
             if (input == 0) throw new ArgumentOutOfRangeException("", customError);
             return input;
         }
+        public static int AssertInRange(int input, int min, int max, string customError = "Input not in range.")
+        {
+            if (input < min || input > max) throw new ArgumentOutOfRangeException("", customError);
+            return input;
+        }
 
         public static string AssertNotNullOrWhiteSpace(string? input, string customError = "Missing required input.")
         {
@@ -151,6 +156,13 @@
             object? item = cboBox.SelectedItem
                 ?? throw new NullReferenceException(customError);
             return item.ToString()!;
+        }
+
+        public static string AssertMaskFull(MaskedTextBox textbox, string customError = "The masked text box must be filled.")
+        {
+            if (!textbox.MaskFull) throw new MissingFieldException(customError);
+
+            return textbox.Text;
         }
     }
 }

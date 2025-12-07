@@ -17,7 +17,6 @@ namespace BookStore
 
         private System.Windows.Forms.TextBox txtTitleID;
         private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.ComboBox cboType;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtAdvance;
         private System.Windows.Forms.TextBox txtRoyalty;
@@ -50,7 +49,6 @@ namespace BookStore
             lblPubDate = new Label();
             txtTitleID = new TextBox();
             txtTitle = new TextBox();
-            cboType = new ComboBox();
             txtPrice = new TextBox();
             txtAdvance = new TextBox();
             txtRoyalty = new TextBox();
@@ -62,6 +60,7 @@ namespace BookStore
             btnExit = new Button();
             btnSelect = new Button();
             txtPublisher = new TextBox();
+            txtType = new TextBox();
             SuspendLayout();
             // 
             // lblTitleID
@@ -170,15 +169,6 @@ namespace BookStore
             txtTitle.Size = new Size(250, 23);
             txtTitle.TabIndex = 11;
             // 
-            // cboType
-            // 
-            cboType.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboType.Items.AddRange(new object[] { "temporary" });
-            cboType.Location = new Point(160, 118);
-            cboType.Name = "cboType";
-            cboType.Size = new Size(250, 23);
-            cboType.TabIndex = 12;
-            // 
             // txtPrice
             // 
             txtPrice.Location = new Point(160, 198);
@@ -274,9 +264,18 @@ namespace BookStore
             txtPublisher.TabIndex = 25;
             txtPublisher.TabStop = false;
             // 
+            // txtType
+            // 
+            txtType.Location = new Point(160, 118);
+            txtType.MaxLength = 12;
+            txtType.Name = "txtType";
+            txtType.Size = new Size(100, 23);
+            txtType.TabIndex = 26;
+            // 
             // frmAddTitle
             // 
             ClientSize = new Size(462, 550);
+            Controls.Add(txtType);
             Controls.Add(txtPublisher);
             Controls.Add(btnSelect);
             Controls.Add(lblTitleID);
@@ -291,7 +290,6 @@ namespace BookStore
             Controls.Add(lblPubDate);
             Controls.Add(txtTitleID);
             Controls.Add(txtTitle);
-            Controls.Add(cboType);
             Controls.Add(txtPrice);
             Controls.Add(txtAdvance);
             Controls.Add(txtRoyalty);
@@ -311,5 +309,6 @@ namespace BookStore
         }
         private Button btnSelect;
         private TextBox txtPublisher;
+        private TextBox txtType;
     }
 }

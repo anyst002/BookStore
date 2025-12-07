@@ -27,6 +27,10 @@ namespace BookStore.Business
             {
                 MessageBox.Show(ex.Message, "Missing Value");
             }
+            catch (MissingFieldException ex)
+            {
+                MessageBox.Show(ex.Message, "Input Missing");
+            }
             catch (Exception ex)
             {
                 Trace.Write(ex);
