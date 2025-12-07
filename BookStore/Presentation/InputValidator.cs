@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace InputValidator
+namespace BookStore.Presentation
 {
     //===============================================================
     // A group of methods to assert inputs meet criteria, throwing

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BookStore.Business;
+using BookStore.Data;
+using BookStore.Presentation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

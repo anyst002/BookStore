@@ -3,8 +3,9 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
-using InputValidator;
-using static InputValidator.InputAssertions;
+using static BookStore.Presentation.InputAssertions;
+using BookStore.Data;
+using BookStore.Presentation;
 
 namespace BookStore
 {

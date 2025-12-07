@@ -1,5 +1,6 @@
-global using static InputValidator.InputAssertions;
-global using InputValidator;
+global using static BookStore.Presentation.InputAssertions;
+global using BookStore.Presentation;
+using BookStore.Data;
 
 namespace BookStore
 {

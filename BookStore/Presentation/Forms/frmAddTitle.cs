@@ -1,3 +1,6 @@
+using BookStore.Data;
+using BookStore.Presentation;
+
 namespace BookStore
 {
     public partial class frmAddTitle : Form

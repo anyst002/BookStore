@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace BookStore
+namespace BookStore.Data
 {
     public class Repository
     {
@@ -128,7 +128,7 @@ namespace BookStore
                 command.Parameters.AddWithValue("@stor_address", (object?)store.StorAddress ?? DBNull.Value);
                 command.Parameters.AddWithValue("@city", (object?)store.City ?? DBNull.Value);
                 command.Parameters.AddWithValue("@state", (object?)store.State ?? DBNull.Value);
-                command.Parameters.AddWithValue("@zip", (object?)store.Zip);
+                command.Parameters.AddWithValue("@zip", store.Zip);
             });
         }
 
@@ -188,7 +188,7 @@ namespace BookStore
                 {
                     while (reader.Read())
                     {
-                        string? info = (reader[1] is DBNull) ? null : Convert.ToString(reader[1]);
+                        string? info = reader[1] is DBNull ? null : Convert.ToString(reader[1]);
 
                         IdInfo result = new IdInfo(Convert.ToString(reader[0])!
                             , info);
@@ -262,8 +262,8 @@ namespace BookStore
                 {
                     while (reader.Read())
                     {
-                        decimal? price = (reader[2] is DBNull) ? null : Decimal.Round(Convert.ToDecimal(reader[2]), 2);
-                        string? pubName = (reader[4] is DBNull) ? null : Convert.ToString(reader[4]);
+                        decimal? price = reader[2] is DBNull ? null : decimal.Round(Convert.ToDecimal(reader[2]), 2);
+                        string? pubName = reader[4] is DBNull ? null : Convert.ToString(reader[4]);
 
                         TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
                             , Convert.ToString(reader[1])!
@@ -308,7 +308,7 @@ namespace BookStore
                 {
                     while (reader.Read())
                     {
-                        decimal? total = (reader[5] is DBNull) ? null : Decimal.Round(Convert.ToDecimal(reader[5]), 2);
+                        decimal? total = reader[5] is DBNull ? null : decimal.Round(Convert.ToDecimal(reader[5]), 2);
 
                         SalesSummaryRow result = new SalesSummaryRow(Convert.ToInt64(reader[0])
                             , Convert.ToDateTime(reader[1])

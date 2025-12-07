@@ -1,4 +1,6 @@
-﻿namespace BookStore
+﻿using BookStore.Data;
+
+namespace BookStore
 {
     partial class frmReports
     {

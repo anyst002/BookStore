@@ -1,8 +1,9 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using BookStore.Data;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.ComponentModel;
 
-namespace BookStore
+namespace BookStore.Business
 {
     public class Order
     {
@@ -83,7 +84,7 @@ namespace BookStore
 
         public void PlaceOrder()
         {
-            if (cart.IsNullOrEmpty() || String.IsNullOrWhiteSpace(payTerms)) return;
+            if (cart.IsNullOrEmpty() || string.IsNullOrWhiteSpace(payTerms)) return;
 
             foreach (OrderItem item in cart)
             {
