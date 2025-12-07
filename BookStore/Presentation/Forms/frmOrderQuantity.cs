@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BookStore.Business;
+using BookStore.Entities;
 
 namespace BookStore
 {
     public partial class frmOrderQuantity : Form
     {
-        public short quantity = 1;
-        public frmOrderQuantity(short quantity)
+        private readonly Order _order;
+        private readonly OrderItem _item;
+        public frmOrderQuantity(object rawData, Order order)
         {
             InitializeComponent();
-            this.quantity = quantity;
-            numQuantity.Value = quantity;
+            _order = order;
+            _item = (OrderItem)rawData;
+            numQuantity.Value = _item.Qty;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            quantity = Convert.ToInt16(numQuantity.Value);
+            _order.UpdateItemQuantity(_item, Convert.ToInt16(numQuantity.Value));
             Close();
         }
 

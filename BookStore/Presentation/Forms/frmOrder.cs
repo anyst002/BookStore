@@ -1,43 +1,26 @@
 ﻿using BookStore.Business;
-using BookStore.Entities;
-using BookStore.Presentation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
     public partial class frmOrder : Form
     {
-        private string storeId;
+        private readonly string _storeId;
         private Order order;
 
         public frmOrder(string storeId)
         {
             InitializeComponent();
-            this.storeId = storeId;
+            _storeId = storeId;
             Reset();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            frmOrderSearch search = new frmOrderSearch();
+            frmOrderSearch search = new frmOrderSearch(order);
             search.ShowDialog();
-            OrderItem? item = search.result;
 
-            if (item is null) return;
-            else
-            {
-                order.AddItem(item);
-                CalculateSubtotal();
-                ToggleConfirmButton();
-            }
+            CalculateSubtotal();
+            ToggleConfirmButton();
         }
 
         private void btnConfirmOrder_Click(object sender, EventArgs e)
@@ -45,7 +28,7 @@ namespace BookStore
             Validator validator = new Validator();
             validator.Validate(() =>
             {
-                order.payTerms = AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
+                order.PayTerms = AssertNotNullOrWhiteSpace(txtPayTerms.Text, "Please enter payment terms.");
 
                 order.PlaceOrder();
 
@@ -62,9 +45,9 @@ namespace BookStore
 
         private void Reset()
         {
-            order = new Order(storeId);
+            order = new Order(_storeId);
             
-            grdCart.DataSource = order.cart;
+            grdCart.DataSource = order.Cart;
             CalculateSubtotal();
             txtPayTerms.Clear();
             ToggleConfirmButton();
@@ -77,14 +60,9 @@ namespace BookStore
 
         private void CalculateSubtotal()
         {
-            decimal subtotal = order.GetSubtotal();
-            txtSubtotal.Text = subtotal.ToString("C");
-
-            decimal tax = subtotal * Order.taxPer;
-            txtTax.Text = tax.ToString("C");
-
-            decimal total = subtotal + tax;
-            txtTotal.Text = total.ToString("C");
+            txtSubtotal.Text = order.GetSubtotal().ToString("C");
+            txtTax.Text = order.GetTax().ToString("C");
+            txtTotal.Text = order.GetTotal().ToString("C");
         }
 
         private void grdCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -96,16 +74,14 @@ namespace BookStore
                 //remove cart item
                 if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Remove"))
                 {
-                    order.RemoveItem((OrderItem)grid.Rows[e.RowIndex].DataBoundItem);
+                    order.RemoveItem(grid.Rows[e.RowIndex].DataBoundItem);
                     ToggleConfirmButton();
                 }
                 //edit cart item quantity
                 else if (String.Equals(grid.Columns[e.ColumnIndex].Name, "Edit"))
                 {
-                    OrderItem item = (OrderItem)grid.Rows[e.RowIndex].DataBoundItem;
-                    frmOrderQuantity edit = new frmOrderQuantity(item.Qty);
+                    frmOrderQuantity edit = new frmOrderQuantity(grid.Rows[e.RowIndex].DataBoundItem, order);
                     edit.ShowDialog();
-                    order.UpdateItemQuantity(item, edit.quantity);
                 }
 
                 CalculateSubtotal();

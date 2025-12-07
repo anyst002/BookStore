@@ -99,7 +99,7 @@ namespace BookStore.Entities
         , string? Info); // generic descriptor
 
     // getTitlesByPartialTitle(): title_id, title, price, au_name, pub_name, pubdate
-    public record TitleSearchResult(string TitleId
+    public record TitleSummary(string TitleId
         , string Title
         , decimal? Price
         , string AuName

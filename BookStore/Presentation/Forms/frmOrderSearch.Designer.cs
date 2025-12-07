@@ -118,7 +118,7 @@ namespace BookStore
             // 
             // titleSearchResultBindingSource
             // 
-            titleSearchResultBindingSource.DataSource = typeof(TitleSearchResult);
+            titleSearchResultBindingSource.DataSource = typeof(TitleSummary);
             // 
             // btnAdd
             // 

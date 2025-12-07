@@ -1,13 +1,4 @@
 ﻿using BookStore.Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace BookStore
 {
@@ -16,18 +7,13 @@ namespace BookStore
         public frmOrderSummary(Order order)
         {
             InitializeComponent();
-            grdSummary.DataSource = order.cart;
+            grdSummary.DataSource = order.Cart;
 
-            txtOrderNum.Text = order.ordNum.ToString();
+            txtOrderNum.Text = order.OrdNum.ToString();
 
-            decimal subtotal = order.GetSubtotal();
-            txtSubtotal.Text = subtotal.ToString("C");
-
-            decimal tax = subtotal * Order.taxPer;
-            txtTax.Text = tax.ToString("C");
-
-            decimal total = subtotal + tax;
-            txtTotal.Text = total.ToString("C");
+            txtSubtotal.Text = order.GetSubtotal().ToString("C");
+            txtTax.Text = order.GetTax().ToString("C");
+            txtTotal.Text = order.GetTotal().ToString("C");
         }
 
         private void btnOK_Click(object sender, EventArgs e)

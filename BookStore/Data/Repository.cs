@@ -245,7 +245,7 @@ namespace BookStore.Data
             }
         }
 
-        public List<TitleSearchResult> GetTitlesByPartialTitle(string partialTitle)
+        public List<TitleSummary> GetTitlesByPartialTitle(string partialTitle)
         {
             using (SqlConnection connection = new(connectionString))
             {
@@ -255,7 +255,7 @@ namespace BookStore.Data
                 command.Parameters.AddWithValue("@partial_title", partialTitle);
                 command.Connection = connection;
 
-                List<TitleSearchResult> list = new List<TitleSearchResult>();
+                List<TitleSummary> list = new List<TitleSummary>();
 
                 connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -265,7 +265,7 @@ namespace BookStore.Data
                         decimal? price = reader[2] is DBNull ? null : decimal.Round(Convert.ToDecimal(reader[2]), 2);
                         string? pubName = reader[4] is DBNull ? null : Convert.ToString(reader[4]);
 
-                        TitleSearchResult result = new TitleSearchResult(Convert.ToString(reader[0])!
+                        TitleSummary result = new TitleSummary(Convert.ToString(reader[0])!
                             , Convert.ToString(reader[1])!
                             , price
                             , Convert.ToString(reader[3])!

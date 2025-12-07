@@ -1,7 +1,6 @@
 ﻿using BookStore.Data;
 using BookStore.Entities;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.ComponentModel;
 
 namespace BookStore.Business
@@ -10,19 +9,20 @@ namespace BookStore.Business
     {
         public static readonly decimal taxPer = 0.05m;
 
-        public long ordNum { get; init; }
-        private readonly string storeId;
-        private readonly OrderRepository repo;
-        public BindingList<OrderItem> cart {  get; init; }
-        public string payTerms { get; set; }
+        private readonly string _storeId;
+
+        public long OrdNum { get; init; }
+        public string PayTerms { get; set; }
+        public BindingList<OrderItem> Cart { get; init; }
 
         public Order(string storeId)
         {
-            repo = new OrderRepository();
-            ordNum = repo.GetOrderNum(storeId);
-            this.storeId = storeId;
-            cart = new BindingList<OrderItem>();
-            payTerms = "";
+            OrderRepository repo = new OrderRepository();
+            OrdNum = repo.GetOrderNum(storeId);
+
+            _storeId = storeId;
+            Cart = new BindingList<OrderItem>();
+            PayTerms = "";
         }
 
         public void AddItem(OrderItem item)
@@ -31,19 +31,33 @@ namespace BookStore.Business
 
             if (index == -1)
             {
-                cart.Add(item);
+                Cart.Add(item);
             }
             else
             {
-                short newQty = (short)(item.Qty + cart[index].Qty); //should check for integer overflow TODO
+                short newQty = (short)(item.Qty + Cart[index].Qty); //should check for integer overflow TODO
                 UpdateItemQuantity(item, newQty);
             }
+        }
+
+        public void AddTitleSummary(object rawData, short qty)
+        {
+            TitleSummary titleSummary = (TitleSummary)rawData;
+            OrderItem item = new OrderItem(titleSummary.TitleId
+                , titleSummary.Title
+                , titleSummary.Price
+                , qty
+                , titleSummary.AuName
+                , titleSummary.PubName
+                , titleSummary.PubDate);
+
+            AddItem(item);
         }
 
         public void UpdateItem(OrderItem item)
         {
             int index = FindEntry(item);
-            cart[index] = item;
+            Cart[index] = item;
         }
 
         public void UpdateItemQuantity(OrderItem item, short qty)
@@ -58,49 +72,69 @@ namespace BookStore.Business
             UpdateItem(newItem);
         }
 
-        public void RemoveItem(OrderItem item)
+        public void RemoveItem(object rawData)
         {
+            OrderItem item = (OrderItem)rawData;
             int index = FindEntry(item);
-            cart.RemoveAt(index);
-        }
-
-        private int FindEntry(OrderItem key)
-        {
-            foreach (OrderItem item in cart)
-            {
-                if (item.TitleId == key.TitleId) return cart.IndexOf(item);
-            }
-            return -1;
+            Cart.RemoveAt(index);
         }
 
         public decimal GetSubtotal()
         {
             decimal subtotal = 0.00m;
-            foreach (OrderItem item in cart)
+            foreach (OrderItem item in Cart)
             {
                 subtotal += Convert.ToDecimal(item.Price) * item.Qty;
             }
             return subtotal;
         }
 
+        public decimal GetTax()
+        {
+            return GetSubtotal() * taxPer;
+        }
+
+        public decimal GetTotal()
+        {
+            decimal subtotal = GetSubtotal();
+            return subtotal + (subtotal * taxPer);
+        }
+
+        public static List<TitleSummary> GetSearchResults(string partialTitle)
+        {
+            OrderRepository repo = new OrderRepository();
+            return repo.GetTitlesByPartialTitle(partialTitle);
+        }
+
         public void PlaceOrder()
         {
-            if (cart.IsNullOrEmpty() || string.IsNullOrWhiteSpace(payTerms)) return;
+            if (Cart.IsNullOrEmpty() || string.IsNullOrWhiteSpace(PayTerms)) return;
 
-            foreach (OrderItem item in cart)
+            OrderRepository repo = new OrderRepository();
+
+            foreach (OrderItem item in Cart)
             {
                 Sales sale = ToSale(item);
                 repo.InsertSale(sale);
             }
         }
 
+        private int FindEntry(OrderItem key)
+        {
+            foreach (OrderItem item in Cart)
+            {
+                if (item.TitleId == key.TitleId) return Cart.IndexOf(item);
+            }
+            return -1;
+        }
+
         private Sales ToSale(OrderItem item)
         {
-            Sales sale = new Sales(storeId
-                , ordNum
+            Sales sale = new Sales(_storeId
+                , OrdNum
                 , DateTime.Today
                 , item.Qty
-                , payTerms
+                , PayTerms
                 , item.TitleId);
 
             return sale;

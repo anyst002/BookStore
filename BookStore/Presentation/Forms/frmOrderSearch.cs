@@ -1,14 +1,14 @@
-﻿using BookStore.Data;
-using BookStore.Entities;
+﻿using BookStore.Business;
 
 namespace BookStore
 {
     public partial class frmOrderSearch : Form
     {
-        public OrderItem? result = null;
-        public frmOrderSearch()
+        private readonly Order _order;
+        public frmOrderSearch(Order order)
         {
             InitializeComponent();
+            _order = order;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -18,24 +18,17 @@ namespace BookStore
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            TitleSearchResult selection = (TitleSearchResult)grdResults.CurrentRow.DataBoundItem;
-            result = new OrderItem(selection.TitleId
-                , selection.Title
-                , selection.Price
-                , Convert.ToInt16(numQuantity.Value)
-                , selection.AuName
-                , selection.PubName
-                , selection.PubDate);
+            _order.AddTitleSummary(grdResults.CurrentRow.DataBoundItem, Convert.ToInt16(numQuantity.Value));
+
             Close();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtSearch.Text)) return;
-
-            OrderRepository repo = new OrderRepository();
-            List<TitleSearchResult> list = repo.GetTitlesByPartialTitle(txtSearch.Text);
-            grdResults.DataSource = list;
+            if (!String.IsNullOrEmpty(txtSearch.Text))
+            {
+                grdResults.DataSource = Order.GetSearchResults(txtSearch.Text);
+            }
         }
 
         private void grdResults_SelectionChanged(object sender, EventArgs e)
