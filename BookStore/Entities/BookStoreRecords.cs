@@ -1,4 +1,4 @@
-namespace BookStore.Data
+namespace BookStore.Entities
 {
     // =============================
     // Core DB Records (per tables)

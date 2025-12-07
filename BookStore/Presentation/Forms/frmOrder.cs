@@ -1,5 +1,5 @@
 ﻿using BookStore.Business;
-using BookStore.Data;
+using BookStore.Entities;
 using BookStore.Presentation;
 using System;
 using System.Collections.Generic;

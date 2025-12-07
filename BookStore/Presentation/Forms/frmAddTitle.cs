@@ -1,4 +1,5 @@
 using BookStore.Data;
+using BookStore.Entities;
 using BookStore.Presentation;
 
 namespace BookStore

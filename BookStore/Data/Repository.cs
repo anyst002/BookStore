@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using BookStore.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
@@ -9,7 +10,6 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;

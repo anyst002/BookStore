@@ -1,4 +1,5 @@
 ﻿using BookStore.Data;
+using BookStore.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

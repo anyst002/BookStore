@@ -6,6 +6,7 @@ using System.Configuration;
 using static BookStore.Presentation.InputAssertions;
 using BookStore.Data;
 using BookStore.Presentation;
+using BookStore.Entities;
 
 namespace BookStore
 {

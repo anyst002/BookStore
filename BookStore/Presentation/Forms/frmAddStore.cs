@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BookStore.Data;
+using BookStore.Entities;
 using BookStore.Presentation;
 
 namespace BookStore

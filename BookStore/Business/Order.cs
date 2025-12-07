@@ -1,4 +1,5 @@
 ﻿using BookStore.Data;
+using BookStore.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.ComponentModel;

@@ -1,6 +1,7 @@
 global using static BookStore.Presentation.InputAssertions;
 global using BookStore.Presentation;
 using BookStore.Data;
+using BookStore.Entities;
 
 namespace BookStore
 {
